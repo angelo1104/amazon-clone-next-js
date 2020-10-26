@@ -1,0 +1,24 @@
+.header{
+    background: #131921 !important;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 15px 10px;
+}
+
+.header_logo{
+    display: flex;
+    align-items: center;
+}
+
+.header_logo_menu{
+    color: white !important;
+}
+
+.header_img_logo{
+    max-width: 100px;
+    object-fit: contain;
+    position: relative;
+    top: 5px;
+    cursor: pointer;
+}
+

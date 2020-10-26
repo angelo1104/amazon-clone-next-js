@@ -1,0 +1,39 @@
+.header_items{
+    display: flex;
+    justify-content: space-between;
+    flex: 0.30;
+}
+
+.header_item{
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.header_item:hover{
+    border: 1px solid white;
+}
+
+.header_item_line1{
+    font-size: 13px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.header_item_line2{
+    font-size: 16px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header_cart_number{
+    font-size: 22px;
+    margin-left: 10px;
+}
+
+.header_item_cart{
+    text-align: right;
+    font-size: 12px;
+}

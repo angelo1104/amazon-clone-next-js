@@ -1,0 +1,53 @@
+.header_search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0.60;
+    position: relative;
+    bottom: 6px;
+}
+
+.header_search:focus{
+    border: 1px solid #F79B34;
+}
+
+.header_input_search{
+    height: 35px;
+    padding: 5px;
+    outline-width: 0;
+    border: none;
+    flex: 1;
+}
+
+.header_search_logo{
+    background-color: #F79B34;
+    border: none !important;
+    outline-width: 0;
+    height: 35px !important;
+    padding: 3px;
+    width: 50px !important;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+    cursor: pointer;
+    font-weight: 400 !important;
+}
+
+.header_search_logo:hover{
+    background-color: #F3A847;
+}
+
+.header_search_select{
+    background-color: #DADADA !important;
+    color: black !important;
+    width: 70px;
+    height: 36.5px;
+    padding-left: 10px;
+    border-bottom: none !important;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    position: relative;
+    top: 1px;
+    border-right: 1px solid lightgray;
+    font-size: 14px !important;
+    font-family: 'Ubuntu', sans-serif !important;
+}
