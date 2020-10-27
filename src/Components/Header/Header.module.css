@@ -37,6 +37,7 @@
     .header{
         flex-direction: column;
         padding: 15px 0;
+        background-color: #232F3E !important;
     }
 
     .header_logo{
