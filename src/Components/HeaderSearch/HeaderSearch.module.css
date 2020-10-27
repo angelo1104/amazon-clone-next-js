@@ -12,18 +12,19 @@
 }
 
 .header_input_search{
-    height: 35px;
+    height: 40px;
     padding: 5px;
+    font-size: 16px;
     outline-width: 0;
     border: none;
     flex: 1;
 }
 
 .header_search_logo{
-    background-color: #F79B34;
+    background-color: #F3A847;
     border: none !important;
     outline-width: 0;
-    height: 35px !important;
+    height: 40px !important;
     padding: 3px;
     width: 50px !important;
     border-bottom-right-radius: 8px;
@@ -33,20 +34,18 @@
 }
 
 .header_search_logo:hover{
-    background-color: #F3A847;
+    background-color: #F79B34;
 }
 
 .header_search_select{
     background-color: #DADADA !important;
     color: black !important;
     width: 70px;
-    height: 36.5px;
+    height: 41px;
     padding-left: 10px;
     border-bottom: none !important;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-    position: relative;
-    top: 1px;
     border-right: 1px solid lightgray;
     font-size: 14px !important;
     font-family: 'Ubuntu', sans-serif !important;
@@ -55,19 +54,19 @@
 @media only screen and (max-width: 450px ) {
     .header_search{
         margin-top: 20px;
-        width: 90%;
+        width: 95%;
         margin-left: auto;
         margin-right: auto;
     }
 
     .header_search_logo{
-        width: 30px !important;
-        height: 32px !important;
+        width: 40px !important;
+        height: 40px !important;
         padding: 5px;
         border-bottom-left-radius: 8px;
         border-top-left-radius: 8px;
         position: relative;
-        left: -5px;
+        left: -8px;
     }
 
     .header_search_select{
@@ -75,9 +74,10 @@
     }
 
     .header_input_search{
-        height: 32px;
-        padding: 5px;
+        height: 40px;
+        padding: 10px !important;
         border-bottom-left-radius: 8px;
         border-top-left-radius: 8px;
+        font-family: 'Ubuntu', sans-serif !important;
     }
 }

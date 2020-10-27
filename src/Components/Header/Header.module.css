@@ -21,13 +21,13 @@
     max-width: 100px;
     object-fit: contain;
     position: relative;
-    top: 5px;
     cursor: pointer;
 }
 
 @media only screen and (max-width: 450px) {
     .header_img_logo{
         width: 85px !important;
+        top: 5px;
     }
 
     .header_logo_menu{
@@ -36,5 +36,18 @@
 
     .header{
         flex-direction: column;
+        padding: 15px 0;
     }
+
+    .header_logo{
+        padding: 0 15px 15px;
+        border-bottom: 1px solid white;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.header_logo_left{
+    display: flex;
+    align-items: flex-start;
 }

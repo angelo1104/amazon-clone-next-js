@@ -5,6 +5,7 @@ import HeaderItems from "../HeaderItems/HeaderItems";
 import Link from "next/link";
 import {Menu} from "@material-ui/icons";
 import {SwipeableDrawer} from "@material-ui/core";
+import ResponsiveHeaderItem from "../ResponsiveHeaderItem/ResponsiveHeaderItem";
 
 function Header() {
     const [drawerOpen, setDrawerOpen] = useState(false)
@@ -21,13 +22,15 @@ function Header() {
         <header className={styles.header}>
 
             <div className={styles.header_logo}>
-                <Menu className={styles.header_logo_menu} onClick={openDrawer}/>
+                <div className={styles.header_logo_left}>
+                    <Menu className={styles.header_logo_menu} onClick={openDrawer}/>
 
-                <Link href={'/'}>
-                    <img className={styles.header_img_logo} src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="amazon logo" />
-                </Link>
+                    <Link href={'/'}>
+                        <img className={styles.header_img_logo} src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="amazon logo" />
+                    </Link>
+                </div>
 
-                <hr className={'hidden hr'}/>
+                <ResponsiveHeaderItem/>
 
                 <SwipeableDrawer
                     anchor={'left'}

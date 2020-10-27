@@ -1,0 +1,32 @@
+.responsive_header_item{
+    color: white;
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.responsive_sign_in{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    margin-right: 20px;
+}
+
+.responsive_cart{
+    display: flex;
+    justify-self: flex-end;
+    align-self: flex-end;
+    align-items: center;
+}
+
+.responsive_basket_count{
+    margin-left: 5px;
+    font-weight: 600;
+}
+
+@media only screen and (min-width: 500px){
+    .responsive_header_item{
+        display: none;
+    }
+}
