@@ -2,4 +2,77 @@
     color: white;
     background-color: #232F3E;
     flex: 1;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header_location{
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 30px;
+    align-items: center;
+    max-width: 200px;
+    cursor: pointer;
+}
+
+.header_location_address{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.deliver_to{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 12px;
+}
+
+.header_location_country{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 15px;
+}
+
+.sub_header_cards{
+    justify-self: center;
+    display: flex;
+    position: relative;
+    right: 50px;
+}
+
+.sub_header_desktop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.header_location_mobile{
+    display: none;
+}
+
+@media only screen and (max-width: 450px) {
+    .sub_header_cards{
+        display: none;
+    }
+
+    .sub_header_amazon_response{
+        display: none;
+    }
+
+    .header_location{
+        padding-left: 0;
+    }
+
+    .header_location_mobile{
+        display: flex;
+        margin-bottom: 5px;
+    }
+
+    .deliver_to{
+        display: none;
+    }
+
+    .header_location_country{
+        display: none;
+    }
 }

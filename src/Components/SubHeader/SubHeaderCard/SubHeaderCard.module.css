@@ -1,0 +1,14 @@
+.sub_header_card{
+    cursor: pointer;
+    padding: 10px;
+}
+
+.sub_header_card:hover{
+    border: 1px solid white;
+}
+
+.sub_header_title{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+}

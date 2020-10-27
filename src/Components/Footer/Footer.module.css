@@ -22,6 +22,8 @@
     background-color: #37475A !important;
     text-transform: capitalize !important;
     border-radius: 0;
+    font-family: 'Ubuntu', sans-serif !important;
+    font-size: 18px !important;
 }
 
 .back_to_top:hover{

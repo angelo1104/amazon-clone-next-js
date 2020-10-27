@@ -7,6 +7,7 @@ import {Menu} from "@material-ui/icons";
 import {SwipeableDrawer} from "@material-ui/core";
 import ResponsiveHeaderItem from "../ResponsiveHeaderItem/ResponsiveHeaderItem";
 import SubHeader from "../SubHeader/SubHeader";
+import HeaderNavigationMobile from "./HeaderNavigationMobile/HeaderNavigationMobile";
 
 function Header() {
     const [drawerOpen, setDrawerOpen] = useState(false)
@@ -47,6 +48,8 @@ function Header() {
                 </div>
 
                 <HeaderSearch/>
+
+                <HeaderNavigationMobile/>
 
                 <HeaderItems/>
 

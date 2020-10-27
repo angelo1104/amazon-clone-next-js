@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #232f3e;
+    background-color: #37475A;
 }
 
 .header_main{
@@ -46,11 +46,12 @@
 
     .header{
         flex-direction: column;
-        padding: 15px 0;
     }
 
     .header_main{
         flex-direction: column;
+        padding: 15px 0;
+        background-color: #232f3e !important;
     }
 
     .header_logo{

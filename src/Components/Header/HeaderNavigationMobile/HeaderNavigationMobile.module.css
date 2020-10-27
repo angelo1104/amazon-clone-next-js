@@ -1,0 +1,19 @@
+.header_navigation_mobile{
+    color: white;
+    display: flex;
+    width: 100%;
+    text-align: left;
+    overflow-x: scroll;
+}
+
+.header_nav_items{
+    display: flex;
+    overflow-x: scroll;
+    padding: 5px 10px;
+}
+
+.header_nav_item{
+    margin-right: 10px;
+    width: fit-content;
+    white-space: nowrap;
+}
