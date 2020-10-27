@@ -6,6 +6,7 @@ import Link from "next/link";
 import {Menu} from "@material-ui/icons";
 import {SwipeableDrawer} from "@material-ui/core";
 import ResponsiveHeaderItem from "../ResponsiveHeaderItem/ResponsiveHeaderItem";
+import SubHeader from "../SubHeader/SubHeader";
 
 function Header() {
     const [drawerOpen, setDrawerOpen] = useState(false)
@@ -21,32 +22,37 @@ function Header() {
     return(
         <header className={styles.header}>
 
-            <div className={styles.header_logo}>
-                <div className={styles.header_logo_left}>
-                    <Menu className={styles.header_logo_menu} onClick={openDrawer}/>
+            <div className={styles.header_main}>
+                <div className={styles.header_logo}>
+                    <div className={styles.header_logo_left}>
+                        <Menu className={styles.header_logo_menu} onClick={openDrawer}/>
 
-                    <Link href={'/'}>
-                        <img className={styles.header_img_logo} src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="amazon logo" />
-                    </Link>
+                        <Link href={'/'}>
+                            <img className={styles.header_img_logo} src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="amazon logo" />
+                        </Link>
+                    </div>
+
+                    <ResponsiveHeaderItem/>
+
+                    <SwipeableDrawer
+                        anchor={'left'}
+                        onClose={closeDrawer}
+                        onOpen={openDrawer}
+                        open={drawerOpen}>
+
+                        <p>Hello</p>
+                        <p>Hello</p>
+                        <p>Hello</p>
+                    </SwipeableDrawer>
                 </div>
 
-                <ResponsiveHeaderItem/>
+                <HeaderSearch/>
 
-                <SwipeableDrawer
-                    anchor={'left'}
-                    onClose={closeDrawer}
-                    onOpen={openDrawer}
-                    open={drawerOpen}>
+                <HeaderItems/>
 
-                    <p>Hello</p>
-                    <p>Hello</p>
-                    <p>Hello</p>
-                </SwipeableDrawer>
             </div>
 
-            <HeaderSearch/>
-
-            <HeaderItems/>
+            <SubHeader/>
         </header>
     )
 }

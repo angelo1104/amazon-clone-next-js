@@ -1,13 +1,22 @@
 .header{
     background: #131921 !important;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    padding: 15px 15px 10px;
+    padding: 15px 0;
+}
+
+.header_main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header_logo{
     display: flex;
     align-items: center;
+    position: relative;
+    right: 30px;
 }
 
 .header_logo_menu{
@@ -37,6 +46,16 @@
     .header{
         flex-direction: column;
         padding: 15px 0;
+    }
+
+    .header_main{
+        flex-direction: column;
+    }
+
+    .header_logo{
+        padding: 15px 15px;
+        width: 100%;
+        position: initial;
     }
 
     .header_logo{
