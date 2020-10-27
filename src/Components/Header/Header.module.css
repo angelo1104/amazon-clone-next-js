@@ -12,7 +12,10 @@
 
 .header_logo_menu{
     color: white !important;
+    margin: 0 20px 0 0;
+    cursor: pointer !important;
 }
+
 
 .header_img_logo{
     max-width: 100px;
@@ -22,3 +25,9 @@
     cursor: pointer;
 }
 
+@media only screen and (max-width: 450px) {
+    .header_img_logo{
+        width: 50px !important;
+        object-fit: cover;
+    }
+}

@@ -37,3 +37,9 @@
     text-align: right;
     font-size: 12px;
 }
+
+@media only screen and (max-width: 450px){
+    .header_items{
+        display: none;
+    }
+}
