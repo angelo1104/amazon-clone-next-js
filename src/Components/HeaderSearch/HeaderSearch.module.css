@@ -53,11 +53,31 @@
 }
 
 @media only screen and (max-width: 450px ) {
+    .header_search{
+        margin-top: 20px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .header_search_logo{
         width: 30px !important;
+        height: 32px !important;
+        padding: 5px;
+        border-bottom-left-radius: 8px;
+        border-top-left-radius: 8px;
+        position: relative;
+        left: -5px;
     }
 
     .header_search_select{
-        width: 40px !important;
+        display: none !important;
+    }
+
+    .header_input_search{
+        height: 32px;
+        padding: 5px;
+        border-bottom-left-radius: 8px;
+        border-top-left-radius: 8px;
     }
 }

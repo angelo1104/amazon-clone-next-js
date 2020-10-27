@@ -21,6 +21,14 @@ a {
   box-sizing: border-box;
 }
 
-/*.header{*/
-/*  background-color: #232F3E;*/
-/*}*/
+.hidden{
+  display: none;
+}
+
+
+@media only screen and (max-width: 450px) {
+  .hr{
+    display: block;
+    border-color: white;
+  }
+}

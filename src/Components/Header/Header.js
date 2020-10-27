@@ -27,6 +27,8 @@ function Header() {
                     <img className={styles.header_img_logo} src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" alt="amazon logo" />
                 </Link>
 
+                <hr className={'hidden hr'}/>
+
                 <SwipeableDrawer
                     anchor={'left'}
                     onClose={closeDrawer}

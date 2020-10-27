@@ -27,7 +27,14 @@
 
 @media only screen and (max-width: 450px) {
     .header_img_logo{
-        width: 50px !important;
-        object-fit: cover;
+        width: 85px !important;
+    }
+
+    .header_logo_menu{
+        font-size: 22px;
+    }
+
+    .header{
+        flex-direction: column;
     }
 }
