@@ -1,0 +1,16 @@
+.footer{
+    background-color: #232F3E;
+    color: white;
+    padding: 30px 50px;
+}
+
+.footer_links{
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 450px) {
+    .footer_links{
+        flex-direction: column;
+    }
+}

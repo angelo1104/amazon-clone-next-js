@@ -1,0 +1,26 @@
+.footer_column{
+    margin-right: 80px;
+}
+
+.footer_link_title{
+    font-size: 22px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+}
+
+.footer_column_links{
+    display: flex;
+    flex-direction: column;
+}
+
+.footer_column_link{
+    margin: 8px 0 0;
+    opacity: 0.8;
+    max-width: 160px;
+}
+
+@media only screen and (max-width: 450px) {
+    .footer_column{
+        margin-bottom: 50px;
+    }
+}
