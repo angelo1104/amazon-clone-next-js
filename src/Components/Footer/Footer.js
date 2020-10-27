@@ -1,6 +1,7 @@
 import React from "react";
 import styles from './Footer.module.css';
 import FooterColumn from "./FooterColumn/FooterColumn";
+import {Button} from "@material-ui/core";
 
 function Footer() {
     const linkData = [
@@ -122,9 +123,15 @@ function Footer() {
         },
     ]
 
+
+    const scrollToTop = (event)=>{
+        window.scrollTo(0,0)
+    }
+
     return(
         <footer className={styles.footer}>
 
+            <Button onClick={scrollToTop} className={styles.back_to_top}>Back To Top</Button>
             <div className={styles.footer_links}>
                 {
                     linkData.map((link,index)=>{

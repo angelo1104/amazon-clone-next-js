@@ -1,12 +1,13 @@
 .header{
-    background: #131921 !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 15px 0;
+    background-color: #232f3e;
 }
 
 .header_main{
+    padding: 15px 0 0;
+    background: #131921 !important;
     display: flex;
     justify-content: center;
     align-items: center;
