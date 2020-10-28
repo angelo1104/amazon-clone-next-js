@@ -4,3 +4,41 @@
     width: 100%;
     display: flex;
 }
+
+.amazon_card_title{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 22px;
+    margin: -30px auto 10px;
+}
+
+.amazon_card_link{
+    position: relative;
+    top: 14px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+    color: rgb(0, 113, 133);
+    font-weight: 500;
+}
+
+.amazon_card_link:hover{
+    text-decoration: underline #C7511F;
+    color: #C7511F;
+}
+
+.amazon_card_signin_button{
+    background: #F1C558;
+    border-color: #a88734 #9c7e31 #846a29;
+    border-width: 0.5px;
+    color: #111;
+    outline-width: 0;
+    border-radius: 3px;
+    padding: 5px 20px;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.amazon_card_signin_button:hover{
+    background-color: #f0c14b;
+}
+

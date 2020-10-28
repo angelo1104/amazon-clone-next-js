@@ -5,3 +5,9 @@
     width: 100% !important;
     padding: 50px 30px;
 }
+
+@media only screen and (max-width: 450px) {
+    .amazon_card_row{
+        flex-wrap: wrap;
+    }
+}
