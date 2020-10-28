@@ -1,0 +1,6 @@
+.amazon_card_image{
+    object-fit: cover;
+    height: 309px;
+    width: 100%;
+    display: flex;
+}

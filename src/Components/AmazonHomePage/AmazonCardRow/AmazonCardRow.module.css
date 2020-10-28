@@ -1,0 +1,7 @@
+.amazon_card_row{
+    display: flex;
+    justify-content: space-between;
+    max-width: 100%;
+    width: 100% !important;
+    padding: 50px 30px;
+}
