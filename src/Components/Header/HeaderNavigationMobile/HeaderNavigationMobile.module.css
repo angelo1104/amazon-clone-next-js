@@ -17,3 +17,9 @@
     width: fit-content;
     white-space: nowrap;
 }
+
+@media only screen and (min-width:500px){
+    .header_navigation_mobile{
+        display: none;
+    }
+}
