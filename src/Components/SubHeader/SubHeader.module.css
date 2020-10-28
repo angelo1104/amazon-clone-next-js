@@ -5,6 +5,7 @@
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
+    height: 40px;
 }
 
 .header_location{
@@ -51,6 +52,10 @@
 }
 
 @media only screen and (max-width: 450px) {
+    .sub_header{
+        background-color: #37465B;
+    }
+
     .sub_header_cards{
         display: none;
     }

@@ -1,6 +1,7 @@
 .sub_header_card{
     cursor: pointer;
     padding: 10px;
+    margin-right: 8px;
 }
 
 .sub_header_card:hover{
