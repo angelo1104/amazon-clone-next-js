@@ -5,6 +5,14 @@
     display: flex;
 }
 
+.amazon_card_image_sigin{
+    object-fit: cover;
+    height: 309px;
+    width: 100%;
+    display: flex;
+    opacity: 0;
+}
+
 .amazon_card_title{
     font-family: 'Ubuntu', sans-serif;
     font-size: 22px;

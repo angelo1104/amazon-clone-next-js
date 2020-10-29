@@ -31,6 +31,8 @@ function AmazonCardRow() {
                 <h4 className={productStyles.amazon_card_title}>Sign in for the best experience</h4>
 
                 <button className={productStyles.amazon_card_signin_button}>Sign in securely</button>
+
+                <img className={productStyles.amazon_card_image_sigin} src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_Returns_1x._SY304_CB432774714_.jpg" alt="" />
             </AmazonCard>
         </div>
     )
