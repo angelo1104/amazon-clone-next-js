@@ -24,3 +24,8 @@ a {
 .hidden{
   display: none;
 }
+
+.visible{
+  display: block !important;
+  background-color: white;
+}

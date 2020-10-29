@@ -69,10 +69,20 @@
 .row_products_scroll_button_left{
     position: absolute;
     cursor: pointer;
+    margin-top: 70px;
+    display: none;
+    transition: color ease-in 200ms, background-color ease-in 400ms;
+    border: none;
+    outline-width: 0;
 }
 
 .row_products_scroll_button_right{
+    border: none;
+    outline-width: 0;
     position: absolute;
-    right: 70px;
+    right: 60px;
     cursor: pointer;
+    margin-top: 70px;
+    display: none;
+    transition: color ease-in 200ms, background-color ease-in 400ms;
 }
