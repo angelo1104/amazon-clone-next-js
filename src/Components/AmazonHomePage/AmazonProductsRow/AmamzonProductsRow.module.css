@@ -1,0 +1,67 @@
+.amazon_products_row{
+    display: flex;
+    flex-direction: column;
+    width: 93%;
+    margin: auto;
+    background-color: white;
+    padding: 15px 20px;
+}
+
+.row_products_main{
+    display: grid;
+    grid-auto-flow: column;
+    height: fit-content;
+    padding: 20px;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.row_products_main:hover{
+    overflow-x: overlay;
+}
+
+.row_products_main::-webkit-scrollbar {
+    height: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.row_products_main::-webkit-scrollbar-track {
+    height: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.row_products_main::-webkit-scrollbar-thumb {
+    height: 2px;
+    border-radius: 10px;
+    background-color: rgba(136,136,136, 0.5);
+    cursor: pointer;
+}
+
+.row_products_main::-webkit-scrollbar-thumb:hover{
+    background-color: rgba(136,136,136, 1);
+    cursor: pointer !important;
+    height: 3px !important;
+}
+
+.amazon_row_header{
+    display: flex;
+    align-items: flex-end;
+}
+
+.amazon_row_title{
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.amazon_row_link{
+    font-size: 14px;
+    color: #007185;
+    margin-left: 10px;
+}
+
+.amazon_row_link:hover{
+    color: #F79B34;
+    text-decoration: underline #F79B34;
+}

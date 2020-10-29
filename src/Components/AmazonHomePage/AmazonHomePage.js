@@ -2,6 +2,7 @@ import React from "react";
 import styles from './AmazonHomePage.module.css';
 import slider from './AmazonSlider.module.css'
 import AmazonCardRow from "./AmazonCardRow/AmazonCardRow";
+import AmazonProductsRow from "./AmazonProductsRow/AmazonProductsRow";
 
 function AmazonHomePage() {
     return(
@@ -12,6 +13,8 @@ function AmazonHomePage() {
 
             <div className={styles.amazon_home_page_products}>
                 <AmazonCardRow />
+
+                <AmazonProductsRow/>
             </div>
         </div>
     )

@@ -1,0 +1,10 @@
+.amazon_row_product_image{
+    object-fit: contain;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.amazon_row_product{
+    height: fit-content;
+    object-fit: contain;
+}
