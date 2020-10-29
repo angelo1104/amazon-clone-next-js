@@ -65,3 +65,14 @@
     color: #F79B34;
     text-decoration: underline #F79B34;
 }
+
+.row_products_scroll_button_left{
+    position: absolute;
+    cursor: pointer;
+}
+
+.row_products_scroll_button_right{
+    position: absolute;
+    right: 70px;
+    cursor: pointer;
+}
