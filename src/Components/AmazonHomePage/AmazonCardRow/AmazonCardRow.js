@@ -51,7 +51,9 @@ function AmazonCardRow({cardData}) {
                     <AmazonCard key={`${index}${Math.random()}`}>
                         <h4 className={productStyles.amazon_card_title}>{card.title}</h4>
 
-                        <img className={productStyles.amazon_card_image} src={card.imageUrl} alt="" />
+                        <a href={card.linkUrl}>
+                            <img className={productStyles.amazon_card_image} src={card.imageUrl} alt="" />
+                        </a>
 
                         <a href={card.linkUrl} className={productStyles.amazon_card_link}>{card.linkTitle}</a>
                     </AmazonCard>
