@@ -44,10 +44,6 @@ function HeaderItems() {
                     </span>
                 </p>
 
-                <p className={styles.header_item_cart}>
-                    Cart
-                </p>
-
             </div>
         </div>
     )
