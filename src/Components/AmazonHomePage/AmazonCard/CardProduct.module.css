@@ -6,10 +6,7 @@
 }
 
 .amazon_card_image_sigin{
-    object-fit: cover;
-    height: 309px;
-    width: 100%;
-    display: flex;
+    display: none;
     opacity: 0;
 }
 
