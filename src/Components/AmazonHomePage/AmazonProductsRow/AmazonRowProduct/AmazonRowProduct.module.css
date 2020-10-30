@@ -1,10 +1,12 @@
 .amazon_row_product_image{
     object-fit: contain;
-    width: 300px;
-    margin-top: 20px;
+    max-width: 300px;
+    max-height: 200px;
+    margin: 20px 10px;
 }
 
 .amazon_row_product{
     height: fit-content;
     object-fit: contain;
+    margin: auto 20px;
 }

@@ -4,7 +4,14 @@ import slider from './AmazonSlider.module.css'
 import AmazonCardRow from "./AmazonCardRow/AmazonCardRow";
 import AmazonProductsRow from "./AmazonProductsRow/AmazonProductsRow";
 import {firstCardData, secondCardData} from "./amazonCardsData";
-import {firstProductsData} from "./amazonProductsData";
+import {
+    eightProductsData,
+    fifthProductData,
+    firstProductsData,
+    fourthProductsData,
+    secondProductsData, seventhProductsData, sixthProductData,
+    thirdProductsData
+} from "./amazonProductsData";
 
 function AmazonHomePage() {
     return(
@@ -17,7 +24,14 @@ function AmazonHomePage() {
                 <AmazonCardRow cardData={firstCardData}/>
                 <AmazonCardRow cardData={secondCardData}/>
 
-                <AmazonProductsRow title={firstProductsData.title} shopUrl={firstProductsData.shopUrl} productsData={firstProductsData.products}/>
+                <AmazonProductsRow {...firstProductsData} />
+                <AmazonProductsRow {...secondProductsData} />
+                <AmazonProductsRow {...thirdProductsData} />
+                <AmazonProductsRow {...fourthProductsData} />
+                <AmazonProductsRow {...fifthProductData} />
+                <AmazonProductsRow {...sixthProductData}/>
+                <AmazonProductsRow {...seventhProductsData}/>
+                <AmazonProductsRow {...eightProductsData}/>
             </div>
         </div>
     )

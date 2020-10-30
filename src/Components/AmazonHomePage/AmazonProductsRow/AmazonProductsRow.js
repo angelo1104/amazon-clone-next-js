@@ -4,7 +4,7 @@ import AmazonRowProduct from "./AmazonRowProduct/AmazonRowProduct";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-function AmazonProductsRow({productsData ,title, shopUrl}) {
+function AmazonProductsRow({products ,title, shopUrl, urlTitle}) {
     const [translate,setTranslate] = useState(0)
 
     const momentum = 500;
@@ -50,7 +50,7 @@ function AmazonProductsRow({productsData ,title, shopUrl}) {
                 </h5>
 
                 <a href={shopUrl} className={styles.amazon_row_link}>
-                    Shop now
+                    {urlTitle}
                 </a>
             </div>
 
@@ -60,7 +60,7 @@ function AmazonProductsRow({productsData ,title, shopUrl}) {
                 <button onClick={scrollRight} className={styles.row_products_scroll_button_right}><ChevronRightIcon/></button>
 
                 {
-                    productsData.map((product, index)=>{
+                    products.map((product, index)=>{
                         return <AmazonRowProduct key={index} {...product}/>
                     })
                 }
