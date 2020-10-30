@@ -16,7 +16,7 @@ function AmazonHomePage() {
             <div className={styles.amazon_home_page_products}>
                 <AmazonCardRow cardData={firstCardData}/>
 
-                <AmazonProductsRow productsData={firstProductsData}/>
+                <AmazonProductsRow title={firstProductsData.title} shopUrl={firstProductsData.shopUrl} productsData={firstProductsData.products}/>
             </div>
         </div>
     )

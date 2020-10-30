@@ -4,7 +4,7 @@ import AmazonRowProduct from "./AmazonRowProduct/AmazonRowProduct";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-function AmazonProductsRow({productsData}) {
+function AmazonProductsRow({productsData ,title, shopUrl}) {
     const [translate,setTranslate] = useState(0)
 
     const momentum = 500;
@@ -46,10 +46,10 @@ function AmazonProductsRow({productsData}) {
         <div className={styles.amazon_products_row}>
             <div className={styles.amazon_row_header}>
                 <h5 className={styles.amazon_row_title}>
-                    Under 30 bucks
+                    {title}
                 </h5>
 
-                <a href="#" className={styles.amazon_row_link}>
+                <a href={shopUrl} className={styles.amazon_row_link}>
                     Shop now
                 </a>
             </div>
