@@ -3,6 +3,7 @@ import styles from './AmazonHomePage.module.css';
 import slider from './AmazonSlider.module.css'
 import AmazonCardRow from "./AmazonCardRow/AmazonCardRow";
 import AmazonProductsRow from "./AmazonProductsRow/AmazonProductsRow";
+import cardData from "./amazonCardsData";
 
 function AmazonHomePage() {
     return(
@@ -12,7 +13,7 @@ function AmazonHomePage() {
             </div>
 
             <div className={styles.amazon_home_page_products}>
-                <AmazonCardRow />
+                <AmazonCardRow cardData={cardData}/>
 
                 <AmazonProductsRow/>
             </div>

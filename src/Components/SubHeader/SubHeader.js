@@ -15,7 +15,6 @@ function SubHeader() {
     useEffect(()=>{
         axios.get('https://ipinfo.io?token=6c7df03daf5dcb')
             .then(response=>{
-                console.log(response)
                 const data = response.data
 
                 const country = countries.getName(data.country, "en", {select: "official"})
