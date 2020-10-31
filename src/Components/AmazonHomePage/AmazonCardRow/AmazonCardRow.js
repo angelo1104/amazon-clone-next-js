@@ -6,43 +6,33 @@ import productStyles from '../AmazonCard/CardProduct.module.css'
 function AmazonCardRow({cardData}) {
     return(
         <div className={styles.amazon_card_row}>
-            {/*<AmazonCard>*/}
-            {/*    <h4 className={productStyles.amazon_card_title}>Best Picks</h4>*/}
-
-            {/*    <img className={productStyles.amazon_card_image} src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_Returns_1x._SY304_CB432774714_.jpg" alt="" />*/}
-
-            {/*    <a href={'#'} className={productStyles.amazon_card_link}>Learn More</a>*/}
-            {/*</AmazonCard>*/}
-            {/*<AmazonCard>*/}
-            {/*    <h4 className={productStyles.amazon_card_title}>Best Picks</h4>*/}
-
-            {/*    <img className={productStyles.amazon_card_image} src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_Returns_1x._SY304_CB432774714_.jpg" alt="" />*/}
-
-            {/*    <a href={'#'} className={productStyles.amazon_card_link}>Learn More</a>*/}
-            {/*</AmazonCard>*/}
-            {/*<AmazonCard>*/}
-            {/*    <h4 className={productStyles.amazon_card_title}>Best Picks</h4>*/}
-
-            {/*    <img className={productStyles.amazon_card_image} src="https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_Returns_1x._SY304_CB432774714_.jpg" alt="" />*/}
-
-            {/*    <a href={'#'} className={productStyles.amazon_card_link}>Learn More</a>*/}
-            {/*</AmazonCard>*/}
-            {/*<AmazonCard>*/}
-            {/*    <h4 className={productStyles.amazon_card_title}>Sign in for the best experience</h4>*/}
-
-            {/*    <button className={productStyles.amazon_card_signin_button}>Sign in securely</button>*/}
-
-            {/*</AmazonCard>*/}
-
             {
                 cardData.map((card,index)=>{
-                    if (card.isSignedIn){
+                    if (card.isSquare){
                         return (
                         <AmazonCard key={`${index}${Math.random()}`}>
-                            <h4 className={productStyles.amazon_card_title}>Sign in for the best experience</h4>
+                            <h4 className={productStyles.amazon_card_title}>{card.title}</h4>
 
-                            <button className={productStyles.amazon_card_signin_button}>Sign in securely</button>
+                            <div className={productStyles.square_images}>
+                                <a href={card.image1Url} className={productStyles.amazon_square_link}>
+                                    <img className={productStyles.square_image} src={card.image1} alt="" />
+                                    <p className={productStyles.square_image_title}>{card.image1Title}</p>
+                                </a>
+                                <a href={card.image2Url} className={productStyles.amazon_square_link}>
+                                    <img className={productStyles.square_image} src={card.image2} alt="" />
+                                    <p className={productStyles.square_image_title}>{card.image2Title}</p>
+                                </a>
+                                <a href={card.image3Url} className={productStyles.amazon_square_link}>
+                                    <img className={productStyles.square_image} src={card.image3} alt="" />
+                                    <p className={productStyles.square_image_title}>{card.image3Title}</p>
+                                </a>
+                                <a href={card.image3Url} className={productStyles.amazon_square_link}>
+                                    <img className={productStyles.square_image} src={card.image4} alt="" />
+                                    <p className={productStyles.square_image_title}>{card.image4Title}</p>
+                                </a>
+                            </div>
 
+                            <a href={card.linkUrl} className={productStyles.amazon_card_link}>{card.linkTitle}</a>
                         </AmazonCard>
                         )
                     }

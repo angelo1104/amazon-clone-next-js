@@ -69,7 +69,8 @@
 
 .row_products_scroll_button_left{
     position: absolute;
-    top: 50%;
+    top: 40%;
+    left: 10px;
     padding: 12px 5px;
     cursor: pointer;
     font-size: large !important;
@@ -97,8 +98,8 @@
     -moz-box-shadow: 0 1px 3px #888;
     position: absolute;
     cursor: pointer;
-    right: 0;
-    top: 50%;
+    right: 10px;
+    top: 40%;
     display: none;
     transition: background-color ease-in 200ms, background-color ease-in 400ms;
 }

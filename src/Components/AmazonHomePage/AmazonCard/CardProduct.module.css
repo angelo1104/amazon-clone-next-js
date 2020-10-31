@@ -47,3 +47,28 @@
     background-color: #f0c14b;
 }
 
+.square_images{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.square_image_title{
+    text-align: center;
+    font-size: 12px;
+    max-width: 80px;
+}
+
+.amazon_square_link{
+    background: #F2FAFB !important;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.square_image{
+    mix-blend-mode: multiply;
+    margin-bottom: 10px;
+}

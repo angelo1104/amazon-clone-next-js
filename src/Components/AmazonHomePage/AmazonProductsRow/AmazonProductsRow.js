@@ -7,7 +7,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 function AmazonProductsRow({products ,title, shopUrl, urlTitle, id}) {
     const [translate,setTranslate] = useState(0)
 
-    const momentum = 500;
+    const momentum = 700;
 
     const scrollRight = ()=>{
         setTranslate(translate+momentum)
