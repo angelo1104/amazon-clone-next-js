@@ -51,6 +51,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
+    max-width: 300px;
 }
 
 .square_image_title{
@@ -60,15 +61,17 @@
 }
 
 .amazon_square_link{
-    background: #F2FAFB !important;
+    background: #F2FAFB;
     padding: 8px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
 .square_image{
     mix-blend-mode: multiply;
     margin-bottom: 10px;
+    width: 100%;
+    height: 100px;
 }

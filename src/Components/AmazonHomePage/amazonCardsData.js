@@ -1,6 +1,6 @@
 const firstCardData = [
     {
-        title: 'Best Picks',
+        title: 'Easy Returns',
         imageUrl: 'https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_Returns_1x._SY304_CB432774714_.jpg',
         linkTitle: 'Learn More',
         linkUrl: '#',
@@ -21,8 +21,7 @@ const firstCardData = [
         isSquare: false
     },
     {
-        title: 'Start on your holiday list early',
-        imageUrl: 'https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Events/2020/PrimeDay/Fuji_Dash_PD_Nonprime__1x._SY304_CB403084762_.jpg',
+        title: 'Shop by Category',
         linkTitle: 'Shop now',
         linkUrl: '#',
         isSquare: true,
@@ -38,6 +37,7 @@ const firstCardData = [
         image2Title: 'Video Games',
         image3Title: 'Baby',
         image4Title: 'Toys & Games',
+        color: '#F2FAFB',
     },
 ];
 
@@ -73,7 +73,46 @@ const secondCardData = [
 ]
 
 const thirdCardData = [
-
+    {
+        title: 'Comfy styles for her',
+        linkTitle: 'See more',
+        linkUrl: '#',
+        isSquare: true,
+        image1: 'https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_WomenFashion_Sweatshirt_Quad_Cat_1x._SY116_CB418609101_.jpg',
+        image2: 'https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_WomenFashion_Joggers_Quad_Cat_1x._SY116_CB418608748_.jpg',
+        image3: 'https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_WomenFashion_Cardigans_Quad_Cat_1x._SY116_CB418608722_.jpg',
+        image4: 'https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_WomenFashion_Tees_Quad_Cat_1x._SY116_CB418608878_.jpg',
+        image1Url: '#',
+        image2Url: '#',
+        image3Url: '#',
+        image4Url: '#',
+        image1Title: 'Sweatshirts',
+        image2Title: 'Joggers',
+        image3Title: 'Cardigans',
+        image4Title: 'Easy tees',
+        color: '#ffffff',
+    },
+    {
+        title: 'Show Laptops & Tablets',
+        imageUrl: 'https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_Laptops_379x304_1X_en_US._SY304_CB418608471_.jpg',
+        linkTitle: 'See more',
+        linkUrl: '#',
+        isSquare: false
+    },
+    {
+        title: 'Explore home bedding',
+        imageUrl: 'https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_HomeBedding_Single_Cat_1x._SY304_CB418596953_.jpg',
+        linkTitle: 'See more',
+        linkUrl: '#',
+        isSquare: false
+    },
+    {
+        title: 'Create with strip lights',
+        imageUrl: 'https://images-na.ssl-images-amazon.com/images/G/01/AmazonExports/Fuji/2020/May/Dashboard/Fuji_Dash_StripLighting_379x304_1X_en_US._SY304_CB418597476_.jpg',
+        linkTitle: 'See more',
+        linkUrl: '#',
+        isSquare: false
+    },
 ]
 
-export {firstCardData ,secondCardData};
+export {firstCardData ,secondCardData, thirdCardData};

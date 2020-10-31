@@ -14,19 +14,19 @@ function AmazonCardRow({cardData}) {
                             <h4 className={productStyles.amazon_card_title}>{card.title}</h4>
 
                             <div className={productStyles.square_images}>
-                                <a href={card.image1Url} className={productStyles.amazon_square_link}>
+                                <a style={{backgroundColor: card.color}} href={card.image1Url} className={productStyles.amazon_square_link}>
                                     <img className={productStyles.square_image} src={card.image1} alt="" />
                                     <p className={productStyles.square_image_title}>{card.image1Title}</p>
                                 </a>
-                                <a href={card.image2Url} className={productStyles.amazon_square_link}>
+                                <a style={{backgroundColor: card.color}} href={card.image2Url} className={productStyles.amazon_square_link}>
                                     <img className={productStyles.square_image} src={card.image2} alt="" />
                                     <p className={productStyles.square_image_title}>{card.image2Title}</p>
                                 </a>
-                                <a href={card.image3Url} className={productStyles.amazon_square_link}>
+                                <a style={{backgroundColor: card.color}} href={card.image3Url} className={productStyles.amazon_square_link}>
                                     <img className={productStyles.square_image} src={card.image3} alt="" />
                                     <p className={productStyles.square_image_title}>{card.image3Title}</p>
                                 </a>
-                                <a href={card.image3Url} className={productStyles.amazon_square_link}>
+                                <a style={{backgroundColor: card.color}} href={card.image3Url} className={productStyles.amazon_square_link}>
                                     <img className={productStyles.square_image} src={card.image4} alt="" />
                                     <p className={productStyles.square_image_title}>{card.image4Title}</p>
                                 </a>

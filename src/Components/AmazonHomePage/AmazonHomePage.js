@@ -3,7 +3,7 @@ import styles from './AmazonHomePage.module.css';
 import slider from './AmazonSlider.module.css'
 import AmazonCardRow from "./AmazonCardRow/AmazonCardRow";
 import AmazonProductsRow from "./AmazonProductsRow/AmazonProductsRow";
-import {firstCardData, secondCardData} from "./amazonCardsData";
+import {firstCardData, secondCardData, thirdCardData} from "./amazonCardsData";
 import {
     eightProductsData,
     fifthProductData,
@@ -27,6 +27,9 @@ function AmazonHomePage() {
                 <AmazonProductsRow {...productDataStore.firstProductsData} id={1} />
                 <AmazonProductsRow {...productDataStore.secondProductsData} id={2} />
                 <AmazonProductsRow {...productDataStore.thirdProductsData} id={3} />
+
+                <AmazonCardRow cardData={thirdCardData}/>
+
                 <AmazonProductsRow {...productDataStore.fourthProductsData} id={4}/>
                 <AmazonProductsRow {...productDataStore.fifthProductsData} id={5}/>
                 <AmazonProductsRow {...productDataStore.sixthProductsData} id={6}/>
