@@ -8,7 +8,7 @@ import {
     eightProductsData,
     fifthProductData,
     firstProductsData,
-    fourthProductsData,
+    fourthProductsData, productDataStore,
     secondProductsData, seventhProductsData, sixthProductData,
     thirdProductsData
 } from "./amazonProductsData";
@@ -24,14 +24,14 @@ function AmazonHomePage() {
                 <AmazonCardRow cardData={firstCardData}/>
                 <AmazonCardRow cardData={secondCardData}/>
 
-                <AmazonProductsRow {...firstProductsData} />
-                <AmazonProductsRow {...secondProductsData} />
-                <AmazonProductsRow {...thirdProductsData} />
-                <AmazonProductsRow {...fourthProductsData} />
-                <AmazonProductsRow {...fifthProductData} />
-                <AmazonProductsRow {...sixthProductData}/>
-                <AmazonProductsRow {...seventhProductsData}/>
-                <AmazonProductsRow {...eightProductsData}/>
+                <AmazonProductsRow {...productDataStore.firstProductsData} id={1} />
+                <AmazonProductsRow {...productDataStore.secondProductsData} id={2} />
+                <AmazonProductsRow {...productDataStore.thirdProductsData} id={3} />
+                <AmazonProductsRow {...productDataStore.fourthProductsData} id={4}/>
+                <AmazonProductsRow {...productDataStore.fifthProductsData} id={5}/>
+                <AmazonProductsRow {...productDataStore.sixthProductsData} id={6}/>
+                <AmazonProductsRow {...productDataStore.seventhProductsData} id={7}/>
+                <AmazonProductsRow {...productDataStore.eightProductsData} id={8}/>
             </div>
         </div>
     )

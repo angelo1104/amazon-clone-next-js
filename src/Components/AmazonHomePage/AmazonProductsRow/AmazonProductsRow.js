@@ -4,7 +4,7 @@ import AmazonRowProduct from "./AmazonRowProduct/AmazonRowProduct";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-function AmazonProductsRow({products ,title, shopUrl, urlTitle}) {
+function AmazonProductsRow({products ,title, shopUrl, urlTitle, id}) {
     const [translate,setTranslate] = useState(0)
 
     const momentum = 500;
@@ -18,7 +18,7 @@ function AmazonProductsRow({products ,title, shopUrl, urlTitle}) {
     }
 
     useEffect(()=>{
-        const container = document.querySelector(`.${styles.row_products_main}`);
+        const container = document.querySelector(`#carouselOfProducts${id}`);
 
         container.scrollTo({
             left: translate,
@@ -27,23 +27,23 @@ function AmazonProductsRow({products ,title, shopUrl, urlTitle}) {
     },[translate])
 
     const mouseOver = ()=>{
-        const leftButton = document.querySelector(`.${styles.row_products_scroll_button_left}`)
-        const rightButton = document.querySelector(`.${styles.row_products_scroll_button_right}`)
+        const leftButton = document.querySelector(`#left${id}`)
+        const rightButton = document.querySelector(`#right${id}`)
 
         leftButton.classList.add('visible')
         rightButton.classList.add('visible')
     }
 
     const mouseDown = ()=>{
-        const leftButton = document.querySelector(`.${styles.row_products_scroll_button_left}`)
-        const rightButton = document.querySelector(`.${styles.row_products_scroll_button_right}`)
+        const leftButton = document.querySelector(`#left${id}`)
+        const rightButton = document.querySelector(`#right${id}`)
 
         leftButton.classList.remove('visible')
         rightButton.classList.remove('visible')
     }
 
     return(
-        <div className={styles.amazon_products_row}>
+        <div className={styles.amazon_products_row} onMouseOver={mouseOver} onMouseLeave={mouseDown}>
             <div className={styles.amazon_row_header}>
                 <h5 className={styles.amazon_row_title}>
                     {title}
@@ -54,11 +54,11 @@ function AmazonProductsRow({products ,title, shopUrl, urlTitle}) {
                 </a>
             </div>
 
+            <button id={`left${id}`} onClick={scrollLeft} className={styles.row_products_scroll_button_left}><ChevronLeftIcon className={styles.chevron_icon}/></button>
+            <button id={`right${id}`} onClick={scrollRight} className={styles.row_products_scroll_button_right}><ChevronRightIcon className={styles.chevron_icon}/></button>
 
-            <div onMouseOver={mouseOver} onMouseLeave={mouseDown} className={styles.row_products_main}>
-                <button onClick={scrollLeft} className={styles.row_products_scroll_button_left}><ChevronLeftIcon/></button>
-                <button onClick={scrollRight} className={styles.row_products_scroll_button_right}><ChevronRightIcon/></button>
 
+            <div id={`carouselOfProducts${id}`} className={styles.row_products_main}>
                 {
                     products.map((product, index)=>{
                         return <AmazonRowProduct key={index} {...product}/>

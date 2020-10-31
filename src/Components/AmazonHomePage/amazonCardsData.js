@@ -60,4 +60,8 @@ const secondCardData = [
     },
 ]
 
+const thirdCardData = [
+
+]
+
 export {firstCardData ,secondCardData};

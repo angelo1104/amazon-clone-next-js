@@ -5,6 +5,7 @@
     margin: 30px auto;
     background-color: white;
     padding: 15px 20px;
+    position: relative;
 }
 
 .row_products_main{
@@ -68,21 +69,36 @@
 
 .row_products_scroll_button_left{
     position: absolute;
+    top: 50%;
+    padding: 12px 5px;
     cursor: pointer;
-    margin-top: 70px;
+    font-size: large !important;
     display: none;
-    transition: color ease-in 200ms, background-color ease-in 400ms;
+    transition: background-color ease-in 200ms, background-color ease-in 400ms;
     border: none;
     outline-width: 0;
+    box-shadow: 0 1px 3px #888;
+    -webkit-box-shadow: 0 1px 3px #888;
+    -moz-box-shadow: 0 1px 3px #888;
+}
+
+.chevron_icon{
+    width: 35px !important;
+    height: 35px !important;
+    color: grey !important;
 }
 
 .row_products_scroll_button_right{
     border: none;
     outline-width: 0;
+    padding: 12px 5px;
+    box-shadow: 0 1px 3px #888;
+    -webkit-box-shadow: 0 1px 3px #888;
+    -moz-box-shadow: 0 1px 3px #888;
     position: absolute;
-    right: 60px;
     cursor: pointer;
-    margin-top: 70px;
+    right: 0;
+    top: 50%;
     display: none;
-    transition: color ease-in 200ms, background-color ease-in 400ms;
+    transition: background-color ease-in 200ms, background-color ease-in 400ms;
 }
