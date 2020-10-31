@@ -1,6 +1,5 @@
 .amazon_card_row{
     display: grid;
-    grid-auto-flow: column;
     grid-column-gap: 20px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     max-width: 100%;

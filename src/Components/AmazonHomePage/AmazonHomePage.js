@@ -3,17 +3,11 @@ import styles from './AmazonHomePage.module.css';
 import slider from './AmazonSlider.module.css'
 import AmazonCardRow from "./AmazonCardRow/AmazonCardRow";
 import AmazonProductsRow from "./AmazonProductsRow/AmazonProductsRow";
-import {firstCardData, secondCardData, thirdCardData} from "./amazonCardsData";
-import {
-    eightProductsData,
-    fifthProductData,
-    firstProductsData,
-    fourthProductsData, productDataStore,
-    secondProductsData, seventhProductsData, sixthProductData,
-    thirdProductsData
-} from "./amazonProductsData";
+import {cardData, firstCardData, secondCardData, thirdCardData} from "./amazonCardsData";
+import {productDataStore,} from "./amazonProductsData";
 
 function AmazonHomePage() {
+
     return(
         <div className={styles.amazon_home_page}>
             <div className={slider.amazon_home_slider}>
@@ -21,14 +15,13 @@ function AmazonHomePage() {
             </div>
 
             <div className={styles.amazon_home_page_products}>
-                <AmazonCardRow cardData={firstCardData}/>
-                <AmazonCardRow cardData={secondCardData}/>
+                <AmazonCardRow cardData={cardData.slice(0,8)}/>
 
                 <AmazonProductsRow {...productDataStore.firstProductsData} id={1} />
                 <AmazonProductsRow {...productDataStore.secondProductsData} id={2} />
                 <AmazonProductsRow {...productDataStore.thirdProductsData} id={3} />
 
-                <AmazonCardRow cardData={thirdCardData}/>
+                <AmazonCardRow cardData={cardData.slice(8,12)}/>
 
                 <AmazonProductsRow {...productDataStore.fourthProductsData} id={4}/>
                 <AmazonProductsRow {...productDataStore.fifthProductsData} id={5}/>
