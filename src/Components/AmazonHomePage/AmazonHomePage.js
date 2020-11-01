@@ -3,10 +3,10 @@ import styles from './AmazonHomePage.module.css';
 import slider from './AmazonSlider.module.css'
 import AmazonCardRow from "./AmazonCardRow/AmazonCardRow";
 import AmazonProductsRow from "./AmazonProductsRow/AmazonProductsRow";
-import {cardData, firstCardData, secondCardData, thirdCardData} from "./amazonCardsData";
-import {productDataStore,} from "./amazonProductsData";
+// import {cardData} from "./amazonCardsData";
+import {productDataStore} from "./amazonProductsData";
 
-function AmazonHomePage() {
+function AmazonHomePage({cardData}) {
 
     return(
         <div className={styles.amazon_home_page}>
