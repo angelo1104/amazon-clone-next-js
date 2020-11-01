@@ -3,8 +3,6 @@ import styles from './AmazonHomePage.module.css';
 import slider from './AmazonSlider.module.css'
 import AmazonCardRow from "./AmazonCardRow/AmazonCardRow";
 import AmazonProductsRow from "./AmazonProductsRow/AmazonProductsRow";
-// import {cardData} from "./amazonCardsData";
-//import {productDataStore} from "./amazonProductsData";
 
 function AmazonHomePage({cardData, productDataStore}) {
 
@@ -15,6 +13,7 @@ function AmazonHomePage({cardData, productDataStore}) {
             </div>
 
             <div className={styles.amazon_home_page_products}>
+
                 <AmazonCardRow cardData={cardData.slice(0,8)}/>
 
                 <AmazonProductsRow {...productDataStore.firstProductsData} id={1} />
