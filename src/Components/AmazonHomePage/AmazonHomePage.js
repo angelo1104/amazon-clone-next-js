@@ -4,9 +4,9 @@ import slider from './AmazonSlider.module.css'
 import AmazonCardRow from "./AmazonCardRow/AmazonCardRow";
 import AmazonProductsRow from "./AmazonProductsRow/AmazonProductsRow";
 // import {cardData} from "./amazonCardsData";
-import {productDataStore} from "./amazonProductsData";
+//import {productDataStore} from "./amazonProductsData";
 
-function AmazonHomePage({cardData}) {
+function AmazonHomePage({cardData, productDataStore}) {
 
     return(
         <div className={styles.amazon_home_page}>
