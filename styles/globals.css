@@ -29,3 +29,11 @@ a {
   display: block !important;
   background-color: white;
 }
+
+.carousel .slide{
+  background: transparent !important;
+}
+
+.carousel .thumb-wrapper{
+  display: none;
+}
