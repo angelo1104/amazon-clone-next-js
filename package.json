@@ -14,18 +14,14 @@
     "axios": "^0.21.0",
     "cors": "^2.8.5",
     "firebase": "^7.24.0",
-    "glider-js": "^1.7.3",
     "i18n-iso-countries": "^6.2.2",
     "next": "^10.0.0",
     "next-compose-plugins": "^2.2.0",
     "next-connect": "^0.9.1",
     "next-images": "^1.6.0",
     "react": "17.0.1",
-    "react-bootstrap": "^1.4.0",
     "react-dom": "17.0.1",
-    "react-glider": "^2.0.3",
-    "react-id-swiper": "^4.0.0",
-    "react-responsive-carousel": "^3.2.10",
-    "swiper": "^6.3.5"
+    "react-material-ui-carousel": "^2.1.1",
+    "react-responsive-carousel": "^3.2.10"
   }
 }
