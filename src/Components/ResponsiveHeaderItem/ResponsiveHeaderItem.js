@@ -7,7 +7,7 @@ function ResponsiveHeaderItem() {
     return(
         <div className={styles.responsive_header_item}>
             <div className={styles.responsive_sign_in}>
-                <Link href={'/auth/sign-in'}>
+                <Link href={'/auth/email/sign-up'}>
                     <p>Sign In</p>
                 </Link>
             </div>
