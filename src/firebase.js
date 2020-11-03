@@ -1,7 +1,4 @@
-import firebase from "firebase/app";
-import 'firebase/auth'
-import 'firebase/firestore'
-import 'firebase/storage'
+import firebase from "firebase";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -11,14 +8,18 @@ const firebaseConfig = {
     projectId: "subtle-anthem-265314",
     storageBucket: "subtle-anthem-265314.appspot.com",
     messagingSenderId: "1063573991139",
-    appId: "1:1063573991139:web:c4d29792977d1798f35fd6",
-    measurementId: "G-W6C68RH22Q"
+    appId: "1:1063573991139:web:cf49b1a68466ee4af35fd6",
+    measurementId: "G-B2KR8VLZZV"
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+// let firebaseApp ;
 
-const auth = firebaseApp.auth()
-const database = firebaseApp.firestore()
-const storage = firebaseApp.storage()
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 
-export {auth,database,storage}
+// const auth = ;
+//
+// export {auth}
+
+export {firebaseConfig}

@@ -1,9 +1,40 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from './SignUp.module.css';
 import Link from "next/link";
 import AuthFooter from "../AuthFooter/AuthFooter";
+import firebase from "firebase";
 
 function SignUp() {
+    const [email,setEmail] = useState('');
+    const [name,setName] = useState('');
+    const [password,setPassword] = useState('');
+    const [repassword,setRepassword] = useState('');
+    const [error,setError] = useState('')
+
+    const signup = (event)=>{
+        event.preventDefault();
+
+        if (email==='' || name==='' || password==='' || repassword===''){
+            setError('Please fill out all the fields')
+        }else if (password!==repassword){
+            setError('Passwords entered are not same.')
+        }else {
+            firebase.auth().createUserWithEmailAndPassword(email,password)
+                .then(authUser=>{
+                    authUser.user.updateProfile({
+                        displayName: name,
+                    })
+                        .then(()=>{
+                            console.log(authUser)
+                        })
+                })
+                .catch(error=>{
+                    setError(error.message)
+                })
+        }
+
+    }
+
 
     const moveToNext = (event)=>{
         if (event.keyCode === 13) {
@@ -24,30 +55,32 @@ function SignUp() {
                 <img className={styles.amazon_logo} src="https://i.pinimg.com/originals/31/d1/3c/31d13c99ee841869ca44ef54ba956272.png" alt="" />
             </Link>
 
-            <form className={styles.signup_form}>
+            <form onSubmit={signup} className={styles.signup_form}>
                 <h1 className={styles.signup_form_heading}>
                     Create account
                 </h1>
 
                 <div className={styles.signup_input_div}>
                     <label className={styles.signup_label} htmlFor={'#signup_name'} >Your name</label>
-                    <input onKeyDown={moveToNext} className={styles.signup_input} type="text" name="" id={'signup_name'} />
+                    <input value={name} onChange={e=>setName(e.target.value)} onKeyDown={moveToNext} className={styles.signup_input} type="text" name="" id={'signup_name'} />
                 </div>
 
                 <div className={styles.signup_input_div}>
                     <label className={styles.signup_label} htmlFor={'#signup_email'} >Email</label>
-                    <input onKeyDown={moveToNext} className={styles.signup_input} type="text" name="" id={'signup_email'} />
+                    <input value={email} onChange={e=>setEmail(e.target.value)} onKeyDown={moveToNext} className={styles.signup_input} type="email" name="" id={'signup_email'} />
                 </div>
 
                 <div className={styles.signup_input_div}>
                     <label className={styles.signup_label} htmlFor={'#signup_password'} >Password</label>
-                    <input onKeyDown={moveToNext} className={styles.signup_input} type="text" name="" id={'signup_password'} />
+                    <input value={password} onChange={e=>setPassword(e.target.value)} onKeyDown={moveToNext} className={styles.signup_input} type="password" name="" id={'signup_password'} />
                 </div>
 
                 <div className={styles.signup_input_div}>
                     <label className={styles.signup_label} htmlFor={'#signup_reenter_pasword'} >Re-enter password</label>
-                    <input onKeyDown={moveToNext} className={styles.signup_input} type="text" name="" id={'signup_reenter_password'} />
+                    <input value={repassword} onChange={e=>setRepassword(e.target.value)} className={styles.signup_input} type="password" name="" id={'signup_reenter_password'} />
                 </div>
+
+                <p className={styles.error}>{error}</p>
 
                 <button className={styles.signup_submit_button} type="submit">Create your Amazon Account</button>
 

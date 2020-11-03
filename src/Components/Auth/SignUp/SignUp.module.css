@@ -63,6 +63,11 @@
     width: 99%;
     cursor: pointer;
     margin: 20px auto;
+    border-radius: 3px;
+}
+
+.signup_submit_button:hover{
+    background-color: #EEBA37;
 }
 
 .signup_terms{
@@ -109,4 +114,10 @@
     background: linear-gradient(to right,#fff,rgba(255,255,255,0),#fff);
     z-index: 1;
     content: "";
+}
+
+.error{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 600;
 }
