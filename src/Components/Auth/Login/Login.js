@@ -1,9 +1,42 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from './Login.module.css';
 import Link from "next/link";
 import AuthFooter from "../AuthFooter/AuthFooter";
+import {auth} from "../../../firebase";
+import {useRouter} from 'next/router'
 
 function Login() {
+    const router = useRouter();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [processing,setProcessing] = useState(false);
+    const [error,setError] = useState('')
+
+    const submitLogin = (event)=>{
+        event.preventDefault();
+
+        if (email==='' || password===''){
+            setError('Please fill out all the fields')
+            setProcessing(false)
+        }else {
+            auth().signInWithEmailAndPassword(email, password)
+                .then(authUser=>{
+                    setProcessing(false)
+                })
+                .catch(error=>{
+                    setError(error.message)
+                })
+        }
+
+    }
+
+    const goToSignUp = (event)=>{
+        event.preventDefault();
+
+        router.push('/auth/email/sign-up');
+    }
+
     const moveToNext = (event)=>{
         if (event.keyCode === 13) {
             event.preventDefault()
@@ -23,7 +56,7 @@ function Login() {
                 <img className={styles.amazon_logo} src="https://i.pinimg.com/originals/31/d1/3c/31d13c99ee841869ca44ef54ba956272.png" alt="" />
             </Link>
 
-            <form className={styles.login_form}>
+            <form onSubmit={submitLogin} className={styles.login_form}>
 
                 <h1 className={styles.login_form_heading}>
                     Sign-In
@@ -39,7 +72,7 @@ function Login() {
                     <input className={styles.login_input} type="password" name="" id={'signup_password'} />
                 </div>
 
-                <button className={styles.login_submit_button} type="submit">Continue</button>
+                <button disabled={processing} className={styles.login_submit_button} type="submit">Continue</button>
 
                 <p className={styles.login_terms}>By continuing over amazon clone you agree to the terms & conditions of our amazon clone.</p>
 
@@ -57,7 +90,7 @@ function Login() {
                 <h5 className={styles.divider_title}>New to Amazon?</h5>
             </div>
 
-            <button className={styles.signup_button}>Create your Amazon account</button>
+            <button onClick={goToSignUp} type={'submit'} className={styles.signup_button}>Create your Amazon account</button>
 
             <AuthFooter/>
         </div>

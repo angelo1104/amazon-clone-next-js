@@ -10,6 +10,7 @@ function AuthProvider({children}) {
     useEffect(()=>{
         const unsubscribe = auth().onAuthStateChanged((authUser)=>{
             if (authUser){
+                console.log(authUser)
                 dispatch(setUser(authUser))
             }else {
                 dispatch(setUser(null))
