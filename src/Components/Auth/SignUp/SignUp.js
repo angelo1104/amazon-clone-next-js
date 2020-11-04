@@ -9,15 +9,19 @@ function SignUp() {
     const [name,setName] = useState('');
     const [password,setPassword] = useState('');
     const [repassword,setRepassword] = useState('');
+    const [processing,setProcessing] = useState(false)
     const [error,setError] = useState('')
 
     const signup = (event)=>{
         event.preventDefault();
+        setProcessing(true)
 
         if (email==='' || name==='' || password==='' || repassword===''){
             setError('Please fill out all the fields')
+            setProcessing(false)
         }else if (password!==repassword){
             setError('Passwords entered are not same.')
+            setProcessing(false)
         }else {
             firebase.auth().createUserWithEmailAndPassword(email,password)
                 .then(authUser=>{
@@ -25,10 +29,11 @@ function SignUp() {
                         displayName: name,
                     })
                         .then(()=>{
-                            console.log(authUser)
+                            setProcessing(false)
                         })
                 })
                 .catch(error=>{
+                    setProcessing(false)
                     setError(error.message)
                 })
         }
@@ -82,7 +87,7 @@ function SignUp() {
 
                 <p className={styles.error}>{error}</p>
 
-                <button className={styles.signup_submit_button} type="submit">Create your Amazon Account</button>
+                <button disabled={processing} className={styles.signup_submit_button} type="submit">Create your Amazon Account</button>
 
                 <p className={styles.signup_terms}>By creating an account you agree to the terms & conditions of our amazon clone.</p>
 
