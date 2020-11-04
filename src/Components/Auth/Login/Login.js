@@ -64,13 +64,15 @@ function Login() {
 
                 <div className={styles.login_input_div}>
                     <label className={styles.login_label} htmlFor={'#signup_email'} >Email</label>
-                    <input onKeyDown={moveToNext} className={styles.login_input} type="email" name="" id={'signup_email'} />
+                    <input value={email} onChange={e=>setEmail(e.target.value)} onKeyDown={moveToNext} className={styles.login_input} type="email" name="" id={'signup_email'} />
                 </div>
 
                 <div className={styles.login_input_div}>
                     <label className={styles.login_label} htmlFor={'#signup_password'} >Password</label>
-                    <input className={styles.login_input} type="password" name="" id={'signup_password'} />
+                    <input value={password} onChange={e=>setPassword(e.target.value)} className={styles.login_input} type="password" name="" id={'signup_password'} />
                 </div>
+
+                <p className={styles.error}>{error}</p>
 
                 <button disabled={processing} className={styles.login_submit_button} type="submit">Continue</button>
 
