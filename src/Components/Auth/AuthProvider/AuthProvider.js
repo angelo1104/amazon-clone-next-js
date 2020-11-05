@@ -1,10 +1,16 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useContext} from "react";
 import {auth} from "../../../firebase";
 import {useStateValue} from "../../../ContextApi/StateProvider";
 import {setUser} from "../../../ContextApi/actions";
+import Cookies from 'js-cookie'
 
 function AuthProvider({children}) {
+
     const [{user}, dispatch] = useStateValue();
+
+    const AuthContext = useContext({
+        user: null
+    });
 
 
     useEffect(()=>{
@@ -17,6 +23,7 @@ function AuthProvider({children}) {
             }
         })
 
+
         return ()=>{
             unsubscribe()
         }
@@ -26,6 +33,19 @@ function AuthProvider({children}) {
         console.log(user)
     },[])
 
+
+
+    useEffect(()=>{
+        auth().onIdTokenChanged(async (authUser)=>{
+            if (authUser){
+                const token = await authUser.getIdToken();
+                Cookies.set('firebase', token);
+            }else {
+                Cookies.remove('firebase')
+                console.log('No user id token')
+            }
+        })
+    },[])
 
     return(
         <>

@@ -20,6 +20,7 @@
     "next-compose-plugins": "^2.2.0",
     "next-connect": "^0.9.1",
     "next-images": "^1.6.0",
+    "nookies": "^2.5.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-material-ui-carousel": "^2.1.1",
