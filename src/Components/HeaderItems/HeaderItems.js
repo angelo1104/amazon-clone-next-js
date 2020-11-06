@@ -6,7 +6,7 @@ import Link from "next/link";
 function HeaderItems() {
     return(
         <div className={styles.header_items}>
-            <Link href={'/auth/email/sign-up'} className={styles.header_item}>
+            <Link href={'/auth/email/login'} className={styles.header_item}>
                 <div className={styles.header_item_link}>
                     <p className={styles.header_item_line1}>
                         Hello,

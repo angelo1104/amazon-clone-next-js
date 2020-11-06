@@ -5,6 +5,9 @@ import AuthFooter from "../AuthFooter/AuthFooter";
 import firebase from "firebase";
 import Lottie from "lottie-react-web";
 import spinner from '../../../lottie/spinner.json'
+import authInstance from "../../../axios/authInstance";
+import {setDataUser} from "../../../ContextApi/actions";
+import {useStateValue} from "../../../ContextApi/StateProvider";
 
 function SignUp() {
     const [email, setEmail] = useState('');
@@ -13,6 +16,8 @@ function SignUp() {
     const [repassword, setRepassword] = useState('');
     const [processing, setProcessing] = useState(false)
     const [error, setError] = useState('')
+
+    const [{}, dispatch] = useStateValue();
 
     const signup = (event) => {
         event.preventDefault();
@@ -33,7 +38,31 @@ function SignUp() {
                         displayName: name,
                     })
                         .then(() => {
-                            setProcessing(false)
+                            authInstance.post('/new/user',{
+                                name: name,
+                                email: email,
+                                seller: false,
+                                uid: authUser.user.uid
+                            })
+                                .then(()=>{
+                                    authInstance.post('/user',{
+                                        filter:{
+                                            email: authUser.user.email,
+                                            uid: authUser.user.uid,
+                                        }
+                                    })
+                                        .then((response)=>{
+                                            dispatch(setDataUser(response.data))
+                                        })
+                                        .catch(error=>{
+                                            console.log(error)
+                                        })
+                                    setProcessing(false)
+                                })
+                                .catch(error=>{
+                                    setProcessing(false);
+                                    setError(error.message)
+                                })
                         })
                 })
                 .catch(error => {

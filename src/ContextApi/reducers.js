@@ -2,7 +2,7 @@ import {actionTypes} from "./actions";
 
 export const initialState = {
     user: null,
-    token:'',
+    dataUser: null
 }
 
 const reducer = (state,action)=>{
@@ -12,10 +12,10 @@ const reducer = (state,action)=>{
                 ...state,
                 user: action.user
             }
-        case 'SET_TOKEN':
+        case actionTypes.setDataUser:
             return {
                 ...state,
-                token: action.token
+                dataUser: action.user
             }
         default:
             return{...state}

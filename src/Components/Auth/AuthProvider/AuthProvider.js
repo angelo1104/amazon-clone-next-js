@@ -1,8 +1,9 @@
 import React, {useEffect, useContext} from "react";
 import {auth} from "../../../firebase";
 import {useStateValue} from "../../../ContextApi/StateProvider";
-import {setUser} from "../../../ContextApi/actions";
+import {setDataUser, setUser} from "../../../ContextApi/actions";
 import Cookies from 'js-cookie'
+import authInstance from "../../../axios/authInstance";
 
 function AuthProvider({children}) {
 
@@ -16,10 +17,23 @@ function AuthProvider({children}) {
     useEffect(()=>{
         const unsubscribe = auth().onAuthStateChanged((authUser)=>{
             if (authUser){
-                console.log(authUser)
+
+                authInstance.post('/user',{
+                    filter:{
+                        email: authUser.email,
+                        uid: authUser.uid,
+                    }
+                })
+                    .then((response)=>{
+                        dispatch(setDataUser(response.data))
+                    })
+                    .catch(error=>{
+                        console.log(error)
+                    })
                 dispatch(setUser(authUser))
             }else {
                 dispatch(setUser(null))
+                dispatch(setDataUser(null))
             }
         })
 
