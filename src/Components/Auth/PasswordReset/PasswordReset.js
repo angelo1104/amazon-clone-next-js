@@ -3,6 +3,8 @@ import styles from './PasswordReset.module.css';
 import Link from "next/link";
 import AuthFooter from "../AuthFooter/AuthFooter";
 import {auth} from "../../../firebase";
+import Lottie from "lottie-react-web";
+import spinner from "../../../lottie/spinner.json";
 
 function PasswordReset() {
     const [email,setEmail] = useState('');
@@ -11,12 +13,16 @@ function PasswordReset() {
 
     const submitPasswordReset = (event)=>{
         event.preventDefault();
+        setMessage('')
 
+        setProcessing(true)
         auth().sendPasswordResetEmail(email)
             .then(()=>{
+                setProcessing(false)
                 setMessage('The password reset email has been ent. Check your email to continue.')
             })
             .catch((error)=>{
+                setProcessing(false)
                 console.log(email)
                 console.log(error)
                 setMessage(error.message)
@@ -43,7 +49,15 @@ function PasswordReset() {
 
                 <p className={styles.message}>{message}</p>
 
-                <button disabled={processing} className={styles.password_reset_submit_button} type="submit">Continue</button>
+                <button disabled={processing} className={styles.password_reset_submit_button} type="submit">
+                    {
+                        !processing ? 'Continue' : <div className={styles.spinner}>
+                            <Lottie options={{
+                                animationData: spinner,
+                            }}/>
+                        </div>
+                    }
+                </button>
             </form>
 
             <AuthFooter/>

@@ -64,6 +64,9 @@
     cursor: pointer;
     margin: 20px auto;
     border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .login_terms{
@@ -138,4 +141,8 @@
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 600;
+}
+
+.spinner{
+    max-width: 100px;
 }

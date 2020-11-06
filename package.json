@@ -16,6 +16,7 @@
     "firebase": "^7.24.0",
     "i18n-iso-countries": "^6.2.2",
     "js-cookie": "^2.2.1",
+    "lottie-react-web": "^2.2.2",
     "next": "^10.0.0",
     "next-compose-plugins": "^2.2.0",
     "next-connect": "^0.9.1",
