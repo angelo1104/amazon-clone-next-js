@@ -2,12 +2,12 @@ import React, {useState} from "react";
 import styles from './SignUp.module.css';
 import Link from "next/link";
 import AuthFooter from "../AuthFooter/AuthFooter";
-import firebase from "firebase";
 import Lottie from "lottie-react-web";
 import spinner from '../../../lottie/spinner.json'
 import authInstance from "../../../axios/authInstance";
 import {setDataUser} from "../../../ContextApi/actions";
 import {useStateValue} from "../../../ContextApi/StateProvider";
+import {auth} from "../../../firebase";
 
 function SignUp() {
     const [email, setEmail] = useState('');
@@ -32,7 +32,7 @@ function SignUp() {
             setProcessing(false)
         } else {
             setProcessing(true)
-            firebase.auth().createUserWithEmailAndPassword(email, password)
+            auth().createUserWithEmailAndPassword(email, password)
                 .then(authUser => {
                     authUser.user.updateProfile({
                         displayName: name,
