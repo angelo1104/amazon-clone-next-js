@@ -10,6 +10,7 @@
     color: white;
     cursor: pointer;
     padding: 10px;
+    border: 1px solid transparent;
 }
 
 .header_item:hover{
@@ -45,4 +46,18 @@
     .header_items{
         display: none;
     }
+}
+
+.header_item_link{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 10px;
+}
+
+.header_item_link:hover{
+    border: 1px solid white;
 }
