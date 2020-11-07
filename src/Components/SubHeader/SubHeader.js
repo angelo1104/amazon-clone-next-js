@@ -52,7 +52,7 @@ function SubHeader() {
                     <SubHeaderCard title={"Customer Service"}/>
                     <SubHeaderCard title={"Gift Cards"}/>
                     <SubHeaderCard title={"Registry"}/>
-                    <SubHeaderCard title={"Sell"}/>
+                    <SubHeaderCard title={"Sell"} link={'/seller/products'}/>
                 </div>
 
                 <div className={styles.sub_header_amazon_response}>
