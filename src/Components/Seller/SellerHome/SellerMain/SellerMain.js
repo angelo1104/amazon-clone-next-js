@@ -128,6 +128,21 @@ function SellerMain() {
                 <p className={styles.seller_third_individual}>Just have a few items to sell? <a href="#" className={styles.seller_main_special_link_inline}>Sign Up to become an individual seller</a></p>
             </div>
 
+
+            <div className={styles.seller_main_fourth}>
+                <h1 className={styles.seller_fourth_heading}>
+                    Start selling today
+                </h1>
+
+                <h4 className={styles.seller_fourth_subheading}>Put your products in front of more than 300 million customers worldwide.</h4>
+
+                <button className={styles.sign_up_button} type={'submit'}>
+                    Sign Up
+                </button>
+
+            <p className={styles.seller_fees}>$39.99 a month + selling fees</p>
+            </div>
+
         </div>
     )
 }

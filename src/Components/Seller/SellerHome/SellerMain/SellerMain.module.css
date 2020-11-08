@@ -246,3 +246,28 @@
     background-position: -17px 3px;
     transform: translate(4px,-4px);
 }
+
+.seller_main_fourth{
+    padding: 50px;
+    min-height: 600px;
+    margin-bottom: 30px;
+    background: url(https://m.media-amazon.com/images/G/01/sell/images/bg/illustration-pf-home-2x._CB441100178_.png) center right/700px no-repeat,url(https://m.media-amazon.com/images/G/01/sell/images/illustration/pf-wave-horizon-1.svg) top left/cover no-repeat;
+}
+
+.seller_fourth_heading{
+    font-size: 70px;
+    color: #232F3E;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
+    max-width: 500px;
+    margin: 100px 0 0;
+}
+
+.seller_fourth_subheading{
+    max-width: 450px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    color: #111111;
+    margin: 30px 0;
+    font-weight: 400;
+}
