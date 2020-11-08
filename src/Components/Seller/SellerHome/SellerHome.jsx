@@ -3,6 +3,7 @@ import styles from './SellerHome.module.css';
 import Header from "../../Header/Header";
 import SellerHeader from "./SellerHeader/SellerHeader";
 import SellerMain from "./SellerMain/SellerMain";
+import Footer from "../../Footer/Footer";
 
 function SellerHome() {
     return(
@@ -14,6 +15,8 @@ function SellerHome() {
 
                 <SellerMain/>
             </div>
+
+            <Footer/>
         </div>
     )
 }

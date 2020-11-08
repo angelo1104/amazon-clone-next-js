@@ -75,3 +75,68 @@
     color: grey;
     margin: 10px 5px;
 }
+
+.seller_main_second{
+    margin: -5px 0 0;
+    display: flex;
+    background: linear-gradient(180deg, #ebf8fa, #ffffff);
+    justify-content: space-between;
+    padding: 50px 100px;
+}
+
+.seller_main_feature_card{
+    flex: 0.45;
+    margin: 0 15px;
+    border: 1px solid #b2e5f6;
+    background-color: #ffffff;
+    padding: 25px 40px;
+    border-radius: 8px;
+    transition: transform 150ms cubic-bezier(.64,.15,.53,.53) 300ms;
+}
+
+.seller_main_feature_card:hover{
+    transform: scale(1.03);
+}
+
+.feature_card_image{
+    width: 64px;
+}
+
+.feature_card_title{
+    font-size: 32px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
+    color: #232f3e;
+    margin: 15px 0 0;
+}
+
+.feature_card_desc{
+    color: gray;
+    margin-top: 15px;
+    line-height: 1.5;
+    width: 95%;
+}
+
+.seller_main_special_link{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 17px;
+    display: block;
+    color: #232f3e;
+    font-weight: 700;
+    margin: 20px 0;
+}
+
+.seller_main_special_link::after{
+    content: "";
+    background: rgba(0,0,0,0) url(https://m.media-amazon.com/images/G/01/sell/navigation/spritesheet-icons._TTH_.svg) no-repeat;
+    display: inline-block;
+    height: 14px;
+    width: 14px;
+    background-position: 2px 3px;
+    transition: transform .2s cubic-bezier(.64,.15,.53,.53),-webkit-transform .2s cubic-bezier(.64,.15,.53,.53);
+}
+
+.seller_main_special_link:hover::after{
+    background-position: -17px 3px;
+    transform: translate(4px,-4px);
+}

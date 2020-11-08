@@ -39,6 +39,49 @@ function SellerMain() {
                 </svg>
             </div>
 
+            <div className={styles.seller_main_second}>
+                <div className={styles.seller_main_feature_card}>
+                    <img className={styles.feature_card_image} src="https://m.media-amazon.com/images/G/01/sp-marketing-toolkit/guides/design/iconography/Desktop_Computer._CB424651243_.svg" alt="" />
+
+                    <h2 className={styles.feature_card_title}>
+                        Sell More
+                    </h2>
+
+                    <p className={styles.feature_card_desc}>
+                        Fresh new startups and Fortune 500s. B2B and B2C. Brand owners and resellers. Independent third-party sellers sold more than a billion items during the 2019 holiday season alone.
+                    </p>
+
+                    <a href="#" className={styles.seller_main_special_link}>How to get Started </a>
+                </div>
+
+                <div className={styles.seller_main_feature_card}>
+                    <img className={styles.feature_card_image} src="https://m.media-amazon.com/images/G/01/sp-marketing-toolkit/guides/design/iconography/Shipping._CB424651256_.svg" alt="" />
+
+                    <h2 className={styles.feature_card_title}>
+                        Scale with FBA
+                    </h2>
+
+                    <p className={styles.feature_card_desc}>
+                        Leave the shipping, returns, and customer service to us with Fulfillment by Amazon (FBA). It’s the easiest way to reach 150 million paid Prime members around the world.                    </p>
+
+                    <a href="#" className={styles.seller_main_special_link}>How to get Started </a>
+                </div>
+
+                <div className={styles.seller_main_feature_card}>
+                    <img className={styles.feature_card_image} src="https://m.media-amazon.com/images/G/01/sp-marketing-toolkit/guides/design/iconography/Desktop_Computer._CB424651243_.svg" alt="" />
+
+                    <h2 className={styles.feature_card_title}>
+                        Sell More
+                    </h2>
+
+                    <p className={styles.feature_card_desc}>
+                        Fresh new startups and Fortune 500s. B2B and B2C. Brand owners and resellers. Independent third-party sellers sold more than a billion items during the 2019 holiday season alone.
+                    </p>
+
+                    <a href="#" className={styles.seller_main_special_link}>How to get Started </a>
+                </div>
+            </div>
+
         </div>
     )
 }
