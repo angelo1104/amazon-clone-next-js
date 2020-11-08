@@ -1,0 +1,77 @@
+.seller_main{
+    width: 98%;
+    margin: auto;
+}
+
+.seller_main_first_row{
+    display: flex;
+}
+
+.seller_main_first_left{
+    flex: 0.85;
+    padding: 0 80px;
+    z-index: 200;
+}
+
+.seller_main_first_right{
+    padding-top: 80px;
+    z-index: 200;
+}
+
+.seller_main_first_title{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
+    font-size: 80px;
+    line-height: 96px;
+    color: #232F3E;
+    margin-top: 100px;
+}
+
+.seller_main_first_img{
+    max-width: 450px;
+    position: relative;
+    top: 10px;
+}
+
+.wave_svg{
+    width: 100%;
+    transform: rotateY(180deg);
+    z-index: -299;
+    margin-top: -500px;
+}
+
+.seller_main_first_desc{
+    color: grey;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    max-width: 450px;
+    line-height: 1.25;
+    margin: 20px 8px 0;
+}
+
+.sign_up_button{
+    color: #232F3E;
+    background: #F90;
+    border: 1px solid #f90;
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 25px;
+    outline-width: 0;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
+    margin: 30px 0 0;
+}
+
+.sign_up_button:hover{
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.35);
+}
+
+.seller_fees{
+    font-size: 14px;
+    font-family: 'Ubuntu', sans-serif;
+    color: grey;
+    margin: 10px 5px;
+}

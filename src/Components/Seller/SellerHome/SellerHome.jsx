@@ -2,6 +2,7 @@ import React from "react";
 import styles from './SellerHome.module.css';
 import Header from "../../Header/Header";
 import SellerHeader from "./SellerHeader/SellerHeader";
+import SellerMain from "./SellerMain/SellerMain";
 
 function SellerHome() {
     return(
@@ -10,6 +11,8 @@ function SellerHome() {
 
             <div>
                 <SellerHeader/>
+
+                <SellerMain/>
             </div>
         </div>
     )

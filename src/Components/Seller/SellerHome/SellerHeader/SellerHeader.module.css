@@ -16,10 +16,11 @@
     font-family: 'Ubuntu', sans-serif;
     font-size: 30px;
     font-weight: 800 !important;
+    color: #232F3E;
 }
 
 .seller_button{
-    color: #111111;
+    color: #232F3E;
     background: #FF9900;
     border-radius: 50px;
     padding: 12px 30px;
