@@ -2,7 +2,8 @@ import React from 'react'
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import AmazonHomePage from "../Components/AmazonHomePage/AmazonHomePage";
-import axios from 'axios'
+import {productDataStore} from "./api/get/data/productsData";
+import {cardData} from "./api/get/data/cardsData";
 
 export default function Home({cardData, productData}) {
   return (
@@ -16,14 +17,10 @@ export default function Home({cardData, productData}) {
 
 
 export async function getStaticProps(context) {
-    const cardData = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/get/data/cards`)
-    const productData = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/get/data/products`)
-
-
     return{
         props:{
-            cardData: cardData.data,
-            productData: productData.data,
+            cardData: cardData,
+            productData: productDataStore,
         },
     }
 }
