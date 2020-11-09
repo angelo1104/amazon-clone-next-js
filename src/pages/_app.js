@@ -4,7 +4,6 @@ import {StateProvider} from "../ContextApi/StateProvider";
 import reducer, {initialState} from "../ContextApi/reducers";
 import Head from "next/head";
 import AuthProvider from "../Components/Auth/AuthProvider/AuthProvider";
-import "animate.css/animate.min.css";
 
 
 function MyApp({ Component, pageProps }) {
