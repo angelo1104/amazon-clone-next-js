@@ -1,9 +1,10 @@
 import React from "react";
+import SellerHome from "../../../Components/Seller/SellerHome/SellerHome";
 
 function SellerHomePage() {
     return(
         <div>
-            <SellerHomePage/>
+            <SellerHome/>
         </div>
     )
 }

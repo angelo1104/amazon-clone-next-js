@@ -1,0 +1,38 @@
+.seller_header{
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.2);
+    width: 97%;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 80px;
+    margin: auto;
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    z-index: 990;
+    align-items: center;
+}
+
+.seller_heading{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 30px;
+    font-weight: 800 !important;
+    color: #232F3E;
+}
+
+.seller_button{
+    color: #232F3E;
+    background: #FF9900;
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    outline-width: 0;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
+}
+
+.seller_button:hover{
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.35);
+}
