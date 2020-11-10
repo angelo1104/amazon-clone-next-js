@@ -4,7 +4,7 @@ import {StateProvider} from "../ContextApi/StateProvider";
 import reducer, {initialState} from "../ContextApi/reducers";
 import Head from "next/head";
 import AuthProvider from "../Components/Auth/AuthProvider/AuthProvider";
-
+import 'antd/dist/antd.css';
 
 function MyApp({ Component, pageProps }) {
 

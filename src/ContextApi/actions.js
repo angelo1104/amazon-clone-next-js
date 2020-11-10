@@ -1,6 +1,7 @@
 const actionTypes = {
     setUser: 'SET_USER',
-    setDataUser: 'SET_DATA_USER'
+    setDataUser: 'SET_DATA_USER',
+    setCanSell: 'SET_CAN_SELL',
 }
 
 const setUser = (payload)=>{
@@ -17,4 +18,11 @@ const setDataUser = (payload)=>{
     }
 }
 
-export {setUser, actionTypes, setDataUser}
+const setCanSell = (payload)=>{
+    return{
+        type: actionTypes.setCanSell,
+        canSell: payload
+    }
+}
+
+export {setUser, actionTypes, setDataUser, setCanSell}

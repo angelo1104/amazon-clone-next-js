@@ -2,7 +2,8 @@ import {actionTypes} from "./actions";
 
 export const initialState = {
     user: null,
-    dataUser: null
+    dataUser: null,
+    canSell: false,
 }
 
 const reducer = (state,action)=>{
@@ -16,6 +17,11 @@ const reducer = (state,action)=>{
             return {
                 ...state,
                 dataUser: action.user
+            }
+        case actionTypes.setCanSell:
+            return {
+                ...state,
+                canSell: action.canSell
             }
         default:
             return{...state}

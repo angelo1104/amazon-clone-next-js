@@ -1,7 +1,7 @@
 import React, {useEffect, useContext} from "react";
 import {auth} from "../../../firebase";
 import {useStateValue} from "../../../ContextApi/StateProvider";
-import {setDataUser, setUser} from "../../../ContextApi/actions";
+import {setCanSell, setDataUser, setUser} from "../../../ContextApi/actions";
 import Cookies from 'js-cookie'
 import authInstance from "../../../axios/authInstance";
 
@@ -26,6 +26,7 @@ function AuthProvider({children}) {
                 })
                     .then((response)=>{
                         dispatch(setDataUser(response.data))
+                        dispatch(setCanSell(response.data.seller))
                     })
                     .catch(error=>{
                         console.log(error)
