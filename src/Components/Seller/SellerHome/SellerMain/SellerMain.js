@@ -2,6 +2,7 @@ import React from "react";
 import styles from './SellerMain.module.css';
 import comma from './comma.png'
 import Reveal from 'react-reveal/Reveal'
+import Link from "next/link";
 
 function SellerMain() {
     return(
@@ -17,9 +18,11 @@ function SellerMain() {
                             More than half the units sold in our stores are from independent sellers.
                         </h3>
 
-                        <button className={styles.sign_up_button} type={'submit'}>
-                            Sign Up
-                        </button>
+                        <Link href={'/seller/products/auth/login'}>
+                            <button className={styles.sign_up_button} type={'submit'}>
+                                Sign Up
+                            </button>
+                        </Link>
 
                         <p className={styles.seller_fees}>$39.99 a month + selling fees</p>
                     </div>
@@ -150,9 +153,12 @@ function SellerMain() {
 
                 <h4 className={styles.seller_fourth_subheading}>Put your products in front of more than 300 million customers worldwide.</h4>
 
-                <button className={styles.sign_up_button} type={'submit'}>
-                    Sign Up
-                </button>
+                <Link href={'/seller/products/auth/login'}>
+                    <button className={styles.sign_up_button} type={'submit'}>
+                        Sign Up
+                    </button>
+                </Link>
+
 
             <p className={styles.seller_fees}>$39.99 a month + selling fees</p>
             </div>
