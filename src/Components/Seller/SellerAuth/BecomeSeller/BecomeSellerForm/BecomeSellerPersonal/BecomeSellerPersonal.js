@@ -1,16 +1,11 @@
 import React, {useEffect, useState} from "react";
 import styles from './BecomeSellerPersonal.module.css';
-import Link from "next/link";
-import {CountryDropdown} from "react-country-region-selector";
 import { Select } from 'antd';
 import csc from 'country-state-city'
 
 const { Option } = Select;
 
-function BecomeSellerPersonal() {
-
-    const [country, setCountry] = useState('')
-    const [region, setRegion] = useState('')
+function BecomeSellerPersonal({nextStep, country, setCountry, region, setRegion, firstName, setFirstName, lastName, setLastName, city, setCity, zip, setZip}) {
 
     function onChange(value) {
         console.log(`selected ${value}`);
@@ -37,29 +32,29 @@ function BecomeSellerPersonal() {
         console.log('This is country -->', country, 'This is state', region)
     }, [country, region])
 
+    const moveToNext = (event) => {
+        if (event.keyCode === 13) {
+            event.preventDefault()
+            const inputs =
+                Array.prototype.slice.call(document.querySelectorAll("input"))
+            const index =
+                (inputs.indexOf(document.activeElement) + 1) % inputs.length
+            const input = inputs[index]
+            input.focus()
+            input.select()
+        }
+    }
+
     return(
         <div className={styles.become_seller_personal}>
-
-            <Link href={'/seller/products'}>
-                <img className={styles.amazon_logo}
-                     src={'https://images-na.ssl-images-amazon.com/images/G/01/rainier/nav/SellerCentral_Bliss._CB485924389_.png'}
-                     alt=""/>
-            </Link>
-
-            <form className={styles.become_seller_personal_form}>
-
-                <h1 className={styles.seller_form_heading}>
-                    Become Amazon Seller
-                </h1>
-
                 <div className={styles.input_div}>
                     <p className={styles.seller_label}>First Name</p>
-                    <input className={styles.seller_input} type="text" />
+                    <input onKeyDown={moveToNext} className={styles.seller_input} type="text" value={firstName} onChange={e=> setFirstName(e.target.value)} />
                 </div>
 
                 <div className={styles.input_div}>
                     <p className={styles.seller_label}>Last Name</p>
-                    <input className={styles.seller_input} type="text" />
+                    <input onKeyDown={moveToNext} className={styles.seller_input} type="text" value={lastName} onChange={e=> setLastName(e.target.value)} />
                 </div>
 
                 <div className={styles.input_div}>
@@ -73,6 +68,7 @@ function BecomeSellerPersonal() {
                         onFocus={onFocus}
                         onBlur={onBlur}
                         onSearch={onSearch}
+                        onKeyDown={moveToNext}
                         filterOption={(input, option) =>
                             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
@@ -94,6 +90,7 @@ function BecomeSellerPersonal() {
                                 <p className={styles.seller_label}>State</p>
                         <Select
                             className={styles.input_select}
+                            onKeyDown={moveToNext}
                             showSearch
                             placeholder="Select a state"
                             optionFilterProp="children"
@@ -118,15 +115,22 @@ function BecomeSellerPersonal() {
 
                     {
                         region!=='' &&
-                            <div className={styles.input_div}>
-                                <p className={styles.seller_label}>City</p>
-                                <input className={styles.seller_input} type="text" name="" id="" />
+                            <div>
+                                <div className={styles.input_div}>
+                                    <p className={styles.seller_label}>City</p>
+                                    <input onKeyDown={moveToNext} className={styles.seller_input} type="text" name="" id="" value={city} onChange={e=> setCity(e.target.value)}/>
+                                </div>
+
+                                <div className={styles.input_div}>
+                                    <p className={styles.seller_label}>Zip</p>
+                                    <input className={styles.seller_input} type="text" name="" id="" value={zip} onChange={e=> setZip(e.target.value)}/>
+                                </div>
                             </div>
                     }
                 </div>
 
-            </form>
-        </div>
+                <button onClick={nextStep} type="submit" className={styles.continue_button}>Continue</button>
+            </div>
     )
 }
 

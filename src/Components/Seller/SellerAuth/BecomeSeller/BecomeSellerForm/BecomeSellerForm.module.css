@@ -1,0 +1,30 @@
+.amazon_logo{
+    max-height: 200px;
+    cursor: pointer;
+    margin: 20px 0;
+    justify-self: flex-start;
+}
+
+.become_seller_form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.become_seller_personal_form{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    padding: 50px 30px;
+}
+
+.seller_form_heading{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+    font-size: 35px;
+    letter-spacing: 0.04px;
+    margin-bottom: 30px;
+    max-width: 300px;
+}

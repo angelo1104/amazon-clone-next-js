@@ -137,6 +137,10 @@
     transition: transform .2s cubic-bezier(.64,.15,.53,.53),-webkit-transform .2s cubic-bezier(.64,.15,.53,.53);
 }
 
+.seller_main_special_link:hover{
+    color: #111111;
+}
+
 .seller_main_special_link:hover::after{
     background-position: -17px 3px;
     transform: translate(4px,-4px);
