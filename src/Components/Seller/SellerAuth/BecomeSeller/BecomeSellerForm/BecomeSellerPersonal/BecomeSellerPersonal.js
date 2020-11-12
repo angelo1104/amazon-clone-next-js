@@ -5,7 +5,7 @@ import csc from 'country-state-city'
 
 const { Option } = Select;
 
-function BecomeSellerPersonal({nextStep, country, setCountry, region, setRegion, firstName, setFirstName, lastName, setLastName, city, setCity, zip, setZip}) {
+function BecomeSellerPersonal({businessLogic, country, setCountry, region, setRegion, firstName, setFirstName, lastName, setLastName, city, setCity, zip, setZip}) {
 
     function onChange(value) {
         console.log(`selected ${value}`);
@@ -68,7 +68,7 @@ function BecomeSellerPersonal({nextStep, country, setCountry, region, setRegion,
                         onFocus={onFocus}
                         onBlur={onBlur}
                         onSearch={onSearch}
-                        onKeyDown={moveToNext}
+                        onKeyDown={e=> e.preventDefault()}
                         filterOption={(input, option) =>
                             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                         }
@@ -90,7 +90,7 @@ function BecomeSellerPersonal({nextStep, country, setCountry, region, setRegion,
                                 <p className={styles.seller_label}>State</p>
                         <Select
                             className={styles.input_select}
-                            onKeyDown={moveToNext}
+                            onKeyDown={e=>e.preventDefault()}
                             showSearch
                             placeholder="Select a state"
                             optionFilterProp="children"
@@ -129,7 +129,10 @@ function BecomeSellerPersonal({nextStep, country, setCountry, region, setRegion,
                     }
                 </div>
 
-                <button onClick={nextStep} type="submit" className={styles.continue_button}>Continue</button>
+                <button onClick={e=>{
+                    e.preventDefault();
+                    businessLogic();
+                }} type="submit" className={styles.continue_button}>Continue</button>
             </div>
     )
 }

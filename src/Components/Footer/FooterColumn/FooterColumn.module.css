@@ -3,9 +3,10 @@
 }
 
 .footer_link_title{
-    font-size: 22px;
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: 500;
+    font-size: 22px !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    color: white !important;
+    font-weight: 500 !important;
 }
 
 .footer_column_links{
@@ -14,13 +15,15 @@
 }
 
 .footer_column_link{
-    margin: 8px 0 0;
-    opacity: 0.8;
-    max-width: 160px;
+    margin: 8px 0 0 !important;
+    opacity: 0.8 !important;
+    max-width: 160px !important;
+    color: white !important;
+    font-size: 15px;
 }
 
 @media only screen and (max-width: 450px) {
     .footer_column{
-        margin-bottom: 50px;
+        margin-bottom: 50px !important;
     }
 }
