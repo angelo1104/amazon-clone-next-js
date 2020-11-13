@@ -5,7 +5,7 @@ import csc from 'country-state-city'
 
 const { Option } = Select;
 
-function BecomeSellerPersonal({businessLogic, country, setCountry, region, setRegion, firstName, setFirstName, lastName, setLastName, city, setCity, zip, setZip}) {
+function BecomeSellerPersonal({address, setAddress, businessLogic, country, setCountry, region, setRegion, firstName, setFirstName, lastName, setLastName, city, setCity, zip, setZip}) {
 
     function onChange(value) {
         console.log(`selected ${value}`);
@@ -119,6 +119,11 @@ function BecomeSellerPersonal({businessLogic, country, setCountry, region, setRe
                                 <div className={styles.input_div}>
                                     <p className={styles.seller_label}>City</p>
                                     <input onKeyDown={moveToNext} className={styles.seller_input} type="text" name="" id="" value={city} onChange={e=> setCity(e.target.value)}/>
+                                </div>
+
+                                <div className={styles.input_div}>
+                                    <p className={styles.seller_label}>Address</p>
+                                    <input onKeyDown={moveToNext} className={styles.seller_input} type="text" name="" id="" value={address} onChange={e=> setAddress(e.target.value)}/>
                                 </div>
 
                                 <div className={styles.input_div}>

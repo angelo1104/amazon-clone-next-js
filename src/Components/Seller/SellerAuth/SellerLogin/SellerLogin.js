@@ -53,11 +53,18 @@ function SellerLogin() {
                         })
                 }else {
                     //MAKE THE GUY SELLER
-                    setError('I will make you seller')
 
-                    router.push('/seller/products/becomeSeller/login-seller')
+                    auth().signInWithEmailAndPassword(email, password)
+                        .then( authUser=>{
+                            console.log('Logged Innn',authUser)
 
-                    setProcessing(false)
+                            router.push('/seller/products/becomeSeller/login-seller')
+
+                            setProcessing(false)
+                        })
+                        .catch(error=>{
+                            setError(error.message)
+                        })
                 }
             }else {
                 setError('There is no account registered. Please create your amazon account.');
