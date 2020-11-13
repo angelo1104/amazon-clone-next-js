@@ -1,0 +1,80 @@
+.become_seller_personal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.amazon_logo{
+    max-height: 200px;
+    cursor: pointer;
+    margin: 20px 0;
+    justify-self: flex-start;
+}
+
+.seller_form_heading{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+    font-size: 35px;
+    letter-spacing: 0.04px;
+    margin-bottom: 30px;
+    max-width: 300px;
+}
+
+.become_seller_personal_form{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    padding: 50px 30px;
+}
+
+.input_div{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin: 10px auto;
+}
+
+
+.seller_label{
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Ubuntu', sans-serif;
+    margin-bottom: 5px;
+}
+
+
+.seller_input{
+    outline-width: 0;
+    border: 1px solid #a6a6a6;
+    border-top-color: #949494;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.07) inset;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 17px;
+    padding: 2px 8px;
+}
+
+.input_select{
+    border: 1px solid #a6a6a6;
+    border-top-color: #949494;
+    border-radius: 3px;
+}
+
+.input_select:hover{
+    border: 1px solid #F79B34;
+}
+
+.continue_button{
+    background: #F79B34;
+    border-radius: 2px;
+    color: #111111;
+    cursor: pointer;
+    outline-width: 0;
+    border: 1px solid;
+    border-color: #a88734 #9c7e31 #846a29;
+    padding: 5px;
+    width: 100%;
+    margin: 20px 0;
+}

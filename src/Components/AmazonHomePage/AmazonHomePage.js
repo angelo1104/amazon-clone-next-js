@@ -3,7 +3,6 @@ import styles from './AmazonHomePage.module.css';
 import slider from './AmazonSlider.module.css'
 import AmazonCardRow from "./AmazonCardRow/AmazonCardRow";
 import AmazonProductsRow from "./AmazonProductsRow/AmazonProductsRow";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Carousel from 'react-material-ui-carousel'
 
 function AmazonHomePage({cardData, productDataStore}) {

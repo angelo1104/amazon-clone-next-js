@@ -1,0 +1,150 @@
+.login{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    padding: 20px;
+}
+
+.amazon_logo{
+    max-height: 200px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+.login_form{
+    display: flex;
+    flex-direction: column;
+    max-width: 32%;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 30px 20px;
+}
+
+.login_form_heading{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+    font-size: 35px;
+    letter-spacing: 0.04px;
+    margin-bottom: 30px;
+}
+
+.login_input_div{
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+
+.login_label{
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Ubuntu', sans-serif;
+    margin-bottom: 5px;
+}
+
+.login_input{
+    outline-width: 0;
+    border: 1px solid #a6a6a6;
+    border-top-color: #949494;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.07) inset;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 17px;
+    padding: 8px;
+}
+
+.login_submit_button{
+    background: #f0c14b;
+    border: 1px solid;
+    border-color: #a88734 #9c7e31 #846a29;
+    color: #111;
+    outline-width: 0;
+    padding: 7px;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    width: 99%;
+    cursor: pointer;
+    margin: 20px auto;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login_terms{
+    margin-top: 10px;
+    font-size: 12px;
+    font-family: 'Ubuntu', sans-serif;
+    color: #111111;
+    max-width: 300px;
+}
+
+.divider{
+    position: relative;
+    text-align: center;
+    display: -webkit-flex;
+    display: flex;
+    margin-top: 30px;
+    width: 30%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.divider_title{
+    line-height: 1;
+    font-size: 12px;
+    color: #767676;
+    font-weight: 400;
+    z-index: 2;
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    padding: 0 8px 0 7px;
+    width: fit-content;
+}
+
+.divider::after{
+    content: "";
+    width: 100%;
+    background-color: transparent;
+    display: block;
+    height: 1px;
+    border-top: 1px solid #e7e7e7;
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    z-index: 1;
+}
+
+.signup_button{
+    padding: 5px 10px;
+    width: 32%;
+    color: #111111;
+    margin: 25px auto;
+    cursor: pointer;
+}
+
+.need_help{
+    margin: 20px 0 auto;
+}
+
+.amazon_link{
+    font-size: 12px;
+    color: #007185;
+}
+
+.amazon_link:hover{
+    color: #F79B34;
+    text-decoration: underline #F79B34;
+}
+
+.error{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 600;
+}
+
+.spinner{
+    max-width: 100px;
+}
