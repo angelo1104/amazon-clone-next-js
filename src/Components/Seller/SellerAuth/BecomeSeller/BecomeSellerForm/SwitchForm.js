@@ -4,8 +4,11 @@ import authInstance from "../../../../../axios/authInstance";
 import {useStateValue} from "../../../../../ContextApi/StateProvider";
 import csc from 'country-state-city'
 import {auth} from "../../../../../firebase";
+import {setDataUser} from "../../../../../ContextApi/actions";
+import {useRouter} from "next/router";
 
 function SwitchForm() {
+    const router = useRouter()
     const [step, setStep] = useState(1);
     const [country, setCountry] = useState('');
     const [region, setRegion] = useState('');
@@ -20,7 +23,15 @@ function SwitchForm() {
         setCountryName(csc.getCountryById(country).name)
     },[country])
 
-    const [{user}] = useStateValue()
+    const [{user, dataUser}, dispatch] = useStateValue()
+
+    useEffect(()=>{
+        if (!user){
+            router.replace('/seller/products/sin-up')
+        }else if (dataUser.seller){
+            router.replace('/seller/products/dashboard')
+        }
+    },[user, dataUser])
 
     const businessLogic = ()=>{
         authInstance.put('/make/seller',{
@@ -40,7 +51,7 @@ function SwitchForm() {
             auth().currentUser.updateProfile({
                 displayName: `${firstName} ${lastName}`,
             })
-            console.log(sellerUser)
+            dispatch(setDataUser(sellerUser.data))
         })
             .catch(error=>{
                 console.log(error)

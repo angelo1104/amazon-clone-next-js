@@ -42,13 +42,25 @@ export async function getServerSideProps(ctx){
 
     const redirect = {
         permanent: false,
-        destination: '/seller/products'
+        destination: '/seller/products/dashboard'
     }
 
 
     if (user.data.user.seller){
         return{
             redirect: redirect,
+            props:{
+                user: user?.data
+            }
+        }
+    }
+
+    if (!user.data.user){
+        return{
+            redirect: {
+                permanent: false,
+                destination: '/seller/products'
+            },
             props:{
                 user: user?.data
             }

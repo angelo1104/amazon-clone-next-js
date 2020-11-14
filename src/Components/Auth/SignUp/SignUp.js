@@ -23,7 +23,7 @@ function SignUp() {
 
     useEffect(()=>{
        if (user) router.replace('/')
-    },[])
+    },[user])
 
     const signup = (event) => {
         event.preventDefault();

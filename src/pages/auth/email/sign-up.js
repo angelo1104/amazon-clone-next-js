@@ -34,6 +34,10 @@ export async function getServerSideProps(ctx){
         });
 
         return{
+            redirect:{
+              permanent: false,
+              destination: '/'
+            },
             props:{
                 user: user?.data
             }
