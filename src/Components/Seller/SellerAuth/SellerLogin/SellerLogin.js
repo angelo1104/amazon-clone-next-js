@@ -56,7 +56,6 @@ function SellerLogin() {
 
                     auth().signInWithEmailAndPassword(email, password)
                         .then( authUser=>{
-                            console.log('Logged Innn',authUser)
 
                             router.push('/seller/products/becomeSeller/login-seller')
 

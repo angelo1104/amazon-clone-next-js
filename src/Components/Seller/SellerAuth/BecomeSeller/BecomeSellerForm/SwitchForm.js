@@ -3,6 +3,7 @@ import BecomeSellerPersonal from "./BecomeSellerPersonal/BecomeSellerPersonal";
 import authInstance from "../../../../../axios/authInstance";
 import {useStateValue} from "../../../../../ContextApi/StateProvider";
 import csc from 'country-state-city'
+import {auth} from "../../../../../firebase";
 
 function SwitchForm() {
     const [step, setStep] = useState(1);
@@ -36,6 +37,9 @@ function SwitchForm() {
                 zip: zip,
             }
         }).then(sellerUser=>{
+            auth().currentUser.updateProfile({
+                displayName: `${firstName} ${lastName}`,
+            })
             console.log(sellerUser)
         })
             .catch(error=>{

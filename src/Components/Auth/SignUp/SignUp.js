@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from './SignUp.module.css';
 import Link from "next/link";
 import AuthFooter from "../AuthFooter/AuthFooter";
@@ -8,6 +8,7 @@ import authInstance from "../../../axios/authInstance";
 import {setDataUser} from "../../../ContextApi/actions";
 import {useStateValue} from "../../../ContextApi/StateProvider";
 import {auth} from "../../../firebase";
+import {useRouter} from "next/router";
 
 function SignUp() {
     const [email, setEmail] = useState('');
@@ -16,8 +17,13 @@ function SignUp() {
     const [repassword, setRepassword] = useState('');
     const [processing, setProcessing] = useState(false)
     const [error, setError] = useState('')
+    const router = useRouter()
 
-    const [{}, dispatch] = useStateValue();
+    const [{user}, dispatch] = useStateValue();
+
+    useEffect(()=>{
+       if (user) router.replace('/')
+    },[])
 
     const signup = (event) => {
         event.preventDefault();
@@ -44,19 +50,8 @@ function SignUp() {
                                 seller: false,
                                 uid: authUser.user.uid
                             })
-                                .then(()=>{
-                                    authInstance.post('/user',{
-                                        filter:{
-                                            email: authUser.user.email,
-                                            uid: authUser.user.uid,
-                                        }
-                                    })
-                                        .then((response)=>{
-                                            dispatch(setDataUser(response.data))
-                                        })
-                                        .catch(error=>{
-                                            console.log(error)
-                                        })
+                                .then((doc)=>{
+                                    dispatch(setDataUser(doc.data))
                                     setProcessing(false)
                                 })
                                 .catch(error=>{

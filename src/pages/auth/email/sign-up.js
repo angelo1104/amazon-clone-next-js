@@ -32,11 +32,15 @@ export async function getServerSideProps(ctx){
         user = await authInstance.post('/idtoken',{
             idToken: firebase
         });
+
+        return{
+            props:{
+                user: user?.data
+            }
+        }
     }
 
     return{
-        props:{
-            user: user?.data
-        }
+        props:{}
     }
 }
