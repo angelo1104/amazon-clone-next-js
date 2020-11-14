@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from './SellerSignUp.module.css';
 import Link from "next/link";
 import AuthFooter from "../../../../Auth/AuthFooter/AuthFooter";
@@ -8,8 +8,10 @@ import authInstance from "../../../../../axios/authInstance";
 import {setDataUser} from "../../../../../ContextApi/actions";
 import {useStateValue} from "../../../../../ContextApi/StateProvider";
 import {auth} from "../../../../../firebase";
+import {useRouter} from "next/router";
 
 function SellerSignUp() {
+    const router = useRouter()
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -17,7 +19,7 @@ function SellerSignUp() {
     const [processing, setProcessing] = useState(false)
     const [error, setError] = useState('')
 
-    const [{}, dispatch] = useStateValue();
+    const [{user}, dispatch] = useStateValue();
 
     const signup = (event) => {
         event.preventDefault();
@@ -44,24 +46,9 @@ function SellerSignUp() {
                                 seller: false,
                                 uid: authUser.user.uid
                             })
-                                .then(()=>{
-                                    authInstance.post('/user',{
-                                        filter:{
-                                            email: authUser.user.email,
-                                            uid: authUser.user.uid,
-                                        }
-                                    })
-                                        .then((response)=>{
-                                            dispatch(setDataUser(response.data))
-                                        })
-                                        .catch(error=>{
-                                            console.log(error)
-                                        })
-                                    setProcessing(false)
-                                })
-                                .catch(error=>{
-                                    setProcessing(false);
-                                    setError(error.message)
+                                .then((doc)=> {
+                                    dispatch(setDataUser(doc.data))
+                                    router.push('/seller/products/becomeSeller/login-seller')
                                 })
                         })
                 })
