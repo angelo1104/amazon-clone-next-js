@@ -2,10 +2,12 @@ import React from "react";
 import {useStateValue} from "../../../../ContextApi/StateProvider";
 import BecomeSellerLogin
     from "../../../../Components/Seller/SellerAuth/BecomeSeller/BecomeSellerLogin/BecomeSellerLogin";
+import nookie from "nookies";
+import authInstance from "../../../../axios/authInstance";
 
-function BecomeLoginSellerPage() {
+function BecomeLoginSellerPage({user}) {
 
-    const [{user,dataUser, canSell}, dispatch] = useStateValue()
+    const [{dataUser, canSell}, dispatch] = useStateValue()
 
     let widget = <div>Nothing here</div>;
 
@@ -19,9 +21,43 @@ function BecomeLoginSellerPage() {
 
     return(
         <div>
-            <BecomeSellerLogin/>
+            <BecomeSellerLogin isUser={user}/>
         </div>
     )
 }
 
 export default BecomeLoginSellerPage
+
+export async function getServerSideProps(ctx){
+
+    const {firebase} = nookie.get(ctx);
+
+    let user = null;
+
+    if (firebase){
+        user = await authInstance.post('/idtoken',{
+            idToken: firebase
+        });
+    }
+
+    const redirect = {
+        permanent: false,
+        destination: '/seller/products'
+    }
+
+
+    if (user.data.user.seller){
+        return{
+            redirect: redirect,
+            props:{
+                user: user?.data
+            }
+        }
+    }
+
+    return{
+        props:{
+            user: user?.data
+        }
+    }
+}
