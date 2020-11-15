@@ -22,7 +22,7 @@ function HeaderItems() {
         <div className={styles.header_items}>
             <div onClick={goToLogin} className={styles.header_item}>
                 <p className={styles.header_item_line1}>
-                    Hello {user?.displayName},
+                    {user? 'Hi':'Hello'} {user?.displayName},
                 </p>
 
                 <p className={styles.header_item_line2}>
@@ -32,7 +32,7 @@ function HeaderItems() {
 
             <div className={styles.header_item} onClick={goToLogin}>
                 <p className={styles.header_item_line1}>
-                    Hello {user?.displayName},
+                    {user? 'Hi':'Hello'} {user?.displayName},
                 </p>
 
                 <p className={styles.header_item_line2}>
