@@ -1,0 +1,30 @@
+.wrapper{
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+    overflow-x: hidden;
+}
+
+.container{
+    border-radius: 50px;
+    padding: 50px 40px;
+}
+
+.heading{
+    background: linear-gradient(270.97deg, #FFE580 -21.36%, #FF7571 -2.45%, #EA5DAD 26.84%, #C2A0FD 64.15%, #3BF0E4 108.29%, #B2F4B6 159.03%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.description{
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    left: 5px;
+}

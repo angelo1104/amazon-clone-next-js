@@ -1,17 +1,26 @@
-import React from "react";
-import Link from "next/link";
+import React, {useEffect} from "react";
+import styles from './styles.module.css';
+import {useRouter} from "next/router";
 
 function HandleRedirectPage() {
     //ADD ACCOUNT ID AND OTHER STUFF
 
+    const router = useRouter();
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            router.replace('/seller/products/dashboard')
+        }, 5000)
+    },[])
+
     return(
-        <div>
-            Hell you went succesfully.
-            <Link href={'/seller/products/dashboard'}>
-                <a>
-                  Go to dashboard
-                </a>
-            </Link>
+        <div className={styles.wrapper}>
+
+            <div className={styles.container}>
+                <h1 className={styles.heading}>Hell you went successfully.</h1>
+
+                <p className={styles.description}>Redirecting you to dashboard</p>
+            </div>
         </div>
     )
 }
