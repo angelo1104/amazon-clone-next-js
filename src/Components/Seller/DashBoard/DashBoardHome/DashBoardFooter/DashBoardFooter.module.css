@@ -1,0 +1,86 @@
+.dashboard_footer{
+    padding: 15px 20px;
+}
+
+.columns{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    align-items: flex-start;
+    margin-left: 20px;
+}
+
+.footer_logo{
+    max-width: 100px;
+    object-fit: contain;
+}
+
+.info{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 10px;
+    margin-bottom: 10px !important;
+    position: relative;
+    top: 8px;
+    color: #111111;
+}
+
+.column_link{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Ubuntu', sans-serif;
+    color: #111111;
+    font-size: 12px;
+    position: relative;
+    transition: none;
+    cursor: pointer;
+}
+
+.link_blue{
+    font-weight: 700;
+    color: rgb(0, 113, 133);
+}
+
+.column_link:hover .link_blue{
+    color: #C7511F !important;
+}
+
+.column_link:hover{
+    text-decoration: underline #C7511F;
+    color: #C7511F !important;
+}
+
+.footer_links{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.footer_link{
+    margin: 0 10px;
+    font-size: 12px;
+    font-family: 'Ubuntu', sans-serif;
+    transition: none;
+    color: #666;
+    text-decoration: underline #666666;
+}
+
+.footer_link::after{
+    content: "kia";
+    color: transparent;
+    margin: 0 10px;
+    width: 2px;
+    background-color: #666666;
+    display: inline-block;
+}
+
+.footer_link:hover{
+    text-decoration: underline #666666;
+    color: #666666;
+}

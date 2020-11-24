@@ -32,6 +32,56 @@ function DashBoardHeader() {
                     </div>
                 </div>
             </div>
+
+            <div className={styles.main_header}>
+                <img className={styles.main_header_img} src="https://feinternational.com/wp-content/uploads/2015/11/FBA_logo_us-300x140.jpg" alt=""/>
+
+                <div className={styles.main_link}>
+                    <a href="#" className={styles.amazon_main_link}>
+                        Bookshelf
+                    </a>
+
+                    <div className={styles.main_link_border}>
+                        Kia
+                    </div>
+                </div>
+                <div className={styles.main_link}>
+                    <a href="#" className={styles.amazon_main_link}>
+                        Shelf
+                    </a>
+
+                    <div className={styles.main_link_border}>
+                        Kia
+                    </div>
+                </div>
+                <div className={styles.main_link}>
+                    <a href="#" className={styles.amazon_main_link}>
+                        Marketing
+                    </a>
+
+                    <div className={styles.main_link_border}>
+                        Kia
+                    </div>
+                </div>
+                <div className={styles.main_link}>
+                    <a href="#" className={styles.amazon_main_link}>
+                        Guides
+                    </a>
+
+                    <div className={styles.main_link_border}>
+                        Kia
+                    </div>
+                </div>
+                <div className={styles.main_link}>
+                    <a href="#" className={styles.amazon_main_link}>
+                        Community
+                    </a>
+
+                    <div className={styles.main_link_border}>
+                        Kia
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

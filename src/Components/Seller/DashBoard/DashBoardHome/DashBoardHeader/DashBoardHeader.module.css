@@ -44,3 +44,41 @@
     cursor: pointer;
     margin: auto;
 }
+
+.main_header{
+    display: flex;
+    padding: 30px 70px;
+    align-items: center;
+}
+
+.main_header_img{
+    max-width: 200px;
+    object-fit: contain;
+}
+
+.main_link{
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.main_link_border{
+    width: 20px;
+    height: 70%;
+    background-color: black;
+    margin-left: 10px;
+}
+
+
+.amazon_main_link{
+    position: relative;
+    color: rgb(0, 113, 133) !important;
+    transition: none;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.amazon_main_link:hover{
+    text-decoration: underline #C7511F;
+    color: #C7511F !important;
+}
