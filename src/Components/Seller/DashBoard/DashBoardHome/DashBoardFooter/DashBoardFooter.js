@@ -47,16 +47,16 @@ function DashBoardFooter() {
 
             <div className={styles.footer_links}>
                 <a className={styles.footer_link}>
-                    KDP
+                    Terms & Conditions
                 </a>
                 <a className={styles.footer_link}>
-                    KDP
+                    Privacy Notice
                 </a>
                 <a className={styles.footer_link}>
-                    KDP
+                    Conditions of use
                 </a>
                 <a className={styles.footer_link}>
-                    KDP
+                    Contact Us
                 </a>
             </div>
         </div>
