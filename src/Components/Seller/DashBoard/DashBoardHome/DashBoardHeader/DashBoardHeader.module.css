@@ -1,0 +1,46 @@
+.top{
+    background-color: #E9E9E9;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.inner_flex{
+    display: flex;
+    padding-right: 10%;
+}
+
+.inner_item{
+    padding: 3px 5px;
+    display: flex;
+}
+
+.inner_item::after{
+    content: "";
+    width: 2px;
+    height: 70%;
+    background-color: lightgray;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    margin-left: 10px;
+}
+
+.amazon_link{
+    position: relative;
+    color: rgb(0, 113, 133) !important;
+    transition: none;
+    cursor: pointer;
+}
+
+.amazon_link:hover{
+    text-decoration: underline #C7511F;
+    color: #C7511F !important;
+}
+
+.mallomar{
+    height: 17px;
+    width: 37px;
+    background-image: url(https://m.media-amazon.com/images/G/01/AUIClients/MallomarFeedbackFragmentUI-delight-feedback-sprite-0e8cf7e2ff136edb25cc2aa7049bd271805dba98._V2_.png);
+    cursor: pointer;
+    margin: auto;
+}
