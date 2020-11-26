@@ -1,0 +1,85 @@
+.dashboard_main_card{
+    background-color: #F8F8F8;
+    padding: 10px 20px;
+}
+
+.title{
+    font-family: 'Ubuntu', sans-serif;
+    color: #555555;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.main_card{
+    display: flex;
+}
+
+.main_card_left{
+    flex: 0.08;
+    padding:  10px 20px 10px 0;
+}
+
+.main_card_right{
+    flex: 0.85;
+    padding:  10px 20px 10px 0;
+}
+
+.block{
+    background-color: white;
+    color: #0066c0;
+    border: 1px solid;
+    border-style: dashed;
+    border-color: #a2a6ac #979aa1 #82858a;
+    cursor: pointer;
+    padding: 10px 5px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.block:hover{
+    background-color: #e7e9ec;
+}
+
+.block_plus{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.block_title{
+    text-align: center;
+}
+
+.one_info{
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 8px !important;
+}
+
+.one_info::before{
+    content: "kia";
+    color: transparent;
+    background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/KDP/sprite_kdp_1x.png);
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    margin-top: 4.15px;
+}
+
+.info_title{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 600;
+    color: #111111;
+}
+
+.info_desc{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+    color: #111111;
+    margin-left: 8px;
+}
