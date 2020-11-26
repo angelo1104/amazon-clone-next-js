@@ -2,6 +2,63 @@
     background-color: #e9e9e9;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     padding: 50px;
+}
+
+.products_ref{
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.products_ref_title{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 28px;
+    color: #767676;
+}
+
+.search{
+    display: flex;
+    align-items: center;
+}
+
+.search_icon{
+    color: grey !important;
+    font-size: 20px !important;
+    position: relative !important;
+    top: 1.25px !important;
+}
+
+
+.search_input{
+    border: none;
+    margin-right: 10px;
+    height: 33px;
+    border-radius: 3px;
+    outline-width: 0;
+    padding: 5px;
+}
+
+.search_box{
+    display: flex;
+    background-color: white;
+    align-items: center;
+    border-radius: 2px;
+    margin-right: 15px;
+    padding: 0 5px;
+}
+
+.search_button{
+    outline-width: 0;
+    background: linear-gradient(to bottom,#72787F,#444C55);
+    color: white;
+    border-radius: 2px;
+    height: 32px;
+    text-align: center;
+    padding: 3px 10px;
+    position: relative;
+    top: -1px;
+    border: 1px solid darkgray;
+    cursor: pointer;
 }
