@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const authInstance = axios.create({
-    baseURL: 'http://localhost:3001/auth'
+    baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/auth`
 });
 
 export default authInstance;
