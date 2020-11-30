@@ -2,6 +2,7 @@ const actionTypes = {
     setUser: 'SET_USER',
     setDataUser: 'SET_DATA_USER',
     setCanSell: 'SET_CAN_SELL',
+    setHits: 'SET_HITS'
 }
 
 const setUser = (payload)=>{
@@ -25,4 +26,11 @@ const setCanSell = (payload)=>{
     }
 }
 
-export {setUser, actionTypes, setDataUser, setCanSell}
+const setHits = (payload)=>{
+    return{
+        type: actionTypes.setHits,
+        hits: payload
+    }
+}
+
+export {setUser, actionTypes, setDataUser, setCanSell, setHits}

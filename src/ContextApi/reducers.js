@@ -3,7 +3,7 @@ import {actionTypes} from "./actions";
 export const initialState = {
     user: null,
     dataUser: null,
-    canSell: false,
+    hits: []
 }
 
 const reducer = (state,action)=>{
@@ -18,10 +18,10 @@ const reducer = (state,action)=>{
                 ...state,
                 dataUser: action.user
             }
-        case actionTypes.setCanSell:
+        case actionTypes.setHits:
             return {
                 ...state,
-                canSell: action.canSell
+                hits: action.hits,
             }
         default:
             return{...state}
