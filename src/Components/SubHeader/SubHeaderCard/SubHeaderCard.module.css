@@ -2,6 +2,7 @@
     cursor: pointer;
     padding: 10px;
     margin-right: 8px;
+    border: 1px solid transparent;
 }
 
 .sub_header_card:hover{

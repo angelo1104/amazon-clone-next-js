@@ -5,15 +5,17 @@ import SearchIcon from "@material-ui/icons/Search";
 import Hit from "./Hit";
 import {productIndex} from "../../algolia/algolia";
 import {useStateValue} from "../../ContextApi/StateProvider";
-import {setHits, setShowAutoComplete} from "../../ContextApi/actions";
+import {setHits, setSearchText, setShowAutoComplete} from "../../ContextApi/actions";
+import {useRouter} from "next/router";
 
 function HeaderSearch() {
     const [selectedValue, setSelectedValue] = useState('All')
     const [placeHolder, setPlaceHolder] = useState('');
-    const [search, setSearch] = useState('')
     const [selectedItem, setSelectedItem] = useState(0)
 
-    const [{hits, showAutoComplete}, dispatch] = useStateValue();
+    const [{hits, showAutoComplete, searchText}, dispatch] = useStateValue();
+
+    const router = useRouter()
 
 
     useEffect(() => {
@@ -28,7 +30,7 @@ function HeaderSearch() {
     }
 
     const onSearchChange = (event) => {
-        setSearch(event.target.value);
+        dispatch(setSearchText(event.target.value))
 
         setSelectedItem(0)
 
@@ -57,6 +59,8 @@ function HeaderSearch() {
             console.log('enter')
 
             dispatch(setShowAutoComplete(false))
+
+            moveToSearch('app')
             //move to search page with the query
         } else if (event.keyCode == 38) {
             //do up stuff
@@ -86,6 +90,10 @@ function HeaderSearch() {
         }
     }
 
+    const moveToSearch = (event)=>{
+        router.push(`/search?q=${searchText}`)
+    }
+
 
     return (
         <div className={styles.header_search_container} >
@@ -97,19 +105,18 @@ function HeaderSearch() {
                 <div className={styles.auto_container}>
 
                     <div className={styles.input_container}>
-                        <input onKeyDown={handleOptionSelection} value={search} onChange={onSearchChange} type="text"
+                        <input onKeyDown={handleOptionSelection} value={searchText} onChange={onSearchChange} type="text"
                                className={styles.header_input_search}
                                placeholder={placeHolder}/>
 
-                        <SearchIcon className={styles.header_search_logo}/>
+                        <SearchIcon className={styles.header_search_logo} onClick={moveToSearch}/>
                     </div>
 
                     {showAutoComplete && <div className={styles.hits}>
                         {
                             hits?.map((hit, index) => {
                                 return (
-                                    <Hit key={index} displayText={hit?.name} index={index} selectedItem={selectedItem}
-                                         setValue={setSearch}/>
+                                    <Hit key={index} displayText={hit?.name} index={index} selectedItem={selectedItem}/>
                                 )
                             })
                         }

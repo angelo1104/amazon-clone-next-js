@@ -5,6 +5,7 @@ export const initialState = {
     dataUser: null,
     hits: [],
     showAutoComplete: false,
+    searchText: ''
 }
 
 const reducer = (state,action)=>{
@@ -28,6 +29,11 @@ const reducer = (state,action)=>{
             return {
                 ...state,
                 showAutoComplete: action.showAutoComplete
+            }
+        case actionTypes.setSearchText:
+            return {
+                ...state,
+                searchText: action.searchText
             }
         default:
             return{...state}

@@ -3,7 +3,8 @@ const actionTypes = {
     setDataUser: 'SET_DATA_USER',
     setCanSell: 'SET_CAN_SELL',
     setHits: 'SET_HITS',
-    setShowAutoComplete: 'SET_SHOW_AUTOCOMPLETE'
+    setShowAutoComplete: 'SET_SHOW_AUTOCOMPLETE',
+    setSearchText: 'SET_SEARCH_TEXT'
 }
 
 const setUser = (payload)=>{
@@ -27,6 +28,13 @@ const setCanSell = (payload)=>{
     }
 }
 
+const setSearchText = (payload)=>{
+    return{
+        type: actionTypes.setSearchText,
+        searchText: payload
+    }
+}
+
 const setHits = (payload)=>{
     return{
         type: actionTypes.setHits,
@@ -41,4 +49,4 @@ const setShowAutoComplete = (payload)=>{
     }
 }
 
-export {setUser, actionTypes, setDataUser, setCanSell, setHits, setShowAutoComplete}
+export {setUser, actionTypes, setDataUser, setCanSell, setHits, setShowAutoComplete, setSearchText}
