@@ -11,6 +11,9 @@
     cursor: pointer;
     padding: 10px;
     border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .header_item:hover{
@@ -20,15 +23,19 @@
 .header_item_line1{
     font-size: 13px;
     font-family: 'Ubuntu', sans-serif;
+    white-space: nowrap;
+    text-align: left;
 }
 
 .header_item_line2{
+    text-align: left;
     font-size: 16px;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 600;
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
 }
 
 .header_cart_number{

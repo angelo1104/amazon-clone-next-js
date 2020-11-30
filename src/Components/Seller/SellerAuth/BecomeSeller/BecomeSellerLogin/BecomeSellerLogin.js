@@ -1,12 +1,11 @@
-import React from "react";
+import React, {createContext, useContext} from "react";
 import styles from './BecomeSellerLogin.module.css'
 import BecomeSellerForm from "../BecomeSellerForm/BecomeSellerForm";
 
-
-function BecomeSellerLogin() {
+function BecomeSellerLogin({isUser}) {
     return(
         <div>
-            <BecomeSellerForm/>
+            <BecomeSellerForm isUser={isUser} />
         </div>
     )
 }

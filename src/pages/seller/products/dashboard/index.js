@@ -1,17 +1,18 @@
 import React from "react";
-import SellerSignUp from "../../../../Components/Seller/SellerAuth/SellerLogin/SellerSignUp/SellerSignUp";
+import DashBoardHome from "../../../../Components/Seller/DashBoard/DashBoardHome/DashBoardHome";
 import nookie from "nookies";
 import authInstance from "../../../../axios/authInstance";
 
-function SellerSignUpPage() {
+function DashBoardHomePage() {
     return(
-        <>
-         <SellerSignUp/>
-        </>
+        <div>
+            <DashBoardHome/>
+        </div>
     )
 }
 
-export default SellerSignUpPage;
+export default DashBoardHomePage
+
 
 export async function getServerSideProps(ctx){
 
@@ -25,12 +26,18 @@ export async function getServerSideProps(ctx){
         });
 
         return{
-            redirect:{
-                permanent: false,
-                destination: '/seller/products/auth/login'
-            },
             props:{
                 user: user?.data
+            }
+        }
+    }else {
+        return{
+            props:{
+                user: user?.data
+            },
+            redirect:{
+                permanent: false,
+                destination: '/seller/products'
             }
         }
     }

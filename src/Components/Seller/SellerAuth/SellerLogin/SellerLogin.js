@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from './SellerLogin.module.css';
 import Link from "next/link";
 import AuthFooter from "../../../Auth/AuthFooter/AuthFooter";
@@ -21,6 +21,14 @@ function SellerLogin() {
     const [loginSeller, setLoginSeller] = useState(false);
 
     const [{user, dataUser, canSell}, dispatch] = useStateValue();
+
+    useEffect(()=>{
+        if (user && dataUser){
+            if (dataUser.seller){
+                router.replace('/seller/products/dashboard')
+            }
+        }
+    },[user, dataUser])
 
     const submitLogin = async (event) => {
         event.preventDefault();
@@ -56,7 +64,6 @@ function SellerLogin() {
 
                     auth().signInWithEmailAndPassword(email, password)
                         .then( authUser=>{
-                            console.log('Logged Innn',authUser)
 
                             router.push('/seller/products/becomeSeller/login-seller')
 
@@ -146,13 +153,13 @@ function SellerLogin() {
                 </div>
             </form>
 
-            <div className={styles.divider}>
+            {!user && <div className={styles.divider}>
                 <h5 className={styles.divider_title}>New to Amazon?</h5>
-            </div>
+            </div>}
 
-            <button disabled={processing} onClick={goToSignUp} type={'submit'} className={styles.signup_button}>
+            {!user && <button disabled={processing} onClick={goToSignUp} type={'submit'} className={styles.signup_button}>
                 Create your Amazon account
-            </button>
+            </button>}
 
             <AuthFooter/>
         </div>

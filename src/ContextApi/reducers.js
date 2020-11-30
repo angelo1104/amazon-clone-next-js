@@ -3,7 +3,9 @@ import {actionTypes} from "./actions";
 export const initialState = {
     user: null,
     dataUser: null,
-    canSell: false,
+    hits: [],
+    showAutoComplete: false,
+    searchText: ''
 }
 
 const reducer = (state,action)=>{
@@ -18,10 +20,20 @@ const reducer = (state,action)=>{
                 ...state,
                 dataUser: action.user
             }
-        case actionTypes.setCanSell:
+        case actionTypes.setHits:
             return {
                 ...state,
-                canSell: action.canSell
+                hits: action.hits,
+            }
+        case actionTypes.setShowAutoComplete:
+            return {
+                ...state,
+                showAutoComplete: action.showAutoComplete
+            }
+        case actionTypes.setSearchText:
+            return {
+                ...state,
+                searchText: action.searchText
             }
         default:
             return{...state}

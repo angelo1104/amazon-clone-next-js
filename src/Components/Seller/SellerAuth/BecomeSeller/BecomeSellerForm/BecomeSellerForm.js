@@ -4,7 +4,8 @@ import BecomeSellerPersonal from "./BecomeSellerPersonal/BecomeSellerPersonal";
 import Link from "next/link";
 import SwitchForm from "./SwitchForm";
 
-function BecomeSellerForm() {
+function BecomeSellerForm({isUser}) {
+
     return(
         <div className={styles.become_seller_form}>
             <Link href={'/seller/products'}>

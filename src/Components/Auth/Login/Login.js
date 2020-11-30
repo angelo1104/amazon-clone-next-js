@@ -26,7 +26,10 @@ function Login() {
             setProcessing(true)
             auth().signInWithEmailAndPassword(email, password)
                 .then(authUser=>{
-                    setProcessing(false)
+                    router.push('/')
+                        .then(()=>{
+                            setProcessing(false)
+                        })
                 })
                 .catch(error=>{
                     setError(error.message)

@@ -7,7 +7,7 @@ import authInstance from "../../../axios/authInstance";
 
 function AuthProvider({children}) {
 
-    const [{user}, dispatch] = useStateValue();
+    const [{user, dataUser}, dispatch] = useStateValue();
 
     const AuthContext = useContext({
         user: null
@@ -45,8 +45,8 @@ function AuthProvider({children}) {
     },[])
 
     useEffect(()=>{
-        console.log(user)
-    },[])
+        console.log('Firebase User', user, 'Data User', dataUser);
+    },[user, dataUser])
 
 
 
@@ -57,7 +57,6 @@ function AuthProvider({children}) {
                 Cookies.set('firebase', token);
             }else {
                 Cookies.remove('firebase')
-                console.log('No user id token')
             }
         })
     },[])
