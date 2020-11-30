@@ -8,9 +8,13 @@ import {SwipeableDrawer} from "@material-ui/core";
 import ResponsiveHeaderItem from "../ResponsiveHeaderItem/ResponsiveHeaderItem";
 import SubHeader from "../SubHeader/SubHeader";
 import HeaderNavigationMobile from "./HeaderNavigationMobile/HeaderNavigationMobile";
+import {useStateValue} from "../../ContextApi/StateProvider";
+import {setShowAutoComplete} from "../../ContextApi/actions";
 
 function Header() {
     const [drawerOpen, setDrawerOpen] = useState(false)
+
+    const [{showAutoComplete}, dispatch] = useStateValue();
 
     const openDrawer = (e)=>{
         setDrawerOpen(!drawerOpen)
@@ -20,8 +24,12 @@ function Header() {
         setDrawerOpen(false)
     }
 
+    const hideAutoComplete = (event) => {
+        dispatch(setShowAutoComplete(false))
+    }
+
     return(
-        <header className={styles.header}>
+        <header className={styles.header} onClick={hideAutoComplete}>
 
             <div className={styles.header_main}>
                 <div className={styles.header_logo}>

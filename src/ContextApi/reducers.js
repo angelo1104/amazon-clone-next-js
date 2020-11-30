@@ -3,7 +3,8 @@ import {actionTypes} from "./actions";
 export const initialState = {
     user: null,
     dataUser: null,
-    hits: []
+    hits: [],
+    showAutoComplete: false,
 }
 
 const reducer = (state,action)=>{
@@ -22,6 +23,11 @@ const reducer = (state,action)=>{
             return {
                 ...state,
                 hits: action.hits,
+            }
+        case actionTypes.setShowAutoComplete:
+            return {
+                ...state,
+                showAutoComplete: action.showAutoComplete
             }
         default:
             return{...state}

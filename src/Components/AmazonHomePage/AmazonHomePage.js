@@ -1,14 +1,45 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from './AmazonHomePage.module.css';
 import slider from './AmazonSlider.module.css'
 import AmazonCardRow from "./AmazonCardRow/AmazonCardRow";
 import AmazonProductsRow from "./AmazonProductsRow/AmazonProductsRow";
 import Carousel from 'react-material-ui-carousel'
+import {useStateValue} from "../../ContextApi/StateProvider";
+import {setShowAutoComplete} from "../../ContextApi/actions";
 
 function AmazonHomePage({cardData, productDataStore}) {
+    const [{showAutoComplete}, dispatch] = useStateValue()
+
+    const hideAutoComplete = (event)=>{
+        dispatch(setShowAutoComplete(false))
+    }
+
+    useEffect(()=>{
+        if (showAutoComplete){
+            disableScroll()
+        }else {
+            enableScroll()
+        }
+    },[showAutoComplete])
+
+    function disableScroll() {
+        // Get the current page scroll position
+        const body = document.querySelector('body');
+        body.classList.add('scroll')
+    }
+
+    function enableScroll() {
+        const body = document.querySelector('body');
+        body.classList.remove('scroll')
+    }
 
     return(
         <div className={styles.amazon_home_page}>
+
+
+            {showAutoComplete && <div className={styles.auto_complete_overlay} onClick={hideAutoComplete}>
+
+            </div>}
 
             <div className={slider.amazon_home_slider}>
 

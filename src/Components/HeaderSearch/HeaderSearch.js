@@ -5,16 +5,15 @@ import SearchIcon from "@material-ui/icons/Search";
 import Hit from "./Hit";
 import {productIndex} from "../../algolia/algolia";
 import {useStateValue} from "../../ContextApi/StateProvider";
-import {setHits} from "../../ContextApi/actions";
+import {setHits, setShowAutoComplete} from "../../ContextApi/actions";
 
 function HeaderSearch() {
     const [selectedValue, setSelectedValue] = useState('All')
     const [placeHolder, setPlaceHolder] = useState('');
     const [search, setSearch] = useState('')
-
-    const helloList = ['Amazon','GlAmazon', 'famazon','dragazon','nematodes']
     const [selectedItem, setSelectedItem] = useState(0)
-    const [{hits}, dispatch] = useStateValue();
+
+    const [{hits, showAutoComplete}, dispatch] = useStateValue();
 
 
     useEffect(() => {
@@ -33,59 +32,63 @@ function HeaderSearch() {
 
         setSelectedItem(0)
 
-        if (!(event.target.value === '')){
-            productIndex.search(event.target.value,{
-                facets:['productName','brand','shortDescription']
+        dispatch(setShowAutoComplete(true))
+
+        if (!(event.target.value === '')) {
+            productIndex.search(event.target.value, {
+                facets: ['productName', 'brand', 'shortDescription'],
+                length: 10
             })
-                .then((foundProducts)=>{
+                .then((foundProducts) => {
                     const hits = foundProducts.hits;
 
                     dispatch(setHits(hits))
                 })
-                .catch((error)=>{
+                .catch((error) => {
                     console.log(error)
                 })
         }
     }
 
-    const handleOptionSelection = (event)=>{
+    const handleOptionSelection = (event) => {
         const length = hits.length //3
 
-        if (event.key === 'Enter'){
+        if (event.key === 'Enter') {
             console.log('enter')
 
+            dispatch(setShowAutoComplete(false))
             //move to search page with the query
-        } else if (event.keyCode == 38){
+        } else if (event.keyCode == 38) {
             //do up stuff
-            if (selectedItem === 0){
+            if (selectedItem === 0) {
                 //move guy to down
                 setSelectedItem(length)
-            }else if (selectedItem === 1){
+            } else if (selectedItem === 1) {
                 //he is up again move down
                 setSelectedItem(length)
-            }else {
+            } else {
                 //he is down move up
-                setSelectedItem((selectedItem-1))
+                setSelectedItem((selectedItem - 1))
             }
-        } else if (event.keyCode == 40){
+        } else if (event.keyCode == 40) {
             // do down stuff
 
-            if (selectedItem === 0){
+            if (selectedItem === 0) {
                 //move guy to down he is up
-                setSelectedItem((selectedItem+1))
-            }else if (selectedItem === length){
+                setSelectedItem((selectedItem + 1))
+            } else if (selectedItem === length) {
                 //he is down again move up
                 setSelectedItem(1)
-            }else {
+            } else {
                 //he is up move down
-                setSelectedItem((selectedItem+1))
+                setSelectedItem((selectedItem + 1))
             }
         }
     }
 
 
     return (
-        <div className={styles.header_search_container}>
+        <div className={styles.header_search_container} >
             <div className={styles.header_search}>
                 <Select className={styles.header_search_select} value={selectedValue} onChange={handleChange}>
                     <MenuItem value={'All'}>All</MenuItem>
@@ -94,21 +97,24 @@ function HeaderSearch() {
                 <div className={styles.auto_container}>
 
                     <div className={styles.input_container}>
-                        <input onKeyDown={handleOptionSelection} value={search} onChange={onSearchChange} type="text" className={styles.header_input_search}
+                        <input onKeyDown={handleOptionSelection} value={search} onChange={onSearchChange} type="text"
+                               className={styles.header_input_search}
                                placeholder={placeHolder}/>
 
                         <SearchIcon className={styles.header_search_logo}/>
                     </div>
 
-                    <div className={styles.hits}>
+                    {showAutoComplete && <div className={styles.hits}>
                         {
-                            hits?.map((hit, index)=>{
-                                return(
-                                    <Hit key={index} displayText={hit?.name} index={index} selectedItem={selectedItem} setValue={setSearch}/>
+                            hits?.map((hit, index) => {
+                                return (
+                                    <Hit key={index} displayText={hit?.name} index={index} selectedItem={selectedItem}
+                                         setValue={setSearch}/>
                                 )
                             })
                         }
-                    </div>
+                    </div>}
+
                 </div>
             </div>
         </div>

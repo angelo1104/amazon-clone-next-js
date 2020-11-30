@@ -91,7 +91,7 @@
 }
 
 .hits{
-    z-index: 999;
+    z-index: 9999999;
     align-self: flex-start;
     justify-self: flex-start;
     top: 38px;
