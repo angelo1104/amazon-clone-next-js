@@ -1,0 +1,1 @@
+(function(o){const i=o["de-ch"]=o["de-ch"]||{};i.dictionary=Object.assign(i.dictionary||{},{"Dropdown toolbar":"","Editor toolbar":"",Redo:"Wiederherstellen","Rich Text Editor, %0":"Rich-Text-Editor, %0","Show more items":"",Undo:"Rückgängig"});i.getPluralForm=function(o){return o!=1}})(window.CKEDITOR_TRANSLATIONS||(window.CKEDITOR_TRANSLATIONS={}));
