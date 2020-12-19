@@ -37,6 +37,19 @@ function DashBoardCreateProduct() {
                 </div>
 
                 <div className={styles.input_div}>
+                    <p className={styles.form_input_label}>Brand <span className={styles.form_brand_desc}>(If it is not branded use "Not branded")</span></p>
+
+                    <p className={styles.address_label}>Country</p>
+                    <input className={styles.form_input} />
+                </div>
+
+                <div className={styles.input_div}>
+                    <p className={styles.form_input_label}>Pickup Address</p>
+
+                    <input className={styles.form_input} />
+                </div>
+
+                <div className={styles.input_div}>
                     <p className={styles.form_input_label}>Short Description</p>
 
                     <textarea className={styles.form_input} />
@@ -53,7 +66,7 @@ function DashBoardCreateProduct() {
                 </div>
 
                 <div className={styles.input_div}>
-                    <p className={styles.form_input_label}>Features</p>
+                    <p className={styles.form_input_label}>Features <span className={styles.form_brand_desc}>(Features are a short and to-the-point way to represent description.)</span></p>
 
                     {
                         features.map((item, index)=>{

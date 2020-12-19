@@ -32,7 +32,7 @@
     display: flex;
     flex-direction: column;
     max-width: 300px;
-    margin-bottom: 10px !important;
+    margin-bottom: 20px !important;
 }
 
 .form_input_label{
@@ -85,4 +85,12 @@
 .add_feature_plus{
     position: relative;
     top: -2px;
+}
+
+.form_brand_desc{
+    font-weight: 400;
+}
+
+.address_label{
+    color: #111111;
 }
