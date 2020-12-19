@@ -1,0 +1,55 @@
+.dashboard_create_product{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main_img{
+    max-width: 250px;
+    object-fit: contain;
+    margin-top: 40px;
+}
+
+.main_form{
+    min-height: 10px;
+    border: 1px solid lightgray;
+    padding: 30px;
+    border-radius: 3px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    min-width: 30%;
+}
+
+.form_heading{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.input_div{
+    display: flex;
+    flex-direction: column;
+    max-width: 225px;
+    margin-bottom: 10px !important;
+}
+
+.form_input_label{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px !important;
+}
+
+.form_input{
+    outline-width: 0;
+    border: 1px solid lightgray;
+    font-family: 'Ubuntu', sans-serif;
+    padding: 5px 10px;
+    color: #000000;
+}
+
+.input_words{
+    margin-top: 5px;
+    text-align: right;
+}

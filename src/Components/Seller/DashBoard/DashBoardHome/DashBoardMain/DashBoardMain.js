@@ -6,7 +6,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 
 function DashBoardMain() {
-    return(
+    return (
         <div className={styles.main_dashboard}>
             <DashBoardMainCard/>
 
@@ -17,7 +17,8 @@ function DashBoardMain() {
                 <div className={styles.search}>
                     <div className={styles.search_box}>
                         <SearchIcon className={styles.search_icon}/>
-                        <input placeholder={'Title, status, etc.'} className={styles.search_input} type="text" name="" id="" />
+                        <input placeholder={'Title, status, etc.'} className={styles.search_input} type="text" name=""
+                               id=""/>
                     </div>
                     <button className={styles.search_button} type="submit">Search</button>
                 </div>

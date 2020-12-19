@@ -1,9 +1,16 @@
 import React from 'react';
 import styles from './DashBoardMainCard.module.css';
+import {useRouter} from "next/router";
 
 function DashBoardMainCard() {
+    const router = useRouter();
+
+    const moveTo = (event)=>{
+        router.push('/seller/products/dashboard/create-product')
+    }
+
     return(
-        <div className={styles.dashboard_main_card}>
+        <div className={styles.dashboard_main_card} onClick={moveTo}>
             <h2 className={styles.title}>
                 Add New Product
             </h2>
