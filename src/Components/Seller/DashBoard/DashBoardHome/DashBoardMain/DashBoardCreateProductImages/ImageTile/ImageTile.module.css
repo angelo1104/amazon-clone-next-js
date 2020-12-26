@@ -1,0 +1,24 @@
+.image_tile{
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1.5px dashed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    border-color:#a2a6ac #979aa1 #82858a;
+    background-size: contain !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    min-height: 100px;
+}
+
+.image_tile:hover{
+    background-color: #e7e9ec;
+}
+
+.image_title{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    color: gray;
+}

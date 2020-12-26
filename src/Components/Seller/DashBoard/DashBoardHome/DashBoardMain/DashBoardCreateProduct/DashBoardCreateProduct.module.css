@@ -94,3 +94,25 @@
 .address_label{
     color: #111111;
 }
+
+.next_button{
+    display: flex;
+    width: 30%;
+    align-self: flex-end;
+    justify-content: center;
+    background-color: white;
+    outline-width: 0;
+    border: 1px solid #111111;
+    cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    padding: 8px;
+    align-items: center;
+}
+
+.next_button_arrow{
+    margin-left: 10px;
+    font-weight: 800;
+    font-size: 23px;
+    position: relative;
+}

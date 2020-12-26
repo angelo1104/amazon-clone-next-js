@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import styles from './DashBoardCreateProduct.module.css';
 
 
-function DashBoardCreateProduct() {
+function DashBoardCreateProduct({setPage}) {
     const [features, setFeatures] = useState([''])
 
     const addFeature = (event)=>{
@@ -21,6 +21,12 @@ function DashBoardCreateProduct() {
         })
 
         setFeatures(featuresClone)
+    }
+
+    const moveToNext = (event)=>{
+        event.preventDefault();
+
+        setPage(2)
     }
 
     return(
@@ -76,6 +82,10 @@ function DashBoardCreateProduct() {
 
                     <button className={styles.add_feature} onClick={addFeature}><span className={styles.add_feature_plus}>+</span></button>
                 </div>
+
+                <button onClick={moveToNext} className={styles.next_button}>
+                    Next <span className={styles.next_button_arrow}>></span>
+                </button>
             </form>
         </div>
     )

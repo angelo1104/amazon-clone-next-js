@@ -1,0 +1,50 @@
+.create_images{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.amazon_logo{
+    width: 400px;
+    margin: 40px auto;
+    object-fit: contain;
+}
+
+.create_images_form{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    width: 45%;
+    margin: auto;
+    border-radius: 4px;
+    padding: 30px 20px;
+}
+
+.create_images_title{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.images_div{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.images_div_desc{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+}
+
+.images_many_div{
+    margin-top: 20px !important;
+}
+
+.images_list{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    padding: 15px 0;
+}

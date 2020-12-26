@@ -1,0 +1,54 @@
+.container{
+    display: flex;
+    width: 125px;
+    height: 150px;
+    position: relative;
+    margin: auto 15px 10px 0;
+    border: 1px solid lightgray;
+}
+
+.image{
+    width: 115px;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    height: 140px;
+    background-size: contain !important;
+    margin: auto 15px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay{
+    background-color: rgba(211, 211, 211, 0);
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    transition: background-color 300ms ease-in, opacity 290ms ease-in;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container:hover .overlay{
+    opacity: 1;
+    background-color: rgba(255, 243, 178, 1);
+}
+
+.remove_button{
+    z-index: 11;
+    background: #fdb827;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    margin: auto;
+    width: 80%;
+}
+
+.remove_button:hover{
+    background: #ffa62b;
+}
