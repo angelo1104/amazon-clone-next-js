@@ -1,3 +1,8 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
 .image_tile{
     cursor: pointer;
     padding: 5px 10px;
@@ -11,6 +16,7 @@
     background-position: center top !important;
     background-repeat: no-repeat !important;
     min-height: 100px;
+    margin-top: 10px;
 }
 
 .image_tile:hover{
@@ -21,4 +27,8 @@
     font-family: 'Ubuntu', sans-serif;
     font-size: 20px;
     color: gray;
+}
+
+.error{
+    color: red;
 }

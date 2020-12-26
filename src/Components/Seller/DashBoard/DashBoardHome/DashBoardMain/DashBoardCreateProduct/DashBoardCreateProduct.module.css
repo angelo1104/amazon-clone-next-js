@@ -110,6 +110,10 @@
     align-items: center;
 }
 
+.next_button:hover{
+    background-color: #e7e9ec;
+}
+
 .next_button_arrow{
     margin-left: 10px;
     font-weight: 800;

@@ -47,6 +47,7 @@ function ImageTile({title, add, stylesImp, images, imageUrl, setImages, setImage
             if (files[0]){
                 const fileType = getFile(files[0].name)
                 if (fileType === 'jpg' || fileType === 'png'){
+                    setError('')
                     setImages([files[0]], index)
                 }else {
                     console.log('error')
@@ -69,13 +70,13 @@ function ImageTile({title, add, stylesImp, images, imageUrl, setImages, setImage
     }
 
     return(
-        <>
-            <p>{error}</p>
+        <div className={styles.container}>
+            <p className={styles.error}>{error}</p>
             <div style={{...imageTileStyles, ...stylesImp}} onClick={showDialog} ref={imageRef} className={styles.image_tile}>
                 <input onChange={handleFiles} style={{display:"none"}} ref={inputRef} type="file" name="" id="" />
                 <span className={styles.image_title} style={spanStyles}>{title}</span>
             </div>
-        </>
+        </div>
     )
 }
 

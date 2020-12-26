@@ -9,9 +9,9 @@ function DashBoardCreateProductContainer() {
         case 1:
             return <DashBoardCreateProduct setPage={setPage}/>
         case 2:
-            return <DashBoardCreateProductImages/>
+            return <DashBoardCreateProductImages setPage={setPage}/>
         default:
-            return <DashBoardCreateProduct/>
+            return <DashBoardCreateProduct setPage={setPage}/>
     }
 }
 

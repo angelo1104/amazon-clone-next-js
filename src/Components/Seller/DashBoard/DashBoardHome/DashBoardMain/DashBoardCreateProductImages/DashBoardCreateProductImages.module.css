@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
+    padding-bottom: 40px;
 }
 
 .amazon_logo{
@@ -47,4 +48,38 @@
     width: 100%;
     flex-wrap: wrap;
     padding: 15px 0;
+}
+
+.step_buttons_div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.step_button{
+    display: flex;
+    width: 30%;
+    align-self: flex-end;
+    justify-content: center;
+    background-color: white;
+    outline-width: 0;
+    border: 1px solid #111111;
+    cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    padding: 8px;
+    align-items: center;
+}
+
+.step_button:hover{
+    background-color: #E0E0E0;
+}
+
+.step_button_arrow{
+    margin-left: 10px;
+    font-weight: 800;
+    font-size: 23px;
+    position: relative;
+    margin-right: 10px;
 }

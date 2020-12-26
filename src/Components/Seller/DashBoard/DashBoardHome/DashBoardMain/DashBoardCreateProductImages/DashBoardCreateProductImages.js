@@ -3,7 +3,7 @@ import styles from './DashBoardCreateProductImages.module.css';
 import ImageTile from "./ImageTile/ImageTile";
 import ImageTag from "./ImageTag/ImageTag";
 
-function DashBoardCreateProductImages() {
+function DashBoardCreateProductImages({setPage}) {
     const [avatar, setAvatar] = useState([])
     const [avatarUrl, setAvatarUrl] = useState('')
     const [images, setImages] = useState([])
@@ -35,33 +35,26 @@ function DashBoardCreateProductImages() {
     }
 
     const removeImageUrl = (index)=>{
-        const imageUrlsClone = [...imageUrls]
-        setImageUrls([...imageUrls].filter((url, indexed)=>{
+        setImageUrls(prevImageUrls=> prevImageUrls.filter((url, indexed)=>{
             if (index !== indexed) return url
         }))
-        console.log('You made me a u made me a remover remover',imageUrlsClone)
     }
-
-    // useEffect(()=>{
-    //     const imageuRLS = [];
-    //     images.forEach( image=>{
-    //         const reader = new FileReader();
-    //         reader.readAsDataURL(image)
-    //
-    //         reader.onloadend = ()=>{
-    //             console.log(reader.result)
-    //             imageuRLS.push(reader.result)
-    //         }
-    //     })
-    //
-    //     console.log('Image Urls',imageuRLS)
-    // },[images])
-
-
 
     useEffect(()=>{
         console.log(imageUrls)
     },[imageUrls])
+
+    const moveBack = (event)=>{
+        event.preventDefault();
+
+        setPage(page=>(page-1))
+    }
+
+    const moveAhead = (event)=>{
+        event.preventDefault()
+
+        setPage(page=>(page+1))
+    }
 
     return(
         <div className={styles.create_images}>
@@ -72,19 +65,29 @@ function DashBoardCreateProductImages() {
 
                 <div className={styles.images_div}>
                     <p className={styles.images_div_desc}>Avatar of product(a.ka thumbnail, recommended size: width- 400px, height- 600px)</p>
-                    <ImageTile index={0} title={'Avatar'} add={true} stylesImp={{width:'40%'}} images={avatar} imageUrl={avatarUrl} setImages={setAvatar} setImageUrl={setAvatarUrl}/>
+                    <ImageTile index={0} title={'Avatar'} add={true} stylesImp={{width:'100px', height:'150px'}} images={avatar} imageUrl={avatarUrl} setImages={setAvatar} setImageUrl={setAvatarUrl}/>
                 </div>
 
                 <div className={styles.images_many_div}>
                     <p className={styles.images_div_desc}>Images for products(minimum two images, recommended size: width- 1000px, height- 1800px)</p>
                     <div className={styles.images_list}>
                         {
-                            imageUrls.map(async (url ,index)=>{
-                                return <ImageTag backgroundUrl={url} index={index} removeUrl={removeImageUrl}/>
+                            imageUrls.map((url ,index)=>{
+                                return <ImageTag key={index} backgroundUrl={url} index={index} removeUrl={removeImageUrl}/>
                             })
                         }
                         <ImageTile title={'Add'} add={false} stylesImp={{width:'125px',height:'150px'}} index={0} images={images} setImages={updateImages} imageUrl={imageUrls[3]} setImageUrl={updateImageUrls}/>
                     </div>
+                </div>
+
+                <div className={styles.step_buttons_div}>
+                    <button className={styles.step_button} onClick={moveBack}>
+                       <span className={styles.step_button_arrow}>{'<'}</span> Prev
+                    </button>
+
+                    <button className={styles.step_button} onClick={moveAhead}>
+                        Next <span className={styles.step_button_arrow}>{'>'}</span>
+                    </button>
                 </div>
             </form>
         </div>
