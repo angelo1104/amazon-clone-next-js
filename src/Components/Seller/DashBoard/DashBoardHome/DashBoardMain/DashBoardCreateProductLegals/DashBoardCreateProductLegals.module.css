@@ -1,66 +1,73 @@
-.create_images{
+.legals{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: stretch;
     padding-bottom: 40px;
 }
 
-.amazon_logo{
-    width: 400px;
-    margin: 40px auto;
+.logo{
+    max-width: 30%;
     object-fit: contain;
+    margin: 50px auto 50px;
 }
 
-.create_images_form{
+.legals_form{
     display: flex;
     flex-direction: column;
     border: 1px solid lightgray;
-    width: 45%;
+    width: 40%;
+    min-height: 30px;
     margin: auto;
     border-radius: 4px;
-    padding: 30px 20px;
+    padding: 15px;
 }
 
-.create_images_title{
+.title{
     font-family: 'Ubuntu', sans-serif;
-    font-size: 25px;
-    margin-bottom: 20px;
+    font-size: 24px;
 }
 
-.images_div{
+.input_div{
     display: flex;
-    width: 100%;
-    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 15px;
 }
 
-.images_div_desc{
+.label{
     font-family: 'Ubuntu', sans-serif;
     font-size: 16px;
 }
 
-.images_many_div{
-    margin-top: 20px !important;
+.input{
+    max-width: 40%;
+    border: 1px solid lightgray;
+    outline-width: 0;
+    padding: 2px 5px;
+    margin-top: 10px;
 }
 
-.images_list{
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    padding: 15px 0;
-    align-items: center;
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
+
+.label_terms{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 12px;
+}
+
 
 .step_buttons_div{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 70px;
 }
 
 .step_button{
     display: flex;
-    width: 30%;
+    width: 20%;
     align-self: flex-end;
     justify-content: center;
     background-color: white;

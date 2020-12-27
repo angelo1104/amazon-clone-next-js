@@ -1,9 +1,9 @@
 .container{
     display: flex;
-    width: 125px;
-    height: 150px;
+    width: 125px !important;
+    height: 150px !important;
     position: relative;
-    margin: auto 15px 10px 0;
+    margin: 10px 15px 0px 0;
     border: 1px solid lightgray;
 }
 
