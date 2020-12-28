@@ -3,6 +3,7 @@ import DashBoardCreateProduct from "../DashBoardCreateProduct/DashBoardCreatePro
 import DashBoardCreateProductImages from "../DashBoardCreateProductImages/DashBoardCreateProductImages";
 import DashBoardCreateProductLegals from "../DashBoardCreateProductLegals/DashBoardCreateProductLegals";
 import {useProductValue} from "../../../../../../ContextApi/ProductProvider";
+import {setVillage} from "../../../../../../ContextApi/productsActions";
 
 function DashBoardCreateProductContainer() {
     const [page, setPage] = useState(1)
@@ -10,10 +11,7 @@ function DashBoardCreateProductContainer() {
     const [state, dispatch] = useProductValue()
 
     useEffect(()=>{
-        dispatch({
-            type: 'SET_VILLAGE',
-            village: 'Chicken'
-        })
+        dispatch(setVillage('barley'))
     },[])
 
     useEffect(()=>{
