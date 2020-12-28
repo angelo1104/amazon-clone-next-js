@@ -3,7 +3,7 @@ import styles from './DashBoardCreateProductImages.module.css';
 import ImageTile from "./ImageTile/ImageTile";
 import ImageTag from "./ImageTag/ImageTag";
 
-function DashBoardCreateProductImages({setPage}) {
+function DashBoardCreateProductImages({setPage, page}) {
     const [avatar, setAvatar] = useState([])
     const [avatarUrl, setAvatarUrl] = useState('')
     const [images, setImages] = useState([])
@@ -47,13 +47,13 @@ function DashBoardCreateProductImages({setPage}) {
     const moveBack = (event)=>{
         event.preventDefault();
 
-        setPage(page=>(page-1))
+        setPage((page-1))
     }
 
     const moveAhead = (event)=>{
         event.preventDefault()
 
-        setPage(page=>(page+1))
+        setPage((page+1))
     }
 
     return(

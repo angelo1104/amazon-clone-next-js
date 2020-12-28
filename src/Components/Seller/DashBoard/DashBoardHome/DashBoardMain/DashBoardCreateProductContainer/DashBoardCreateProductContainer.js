@@ -3,30 +3,33 @@ import DashBoardCreateProduct from "../DashBoardCreateProduct/DashBoardCreatePro
 import DashBoardCreateProductImages from "../DashBoardCreateProductImages/DashBoardCreateProductImages";
 import DashBoardCreateProductLegals from "../DashBoardCreateProductLegals/DashBoardCreateProductLegals";
 import {useProductValue} from "../../../../../../ContextApi/ProductProvider";
-import {setVillage} from "../../../../../../ContextApi/productsActions";
+import {setFormPage, setVillage} from "../../../../../../ContextApi/productsActions";
 
 function DashBoardCreateProductContainer() {
-    const [page, setPage] = useState(1)
 
-    const [state, dispatch] = useProductValue()
+    const [{village, page}, dispatch] = useProductValue()
+
+    const setPage = (pageNumber)=>{
+        dispatch(setFormPage(pageNumber))
+    }
 
     useEffect(()=>{
         dispatch(setVillage('barley'))
     },[])
 
     useEffect(()=>{
-        console.log(state)
-    },[state])
+        console.log(village)
+    },[village])
 
     switch (page) {
         case 1:
-            return <DashBoardCreateProduct setPage={setPage}/>
+            return <DashBoardCreateProduct setPage={setPage} />
         case 2:
-            return <DashBoardCreateProductImages setPage={setPage}/>
+            return <DashBoardCreateProductImages setPage={setPage} page={page}/>
         case 3:
-            return <DashBoardCreateProductLegals setPage={setPage}/>
+            return <DashBoardCreateProductLegals setPage={setPage} page={page}/>
         default:
-            return <DashBoardCreateProduct setPage={setPage}/>
+            return <DashBoardCreateProduct setPage={setPage} />
     }
 }
 

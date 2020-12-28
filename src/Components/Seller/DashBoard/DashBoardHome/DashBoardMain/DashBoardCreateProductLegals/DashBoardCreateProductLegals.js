@@ -1,12 +1,12 @@
 import React from "react";
 import styles from './DashBoardCreateProductLegals.module.css'
 
-function DashBoardCreateProductLegals({setPage}) {
+function DashBoardCreateProductLegals({setPage, page}) {
 
     const moveBack = (event)=>{
         event.preventDefault()
 
-        setPage(page => (page-1))
+        setPage((page-1))
     }
 
     return(
@@ -18,7 +18,7 @@ function DashBoardCreateProductLegals({setPage}) {
 
                 <div className={styles.input_div}>
                     <p className={styles.label}>Prices in USD</p>
-                    <input className={styles.input} type="number" autoComplete={false}/>
+                    <input className={styles.input} type="number" />
                 </div>
 
                 <div className={styles.input_div}>
