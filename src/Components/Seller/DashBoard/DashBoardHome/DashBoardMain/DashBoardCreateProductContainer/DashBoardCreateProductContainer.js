@@ -1,10 +1,24 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import DashBoardCreateProduct from "../DashBoardCreateProduct/DashBoardCreateProduct";
 import DashBoardCreateProductImages from "../DashBoardCreateProductImages/DashBoardCreateProductImages";
 import DashBoardCreateProductLegals from "../DashBoardCreateProductLegals/DashBoardCreateProductLegals";
+import {useProductValue} from "../../../../../../ContextApi/ProductProvider";
 
 function DashBoardCreateProductContainer() {
     const [page, setPage] = useState(1)
+
+    const [state, dispatch] = useProductValue()
+
+    useEffect(()=>{
+        dispatch({
+            type: 'SET_VILLAGE',
+            village: 'Chicken'
+        })
+    },[])
+
+    useEffect(()=>{
+        console.log(state)
+    },[state])
 
     switch (page) {
         case 1:
