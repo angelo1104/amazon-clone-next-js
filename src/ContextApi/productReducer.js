@@ -8,6 +8,10 @@ export const productInitialState = {
   pickupAddress: "",
   shortDescription: "",
   description: "",
+  avatar: [],
+  avatarUrl: "",
+  images: [],
+  imagesUrls: [],
 };
 
 const productReducer = (state, action) => {
@@ -46,6 +50,26 @@ const productReducer = (state, action) => {
       return {
         ...state,
         description: action.description,
+      };
+    case productActionTypes.setAvatar:
+      return {
+        ...state,
+        avatar: action.avatar,
+      };
+    case productActionTypes.setAvatarUrl:
+      return {
+        ...state,
+        avatarUrl: action.avatarUrl,
+      };
+    case productActionTypes.setImages:
+      return {
+        ...state,
+        images: action.images,
+      };
+    case productActionTypes.setImagesUrl:
+      return {
+        ...state,
+        imagesUrls: action.imagesUrl,
       };
     default:
       return {

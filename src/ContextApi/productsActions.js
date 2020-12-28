@@ -6,6 +6,10 @@ const productActionTypes = {
   setPickupAddress: "SET_PICKUP_ADDRESS",
   setShortDescription: "SET_SHORT_DESCRIPTION",
   setDescription: "SET_DESCRIPTION",
+  setAvatar: "SET_AVATAR",
+  setAvatarUrl: "SET_AVATAR_URL",
+  setImages: "SET_IMAGES",
+  setImagesUrl: "SET_IMAGES_URL",
 };
 
 const setFormPage = (payload) => ({
@@ -43,6 +47,26 @@ const setFormDescription = (payload) => ({
   description: payload,
 });
 
+const setFormAvatar = (payload) => ({
+  type: productActionTypes.setAvatar,
+  avatar: payload,
+});
+
+const setFormAvatarUrl = (payload) => ({
+  type: productActionTypes.setAvatarUrl,
+  avatarUrl: payload,
+});
+
+const setFormImages = (payload) => ({
+  type: productActionTypes.setImages,
+  images: payload,
+});
+
+const setFormImagesUrl = (payload) => ({
+  type: productActionTypes.setImagesUrl,
+  imagesUrl: payload,
+});
+
 export {
   productActionTypes,
   setFormPage,
@@ -52,4 +76,8 @@ export {
   setFormPickupAddress,
   setFormShortDescription,
   setFormDescription,
+  setFormAvatar,
+  setFormAvatarUrl,
+  setFormImages,
+  setFormImagesUrl,
 };
