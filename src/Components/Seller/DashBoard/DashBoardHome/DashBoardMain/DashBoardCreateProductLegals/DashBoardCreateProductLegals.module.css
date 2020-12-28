@@ -67,7 +67,7 @@
 
 .step_button{
     display: flex;
-    width: 20%;
+    width: 30%;
     align-self: flex-end;
     justify-content: center;
     background-color: white;
@@ -78,6 +78,7 @@
     font-size: 18px;
     padding: 8px;
     align-items: center;
+    height: 44px;
 }
 
 .step_button:hover{

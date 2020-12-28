@@ -12,6 +12,8 @@ export const productInitialState = {
   avatarUrl: "",
   images: [],
   imagesUrls: [],
+  price: 0,
+  searchTerm: "",
 };
 
 const productReducer = (state, action) => {
@@ -70,6 +72,16 @@ const productReducer = (state, action) => {
       return {
         ...state,
         imagesUrls: action.imagesUrl,
+      };
+    case productActionTypes.setPrice:
+      return {
+        ...state,
+        price: action.price,
+      };
+    case productActionTypes.setSearchTerm:
+      return {
+        ...state,
+        searchTerm: action.searchTerm,
       };
     default:
       return {

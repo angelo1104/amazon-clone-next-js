@@ -1,7 +1,14 @@
 import React from "react";
 import styles from "./DashBoardCreateProductLegals.module.css";
+import { useProductValue } from "../../../../../../ContextApi/ProductProvider";
+import {
+  setFormPrice,
+  setFormSearchTerm,
+} from "../../../../../../ContextApi/productsActions";
 
 function DashBoardCreateProductLegals({ setPage, page }) {
+  const [{ price, searchTerm }, dispatch] = useProductValue();
+
   const moveBack = (event) => {
     event.preventDefault();
 
@@ -23,12 +30,24 @@ function DashBoardCreateProductLegals({ setPage, page }) {
 
         <div className={styles.input_div}>
           <p className={styles.label}>Prices in USD</p>
-          <input className={styles.input} type="number" />
+          <input
+            className={styles.input}
+            type="number"
+            value={price}
+            onChange={(event) => dispatch(setFormPrice(event.target.value))}
+          />
         </div>
 
         <div className={styles.input_div}>
           <p className={styles.label}>Search Term</p>
-          <input className={styles.input} type="text" />
+          <input
+            className={styles.input}
+            type="text"
+            value={searchTerm}
+            onChange={(event) =>
+              dispatch(setFormSearchTerm(event.target.value))
+            }
+          />
         </div>
 
         <p className={styles.label_terms}>
