@@ -23,7 +23,7 @@ function DashBoardCreateProduct({ setPage }) {
   const addFeature = (event) => {
     event.preventDefault();
 
-    setFeatures([...features, ""]);
+    if (features.length <= 12) setFeatures([...features, ""]);
   };
 
   const updateFeature = (event, index) => {
@@ -64,7 +64,9 @@ function DashBoardCreateProduct({ setPage }) {
             className={styles.form_input}
             type="text"
             value={name}
-            onChange={(event) => dispatch(setFormName(event.target.value))}
+            onChange={(event) =>
+              dispatch(setFormName(event.target.value.substr(0, 128)))
+            }
           />
         </div>
 
@@ -79,7 +81,9 @@ function DashBoardCreateProduct({ setPage }) {
             className={styles.form_input}
             type={"text"}
             value={brand}
-            onChange={(event) => dispatch(setFormBrand(event.target.value))}
+            onChange={(event) =>
+              dispatch(setFormBrand(event.target.value.substr(0, 128)))
+            }
           />
         </div>
 
@@ -90,7 +94,7 @@ function DashBoardCreateProduct({ setPage }) {
             className={styles.form_input}
             value={pickupAddress}
             onChange={(event) =>
-              dispatch(setFormPickupAddress(event.target.value))
+              dispatch(setFormPickupAddress(event.target.value.substr(0, 350)))
             }
           />
         </div>
@@ -102,11 +106,13 @@ function DashBoardCreateProduct({ setPage }) {
             className={styles.form_input}
             value={shortDescription}
             onChange={(event) =>
-              dispatch(setFormShortDescription(event.target.value))
+              dispatch(
+                setFormShortDescription(event.target.value.substr(0, 200))
+              )
             }
           />
 
-          <p className={styles.input_words}>100/200</p>
+          <p className={styles.input_words}>{shortDescription.length}/200</p>
         </div>
 
         <div className={styles.input_div}>
@@ -116,11 +122,11 @@ function DashBoardCreateProduct({ setPage }) {
             className={styles.form_input}
             value={description}
             onChange={(event) =>
-              dispatch(setFormDescription(event.target.value))
+              dispatch(setFormDescription(event.target.value.substr(0, 500)))
             }
           />
 
-          <p className={styles.input_words}>200/300</p>
+          <p className={styles.input_words}>{description.length}/500</p>
         </div>
 
         <div className={styles.input_div}>
@@ -128,7 +134,7 @@ function DashBoardCreateProduct({ setPage }) {
             Features{" "}
             <span className={styles.form_brand_desc}>
               (Features are a short and to-the-point way to represent
-              description.)
+              description. Max 12)
             </span>
           </p>
 

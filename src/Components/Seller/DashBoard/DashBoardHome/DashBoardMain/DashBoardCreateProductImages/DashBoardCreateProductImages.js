@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./DashBoardCreateProductImages.module.css";
 import ImageTile from "./ImageTile/ImageTile";
 import ImageTag from "./ImageTag/ImageTag";
@@ -15,6 +15,8 @@ function DashBoardCreateProductImages({ setPage, page }) {
     { avatar, avatarUrl, images, imagesUrls },
     dispatch,
   ] = useProductValue();
+
+  const [error, setError] = useState("");
 
   const setImages = (image) => {
     dispatch(setFormImages(image));
@@ -46,13 +48,13 @@ function DashBoardCreateProductImages({ setPage, page }) {
 
   const updateImages = (file) => {
     const imagesClone = [...images];
-    imagesClone.push(file);
+    if (imagesClone.length < 8) imagesClone.push(file);
     setImages(imagesClone);
   };
 
   const updateImageUrls = (url) => {
     const urlsClone = [...imagesUrls];
-    urlsClone.push(url);
+    if (urlsClone.length < 8) urlsClone.push(url);
     setImagesUrls(urlsClone);
   };
 
@@ -73,7 +75,9 @@ function DashBoardCreateProductImages({ setPage, page }) {
   const moveAhead = (event) => {
     event.preventDefault();
 
-    setPage(page + 1);
+    if (!avatar.length) setError("Avatar is required.");
+    else if (!images.length) setError("At least 1 Image is required.");
+    else setPage(page + 1);
   };
 
   return (
@@ -99,7 +103,6 @@ function DashBoardCreateProductImages({ setPage, page }) {
             title={"Avatar"}
             add={true}
             stylesImp={{ width: "100px", height: "150px" }}
-            images={avatar}
             imageUrl={avatarUrl}
             setImages={setAvatar}
             setImageUrl={setAvatarUrl}
@@ -109,7 +112,7 @@ function DashBoardCreateProductImages({ setPage, page }) {
         <div className={styles.images_many_div}>
           <p className={styles.images_div_desc}>
             Images for products(minimum two images, recommended size: width-
-            1000px, height- 1800px)
+            1000px, height- 1800px. Max 8)
           </p>
           <div className={styles.images_list}>
             {imagesUrls?.map((url, index) => {
@@ -122,12 +125,12 @@ function DashBoardCreateProductImages({ setPage, page }) {
                 />
               );
             })}
+
             <ImageTile
               title={"Add"}
               add={false}
               stylesImp={{ width: "125px", height: "150px" }}
               index={0}
-              images={images}
               setImages={updateImages}
               imageUrl={imagesUrls[3]}
               setImageUrl={updateImageUrls}
@@ -135,6 +138,7 @@ function DashBoardCreateProductImages({ setPage, page }) {
           </div>
         </div>
 
+        <p className={styles.error}>{error}</p>
         <div className={styles.step_buttons_div}>
           <button className={styles.step_button} onClick={moveBack}>
             <span className={styles.step_button_arrow}>{"<"}</span> Prev

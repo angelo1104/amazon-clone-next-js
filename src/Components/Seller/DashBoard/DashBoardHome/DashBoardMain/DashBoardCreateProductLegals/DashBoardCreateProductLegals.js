@@ -6,8 +6,16 @@ import {
   setFormSearchTerm,
 } from "../../../../../../ContextApi/productsActions";
 
+//I love Ishika. Please love me.
+
 function DashBoardCreateProductLegals({ setPage, page }) {
   const [{ price, searchTerm }, dispatch] = useProductValue();
+
+  const submit = (event) => {
+    event.preventDefault();
+
+    console.log("Submitted");
+  };
 
   const moveBack = (event) => {
     event.preventDefault();
@@ -34,7 +42,10 @@ function DashBoardCreateProductLegals({ setPage, page }) {
             className={styles.input}
             type="number"
             value={price}
-            onChange={(event) => dispatch(setFormPrice(event.target.value))}
+            onChange={(event) => {
+              const priceValue = parseFloat(event.target.value);
+              if (priceValue <= 99999999.99) dispatch(setFormPrice(priceValue));
+            }}
           />
         </div>
 
@@ -45,7 +56,7 @@ function DashBoardCreateProductLegals({ setPage, page }) {
             type="text"
             value={searchTerm}
             onChange={(event) =>
-              dispatch(setFormSearchTerm(event.target.value))
+              dispatch(setFormSearchTerm(event.target.value.substr(0, 128)))
             }
           />
         </div>
@@ -61,7 +72,9 @@ function DashBoardCreateProductLegals({ setPage, page }) {
             <span className={styles.step_button_arrow}>{"<"}</span> Prev
           </button>
 
-          <button className={styles.step_button}>Create</button>
+          <button className={styles.step_button} onClick={submit}>
+            Create
+          </button>
         </div>
       </form>
     </div>

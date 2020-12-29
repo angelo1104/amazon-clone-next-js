@@ -49,13 +49,14 @@
     flex-wrap: wrap;
     padding: 15px 0;
     align-items: center;
+    margin-bottom: 40px;
 }
 
 .step_buttons_div{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 15px;
 }
 
 .step_button{
@@ -83,4 +84,10 @@
     font-size: 23px;
     position: relative;
     margin-right: 10px;
+}
+
+.error{
+    font-family: 'Ubuntu', sans-serif;
+    color: red;
+    font-size: 16px !important;
 }
