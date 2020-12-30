@@ -5,16 +5,104 @@ import {
   setFormPrice,
   setFormSearchTerm,
 } from "../../../../../../ContextApi/productsActions";
+import productInstance from "../../../../../../axios/productInstance";
+import { useStateValue } from "../../../../../../ContextApi/StateProvider";
+import { storage } from "../../../../../../firebase";
 
 //I love Ishika. Please love me.
 
 function DashBoardCreateProductLegals({ setPage, page }) {
-  const [{ price, searchTerm }, dispatch] = useProductValue();
+  const [
+    {
+      name,
+      price,
+      searchTerm,
+      brand,
+      pickupAddress,
+      shortDescription,
+      description,
+      avatar,
+      images,
+      imagesUrls,
+      features,
+    },
+    dispatch,
+  ] = useProductValue();
 
-  const submit = (event) => {
+  const [{ dataUser }, dispatchState] = useStateValue();
+
+  const submit = async (event) => {
     event.preventDefault();
 
-    console.log("Submitted");
+    try {
+      console.log("clicked.");
+      await storage()
+        .ref(`products/${dataUser.name}/${name}/avatar`)
+        .put(avatar[0]);
+
+      const avatarUrl = await storage()
+        .ref(`products/${dataUser.name}/${name}/avatar`)
+        .getDownloadURL();
+
+      let imageUrls = []; // <======== set this as a separate variable and remove it from the next line
+
+      images.map((image, index) => {
+        const imageUploadTask = storage()
+          .ref(`products/${dataUser.name}/${name}/${image.name}${index}`)
+          .put(image);
+
+        imageUploadTask.on(
+          "state_changed",
+          (snapshot) => {},
+          (error) => {
+            console.log(error);
+          },
+          () => {
+            storage()
+              .ref(`products/${dataUser.name}/${name}/${image.name}${index}`)
+              .getDownloadURL()
+              .then((url) => {
+                console.log(url);
+                imageUrls.push(url); // <============= add this line here
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        );
+      });
+
+      console.log(avatarUrl, imageUrls);
+    } catch (error) {}
+
+    // try {
+    //   const product = await productInstance.post("/create", {
+    //     product: {
+    //       name,
+    //       brand,
+    //       pickupAddress,
+    //       shortDescription,
+    //       description,
+    //       avatar: avatarUrl,
+    //       images: imagesUrls,
+    //       price,
+    //       searchTerm,
+    //       features: features.filter((feature, index) => {
+    //         if (feature || feature.trim()) {
+    //           // feature is no empty
+    //           return feature;
+    //         }
+    //       }),
+    //       ownerEmail: dataUser.email,
+    //       ownerUid: dataUser.uid,
+    //       status: "LIVE",
+    //     },
+    //   });
+    //
+    //   console.log("Submitted", product);
+    // } catch (e) {
+    //   console.log(e);
+    // }
   };
 
   const moveBack = (event) => {

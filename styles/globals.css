@@ -61,3 +61,18 @@ p{
   text-align: center;
   margin-top: 50px;
 }
+
+.create-product-div{
+  display: flex;
+  flex-direction: column;
+}
+
+.create-product-cancel{
+  border: 1px solid #111111;
+  margin: 50px auto 20px;
+  border-radius: 3px;
+  padding: 5px 10px;
+  width: 150px;
+  cursor: pointer;
+  color: #111111;
+}
