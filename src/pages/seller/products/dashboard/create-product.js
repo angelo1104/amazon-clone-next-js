@@ -4,17 +4,11 @@ import { ProductContextProvider } from "../../../../ContextApi/ProductProvider";
 import productReducer, {
   productInitialState,
 } from "../../../../ContextApi/productReducer";
+import DashBoardCreateProductCancel from "../../../../Components/Seller/DashBoard/DashBoardHome/DashBoardMain/DashBoardCreateProductCancel/DashBoardCreateProductCancel";
 import { useRouter } from "next/router";
 
 function CreateProductPage() {
   const router = useRouter();
-
-  const cancel = (event) => {
-    event.preventDefault();
-
-    router.replace("/seller/products/dashboard");
-  };
-
   return (
     <div className={"create-product-div"}>
       <ProductContextProvider
@@ -22,9 +16,7 @@ function CreateProductPage() {
         reducer={productReducer}
       >
         <DashBoardCreateProductContainer />
-        <button onClick={cancel} className={"create-product-cancel"}>
-          Cancel
-        </button>
+        <DashBoardCreateProductCancel router={router} />
       </ProductContextProvider>
     </div>
   );

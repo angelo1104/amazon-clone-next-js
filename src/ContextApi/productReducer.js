@@ -14,6 +14,7 @@ export const productInitialState = {
   imagesUrls: [],
   price: 0,
   searchTerm: "",
+  processing: true,
 };
 
 const productReducer = (state, action) => {
@@ -82,6 +83,11 @@ const productReducer = (state, action) => {
       return {
         ...state,
         searchTerm: action.searchTerm,
+      };
+    case productActionTypes.setFormProcessing:
+      return {
+        ...state,
+        processing: action.processing,
       };
     default:
       return {

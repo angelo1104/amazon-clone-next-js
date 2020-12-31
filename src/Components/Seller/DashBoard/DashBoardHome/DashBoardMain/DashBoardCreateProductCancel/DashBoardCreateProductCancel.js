@@ -1,0 +1,25 @@
+import React from "react";
+import { useRouter } from "next/router";
+import { useProductValue } from "../../../../../../ContextApi/ProductProvider";
+
+function DashBoardCreateProductCancel({ router }) {
+  const [{ processing }] = useProductValue();
+
+  const cancel = (event) => {
+    event.preventDefault();
+
+    router.replace("/seller/products/dashboard");
+  };
+
+  return (
+    <button
+      onClick={cancel}
+      className={"create-product-cancel"}
+      disabled={processing}
+    >
+      Cancel
+    </button>
+  );
+}
+
+export default DashBoardCreateProductCancel;

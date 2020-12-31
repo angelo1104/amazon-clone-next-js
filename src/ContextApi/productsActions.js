@@ -12,6 +12,7 @@ const productActionTypes = {
   setImagesUrl: "SET_IMAGES_URL",
   setPrice: "SET_PRICE",
   setSearchTerm: "SET_SEARCH_TERM",
+  setFormProcessing: "SET_FORM_PROCESSING",
 };
 
 const setFormPage = (payload) => ({
@@ -79,6 +80,11 @@ const setFormSearchTerm = (payload) => ({
   searchTerm: payload,
 });
 
+const setFormProcessing = (payload) => ({
+  type: productActionTypes.setFormProcessing,
+  processing: payload,
+});
+
 export {
   productActionTypes,
   setFormPage,
@@ -94,4 +100,5 @@ export {
   setFormImagesUrl,
   setFormPrice,
   setFormSearchTerm,
+  setFormProcessing,
 };

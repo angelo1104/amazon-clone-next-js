@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./DashBoardCreateProductLegals.module.css";
 import { useProductValue } from "../../../../../../ContextApi/ProductProvider";
 import {
   setFormPrice,
+  setFormProcessing,
   setFormSearchTerm,
 } from "../../../../../../ContextApi/productsActions";
 import productInstance from "../../../../../../axios/productInstance";
 import { useStateValue } from "../../../../../../ContextApi/StateProvider";
 import { storage } from "../../../../../../firebase";
+import animation from "../../../../../../lottie/loader-product.json";
+import Lottie from "lottie-react-web";
 
 //I love Ishika. Please love me.
 
@@ -24,17 +27,23 @@ function DashBoardCreateProductLegals({ setPage, page }) {
       avatar,
       images,
       features,
+      processing,
     },
     dispatch,
   ] = useProductValue();
 
-  const [{ dataUser }, dispatchState] = useStateValue();
+  const setProcessing = (state) => {
+    dispatch(setFormProcessing(state));
+  };
+
+  const [{ dataUser }] = useStateValue();
 
   const submit = async (event) => {
     event.preventDefault();
 
     try {
       console.log("clicked.");
+      setProcessing(true);
       await storage()
         .ref(`products/${dataUser.name}/${name}/avatar`)
         .put(avatar[0]);
@@ -85,7 +94,9 @@ function DashBoardCreateProductLegals({ setPage, page }) {
       });
 
       console.log("Submitted", product);
+      setProcessing(false);
     } catch (error) {
+      setProcessing(false);
       console.log(error);
     }
   };
@@ -114,6 +125,7 @@ function DashBoardCreateProductLegals({ setPage, page }) {
           <input
             className={styles.input}
             type="number"
+            disabled={processing}
             value={price}
             onChange={(event) => {
               const priceValue = parseFloat(event.target.value);
@@ -126,6 +138,7 @@ function DashBoardCreateProductLegals({ setPage, page }) {
           <p className={styles.label}>Search Term</p>
           <input
             className={styles.input}
+            disabled={processing}
             type="text"
             value={searchTerm}
             onChange={(event) =>
@@ -141,11 +154,24 @@ function DashBoardCreateProductLegals({ setPage, page }) {
         </p>
 
         <div className={styles.step_buttons_div}>
-          <button className={styles.step_button} onClick={moveBack}>
+          <button
+            className={styles.step_button}
+            onClick={moveBack}
+            disabled={processing}
+          >
             <span className={styles.step_button_arrow}>{"<"}</span> Prev
           </button>
 
-          <button className={styles.step_button} onClick={submit}>
+          <button
+            className={styles.step_button}
+            onClick={submit}
+            disabled={processing}
+          >
+            {processing && (
+              <div className={styles.lottie}>
+                <Lottie options={{ animationData: animation }} />
+              </div>
+            )}
             Create
           </button>
         </div>
