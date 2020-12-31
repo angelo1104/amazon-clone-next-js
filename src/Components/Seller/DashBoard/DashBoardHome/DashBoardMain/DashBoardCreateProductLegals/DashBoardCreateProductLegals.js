@@ -23,7 +23,6 @@ function DashBoardCreateProductLegals({ setPage, page }) {
       description,
       avatar,
       images,
-      imagesUrls,
       features,
     },
     dispatch,
@@ -44,65 +43,51 @@ function DashBoardCreateProductLegals({ setPage, page }) {
         .ref(`products/${dataUser.name}/${name}/avatar`)
         .getDownloadURL();
 
-      let imageUrls = []; // <======== set this as a separate variable and remove it from the next line
+      const imageUrls = [];
 
-      images.map((image, index) => {
-        const imageUploadTask = storage()
+      for (const image of images) {
+        const index = images.indexOf(image);
+
+        await storage()
           .ref(`products/${dataUser.name}/${name}/${image.name}${index}`)
           .put(image);
 
-        imageUploadTask.on(
-          "state_changed",
-          (snapshot) => {},
-          (error) => {
-            console.log(error);
-          },
-          () => {
-            storage()
-              .ref(`products/${dataUser.name}/${name}/${image.name}${index}`)
-              .getDownloadURL()
-              .then((url) => {
-                console.log(url);
-                imageUrls.push(url); // <============= add this line here
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
-        );
-      });
+        const url = await storage()
+          .ref(`products/${dataUser.name}/${name}/${image.name}${index}`)
+          .getDownloadURL();
+
+        imageUrls.push(url);
+      }
 
       console.log(avatarUrl, imageUrls);
-    } catch (error) {}
 
-    // try {
-    //   const product = await productInstance.post("/create", {
-    //     product: {
-    //       name,
-    //       brand,
-    //       pickupAddress,
-    //       shortDescription,
-    //       description,
-    //       avatar: avatarUrl,
-    //       images: imagesUrls,
-    //       price,
-    //       searchTerm,
-    //       features: features.filter((feature, index) => {
-    //         if (feature || feature.trim()) {
-    //           // feature is no empty
-    //           return feature;
-    //         }
-    //       }),
-    //       ownerEmail: dataUser.email,
-    //       ownerUid: dataUser.uid,
-    //       status: "LIVE",
-    //     },
-    //   });
-    //
-    //   console.log("Submitted", product);
-    // } catch (e) {
-    //   console.log(e);
-    // }
+      const product = await productInstance.post("/create", {
+        product: {
+          name,
+          brand,
+          pickupAddress,
+          shortDescription,
+          description,
+          avatar: avatarUrl,
+          images: imageUrls,
+          price: price.toString(),
+          searchTerm,
+          features: features.filter((feature, index) => {
+            if (feature || feature.trim()) {
+              // feature is no empty
+              return feature;
+            }
+          }),
+          ownerEmail: dataUser.email,
+          ownerUid: dataUser.uid,
+          status: "LIVE",
+        },
+      });
+
+      console.log("Submitted", product);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const moveBack = (event) => {
