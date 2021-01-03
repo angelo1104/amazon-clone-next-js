@@ -9,5 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="amazon-clone-server" />
+    <orderEntry type="module" module-name="amazon-clone-nextjs-server" />
   </component>
 </module>

@@ -15,6 +15,7 @@ import Lottie from "lottie-react-web";
 //I love Ishika. Please love me.
 
 function DashBoardCreateProductLegals({ setPage, page }) {
+  const [clickable, setClickable] = useState(false)
   const [
     {
       name,

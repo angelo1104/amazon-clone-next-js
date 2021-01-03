@@ -14,7 +14,7 @@ export const productInitialState = {
   imagesUrls: [],
   price: 0,
   searchTerm: "",
-  processing: true,
+  processing: false,
 };
 
 const productReducer = (state, action) => {

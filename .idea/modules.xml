@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/amazon-clone.iml" filepath="$PROJECT_DIR$/.idea/amazon-clone.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../amazon-clone-nextjs-server/.idea/amazon-clone-nextjs-server.iml" filepath="$PROJECT_DIR$/../amazon-clone-nextjs-server/.idea/amazon-clone-nextjs-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/../amazon-clone-server/.idea/amazon-clone-server.iml" filepath="$PROJECT_DIR$/../amazon-clone-server/.idea/amazon-clone-server.iml" />
     </modules>
   </component>

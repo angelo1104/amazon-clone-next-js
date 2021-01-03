@@ -2,7 +2,8 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useProductValue } from "../../../../../../ContextApi/ProductProvider";
 
-function DashBoardCreateProductCancel({ router }) {
+function DashBoardCreateProductCancel() {
+  const router = useRouter()
   const [{ processing }] = useProductValue();
 
   const cancel = (event) => {

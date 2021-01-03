@@ -5,10 +5,8 @@ import productReducer, {
   productInitialState,
 } from "../../../../ContextApi/productReducer";
 import DashBoardCreateProductCancel from "../../../../Components/Seller/DashBoard/DashBoardHome/DashBoardMain/DashBoardCreateProductCancel/DashBoardCreateProductCancel";
-import { useRouter } from "next/router";
 
 function CreateProductPage() {
-  const router = useRouter();
   return (
     <div className={"create-product-div"}>
       <ProductContextProvider
@@ -16,7 +14,7 @@ function CreateProductPage() {
         reducer={productReducer}
       >
         <DashBoardCreateProductContainer />
-        <DashBoardCreateProductCancel router={router} />
+        <DashBoardCreateProductCancel />
       </ProductContextProvider>
     </div>
   );
