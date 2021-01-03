@@ -11,6 +11,7 @@ import { useStateValue } from "../../../../../../ContextApi/StateProvider";
 import { storage } from "../../../../../../firebase";
 import animation from "../../../../../../lottie/loader-product.json";
 import Lottie from "lottie-react-web";
+import {useRouter} from "next/router";
 
 //I love Ishika. Please love me.
 
@@ -38,6 +39,8 @@ function DashBoardCreateProductLegals({ setPage, page }) {
   };
 
   const [{ dataUser }] = useStateValue();
+
+  const router = useRouter()
 
   const submit = async (event) => {
     event.preventDefault();
@@ -95,6 +98,8 @@ function DashBoardCreateProductLegals({ setPage, page }) {
       });
 
       console.log("Submitted", product);
+
+      router.push('/seller/products/dashboard')
       setProcessing(false);
     } catch (error) {
       setProcessing(false);

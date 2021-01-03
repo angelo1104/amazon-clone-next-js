@@ -40,7 +40,7 @@ function ImageTile({
 
       for (let i = 0; i < Object.size(files); i++) {
         const fileType = getFile(files[i].name);
-        if (fileType === "jpg" || fileType === "png") {
+        if (fileType === "jpg" || fileType === "png" ) {
           setError("");
           //to-do
           setImages(files[i]);
