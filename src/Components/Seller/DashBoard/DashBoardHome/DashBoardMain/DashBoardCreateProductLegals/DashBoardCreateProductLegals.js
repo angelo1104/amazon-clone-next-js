@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./DashBoardCreateProductLegals.module.css";
 import { useProductValue } from "../../../../../../ContextApi/ProductProvider";
 import {
@@ -16,7 +16,6 @@ import {useRouter} from "next/router";
 //I love Ishika. Please love me.
 
 function DashBoardCreateProductLegals({ setPage, page }) {
-  const [clickable, setClickable] = useState(false)
   const [
     {
       name,
@@ -182,6 +181,7 @@ function DashBoardCreateProductLegals({ setPage, page }) {
           </button>
         </div>
       </form>
+
     </div>
   );
 }
