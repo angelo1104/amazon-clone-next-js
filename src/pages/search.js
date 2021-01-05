@@ -3,8 +3,9 @@ import {useRouter} from "next/router";
 import Header from "../Components/Header/Header";
 import {useStateValue} from "../ContextApi/StateProvider";
 import {setSearchText} from "../ContextApi/actions";
+import SearchPage from "../Components/SearchPage/SearchPage";
 
-function SearchPage() {
+function Search() {
     const router = useRouter();
     const queryParam = router.query;
     const [{}, dispatch] = useStateValue();
@@ -17,11 +18,9 @@ function SearchPage() {
         <div>
             <Header/>
 
-            <p className={'testProductsPlaceholder'}>
-                I will configure products for later for the query {queryParam?.q}
-            </p>
+            <SearchPage/>
         </div>
     )
 }
 
-export default SearchPage;
+export default Search;
