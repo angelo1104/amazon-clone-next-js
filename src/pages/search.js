@@ -13,10 +13,6 @@ function Search({data}) {
     const [{}, dispatch] = useStateValue();
 
     useEffect(()=>{
-        console.log(data)
-    },[])
-
-    useEffect(()=>{
         if (queryParam.q) dispatch(setSearchText(queryParam.q))
     },[queryParam])
 
@@ -24,7 +20,7 @@ function Search({data}) {
         <div>
             <Header/>
 
-            <SearchPage/>
+            <SearchPage serverHits={data}/>
 
             <Footer/>
         </div>

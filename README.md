@@ -1,7 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ##Note
-Avatar Image Size - width - 200px: height - 250px : 4:5
+Avatar Image Size - width - 180px: height - 110px : 4:5
 
 Normal Image - width : height : 125px:150px
 

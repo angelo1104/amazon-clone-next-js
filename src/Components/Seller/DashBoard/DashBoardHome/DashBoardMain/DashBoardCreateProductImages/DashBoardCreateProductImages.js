@@ -95,14 +95,14 @@ function DashBoardCreateProductImages({ setPage, page }) {
 
         <div className={styles.images_div}>
           <p className={styles.images_div_desc}>
-            Avatar of product(a.ka thumbnail, recommended size: width- 1000px,
-            height- 1250px)
+            Avatar of product(a.ka thumbnail, recommended size: width- 1800px,
+            height- 1100px)
           </p>
           <ImageTile
             index={0}
             title={"Avatar"}
             add={true}
-            stylesImp={{ width: "150px", height: "187.5px" }}
+            stylesImp={{ width: "180px", height: "110px" }}
             imageUrl={avatarUrl}
             setImages={setAvatar}
             setImageUrl={setAvatarUrl}
