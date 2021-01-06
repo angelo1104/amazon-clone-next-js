@@ -1,0 +1,77 @@
+.products{
+    display: flex;
+    width: 100%;
+    min-height: 80vh;
+}
+
+.ad{
+    width: 15%;
+    background: url("https://images.all-free-download.com/images/graphicthumb/wood_background_hd_picture_4_169843.jpg");
+    background-size: cover;
+}
+
+.product_with_divider{
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: black;
+}
+
+.product_with_divider:hover{
+    color: black;
+}
+
+.product_with_divider::after{
+    content: "";
+    height: 2.5px;
+    background-color: #DDDDDD;
+    width: 90%;
+    margin: 15px auto;
+}
+
+.product_list{
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product{
+    display: flex;
+    width: 100%;
+    padding: 20px 25px;
+    position: relative;
+}
+
+.product_img{
+    object-fit: contain;
+    max-height: 250px;
+    max-width: 200px;
+}
+
+.product_details{
+    display: flex;
+    padding: 0 10px;
+    flex-direction: column;
+}
+
+.product_title{
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.product_title:hover{
+    color: #C7511F;
+}
+
+.product_price{
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.super_cents{
+    vertical-align: super;
+    font-size: 80%;
+    margin-left: -2px;
+}
