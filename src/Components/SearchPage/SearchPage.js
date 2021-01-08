@@ -4,12 +4,16 @@ import ProductTile from "./ProductTile/ProductTile";
 import VizSensor from "react-visibility-sensor";
 import productInstance from "../../axios/productInstance";
 import { useStateValue } from "../../ContextApi/StateProvider";
+import productLoader from "../../lottie/products-loader.json";
+import Lottie from "lottie-react-web";
 
 function SearchPage({ serverHits }) {
   const [hits, setHits] = useState([]);
   const [visible, setVisible] = useState(false);
   const [next, setNext] = useState(false);
   const [page, setPage] = useState(1);
+
+  const [lottieVisible, setLottieVisible] = useState(true);
 
   const [{ searchText }] = useStateValue();
 
@@ -44,6 +48,7 @@ function SearchPage({ serverHits }) {
         fetchProducts();
       } else {
         //no more products
+        setTimeout(() => setLottieVisible(false), 3000);
       }
     }
   }, [visible]);
@@ -82,7 +87,16 @@ function SearchPage({ serverHits }) {
         />
 
         <VizSensor onChange={(isVisible) => setVisible(isVisible)}>
-          <div>Hi i am loader.</div>
+          <div className={styles.lottie}>
+            <div className={styles.lottie_spinner}>
+              {lottieVisible && (
+                <Lottie options={{ animationData: productLoader }} />
+              )}
+            </div>
+            {!lottieVisible && (
+              <p className={styles.message}>No More Products</p>
+            )}
+          </div>
         </VizSensor>
       </div>
     </div>

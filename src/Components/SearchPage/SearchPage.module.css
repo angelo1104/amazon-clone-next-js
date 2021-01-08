@@ -16,3 +16,17 @@
     flex-direction: column;
 }
 
+
+.lottie{
+    margin: 20px auto;
+}
+
+.lottie_spinner{
+    width: 150px;
+}
+
+.message{
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+}

@@ -12,7 +12,7 @@
 
 .product_with_divider::after{
     content: "";
-    height: 2.5px;
+    height: 3px;
     background-color: #DDDDDD;
     width: 90%;
     margin: 0px auto;
