@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Product.module.css";
 import Header from "../Header/Header";
+import ReactImageMagnify from "react-image-magnify";
 
 function Product({ _id, name, images, description, features }) {
   return (
@@ -10,7 +11,32 @@ function Product({ _id, name, images, description, features }) {
       <div className={styles.product_main}>
         <div className={styles.product_info}>
           <div className={styles.product_images}>
-            <img className={styles.product_image} src={images[0]} alt="" />
+            <div className={styles.small_images}>
+              <img className={styles.small_image} src={images[0]} alt="" />
+            </div>
+
+            <div className={styles.main_image}>
+              <ReactImageMagnify
+                smallImage={{
+                  isFluidWidth: true,
+                  src: images[0],
+                }}
+                largeImage={{
+                  src: images[0],
+                  width: 667,
+                  height: 800,
+                }}
+                lensStyle={{
+                  background: "hsla(0, 0%, 100%, .3)",
+                  width: 75,
+                  height: 85,
+                }}
+                enlargedImageContainerDimensions={{
+                  width: "125%",
+                  height: "150%",
+                }}
+              />
+            </div>
           </div>
 
           <div className={styles.product_description}>

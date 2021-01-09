@@ -10,6 +10,7 @@
 
 .product_images{
     width: 43%;
+    display: flex;
 }
 
 .product_image{
@@ -98,4 +99,23 @@
     cursor: pointer;
     font-size: 13px;
     font-family: 'Inter', sans-serif;
+}
+
+.small_image{
+    display: flex;
+    width: 41.6px;
+    height: 50px;
+    object-fit: contain;
+    border: 1px solid #a2a6ac;
+    cursor: pointer;
+    box-shadow: 0 0 3px 2px rgba(228,121,17, .7)
+}
+
+.small_images{
+    width: 20%;
+    margin-right: 20px;
+}
+
+.main_image{
+    width: 80% !important;
 }
