@@ -19,8 +19,6 @@ function SearchPage({ serverHits }) {
 
   const fetchProducts = async () => {
     try {
-      console.log("fetched");
-
       const { data } = await productInstance.post("/paginate", {
         page: page + 1,
         query: searchText,
@@ -42,12 +40,12 @@ function SearchPage({ serverHits }) {
 
   useEffect(() => {
     if (visible) {
-      //loader is visible fetch products
+      //loader is visible fetch product
       if (next) {
-        //products are there you can fetch
+        //product are there you can fetch
         fetchProducts();
       } else {
-        //no more products
+        //no more product
         setTimeout(() => setLottieVisible(false), 3000);
       }
     }
@@ -71,6 +69,7 @@ function SearchPage({ serverHits }) {
               imageUrl={hit.avatar}
               title={hit.name}
               price={hit.price}
+              id={hit.objectID}
             />
           );
         })}
