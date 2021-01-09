@@ -36,3 +36,5 @@ function ProductTile({ title, imageUrl, price, brand, id }) {
 }
 
 export default ProductTile;
+
+export async function getServerSideProps({ query }) {}

@@ -1,0 +1,101 @@
+.product_main{
+    display: flex;
+}
+
+.product_info{
+    display: flex;
+    width: 100%;
+    padding: 20px 10px;
+}
+
+.product_images{
+    width: 43%;
+}
+
+.product_image{
+    display: flex;
+    object-fit: contain;
+    width: 100%;
+}
+
+.product_description{
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
+
+.product_title{
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.product_separator{
+    background-color: #DDDDDD;
+    width: 100%;
+    margin: 10px auto;
+    height: 3px;
+    border: none;
+    border-radius: 50px;
+}
+
+.product_desc{
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.product_list{
+    padding: 0 20px;
+    margin-top: 20px;
+}
+
+.product_list_item{
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.product_buy{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 200px;
+    margin-top: 50px;
+}
+
+.buy_now{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.buy_now_button{
+    width: 60%;
+    margin: auto;
+    cursor: pointer;
+}
+
+.product_separator_buttons{
+    background-color: #DDDDDD;
+    width: 80%;
+    margin: 10px auto;
+    height: 2px;
+    border: none;
+    border-radius: 50px;
+}
+
+.one_to_sell{
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+}
+
+.sell_now_button{
+    width: 50%;
+    margin: auto;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+}
