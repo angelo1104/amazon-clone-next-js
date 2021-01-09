@@ -58,46 +58,54 @@ function SearchPage({ serverHits }) {
 
   return (
     <div className={styles.products}>
-      <div className={styles.ad}></div>
+      {!serverHits.hits.length && (
+        <div className={styles.nothing}>
+          <p className={styles.nothing_text}>No results found</p>
+        </div>
+      )}
 
-      <div className={styles.product_list}>
-        {hits?.map((hit, index) => {
-          return (
-            <ProductTile
-              key={index}
-              brand={hit.brand}
-              imageUrl={hit.avatar}
-              title={hit.name}
-              price={hit.price}
-              id={hit.objectID}
-            />
-          );
-        })}
+      {serverHits.hits.length && <div className={styles.ad}></div>}
 
-        <ProductTile
-          brand={"Apple Inc"}
-          title={
-            "Mac book pro 13 inches | Awesome stuff for you | Best hardware in the cupboard handpicked by IT professionals and a beautiful OS"
-          }
-          price={"1999.99"}
-          imageUrl={
-            "https://m.media-amazon.com/images/I/71BMVOs2xML._AC_UY218_.jpg"
-          }
-        />
+      {serverHits.hits.length && (
+        <div className={styles.product_list}>
+          {hits?.map((hit, index) => {
+            return (
+              <ProductTile
+                key={index}
+                brand={hit.brand}
+                imageUrl={hit.avatar}
+                title={hit.name}
+                price={hit.price}
+                id={hit.objectID}
+              />
+            );
+          })}
 
-        <VizSensor onChange={(isVisible) => setVisible(isVisible)}>
-          <div className={styles.lottie}>
-            <div className={styles.lottie_spinner}>
-              {lottieVisible && (
-                <Lottie options={{ animationData: productLoader }} />
+          <ProductTile
+            brand={"Apple Inc"}
+            title={
+              "Mac book pro 13 inches | Awesome stuff for you | Best hardware in the cupboard handpicked by IT professionals and a beautiful OS"
+            }
+            price={"1999.99"}
+            imageUrl={
+              "https://m.media-amazon.com/images/I/71BMVOs2xML._AC_UY218_.jpg"
+            }
+          />
+
+          <VizSensor onChange={(isVisible) => setVisible(isVisible)}>
+            <div className={styles.lottie}>
+              <div className={styles.lottie_spinner}>
+                {lottieVisible && (
+                  <Lottie options={{ animationData: productLoader }} />
+                )}
+              </div>
+              {!lottieVisible && (
+                <p className={styles.message}>No More Products</p>
               )}
             </div>
-            {!lottieVisible && (
-              <p className={styles.message}>No More Products</p>
-            )}
-          </div>
-        </VizSensor>
-      </div>
+          </VizSensor>
+        </div>
+      )}
     </div>
   );
 }
