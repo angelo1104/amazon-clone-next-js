@@ -5,7 +5,13 @@ import ReactImageMagnify from "react-image-magnify";
 import ImageLens from "./ImageLens/ImageLens";
 import { useRouter } from "next/router";
 import { useStateValue } from "../../ContextApi/StateProvider";
-import { addProduct, updateTotalProduct } from "../../ContextApi/actions";
+import {
+  addProduct,
+  removeProduct,
+  updateTotalProduct,
+} from "../../ContextApi/actions";
+import { Button } from "@material-ui/core";
+import Footer from "../Footer/Footer";
 
 function Product({
   _id,
@@ -19,11 +25,20 @@ function Product({
 }) {
   const [selectedImage, setSelectedImage] = useState(0);
   const router = useRouter();
+  const [productInCart, setProductInCart] = useState({});
+
+  const filterValue = (array, key, value) =>
+    array.filter((item) => item[key] === value);
 
   const [{ cart }, dispatch] = useStateValue();
 
   useEffect(() => {
     console.log("Cartey", cart);
+
+    const gotItem = filterValue(cart, "_id", _id);
+
+    if (gotItem.length) setProductInCart(gotItem[0]);
+    else setProductInCart({});
   }, [cart]);
 
   const pushToCart = () => {
@@ -57,6 +72,10 @@ function Product({
         dispatch(addProduct(product));
       }
     }
+  };
+
+  const removeFromCart = (event) => {
+    dispatch(removeProduct(productInCart));
   };
 
   const goToCart = () => {
@@ -162,6 +181,21 @@ function Product({
               Add to cart
             </button>
 
+            {productInCart?.amount && (
+              <div className={styles.add_remove}>
+                <Button className={styles.add_button} onClick={pushToCart}>
+                  +
+                </Button>
+                <span>{productInCart.amount}</span>
+                <Button
+                  className={styles.remove_button}
+                  onClick={removeFromCart}
+                >
+                  -
+                </Button>
+              </div>
+            )}
+
             <hr className={styles.product_separator_buttons} />
 
             <p className={styles.one_to_sell}>Have one to sell?</p>
@@ -175,6 +209,8 @@ function Product({
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

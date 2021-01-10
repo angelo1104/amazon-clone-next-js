@@ -66,6 +66,13 @@ const updateTotalProduct = (payload) => {
   };
 };
 
+const removeProduct = (payload) => {
+  return {
+    type: actionTypes.removeProduct,
+    product: payload,
+  };
+};
+
 export {
   setUser,
   actionTypes,
@@ -76,4 +83,5 @@ export {
   setSearchText,
   addProduct,
   updateTotalProduct,
+  removeProduct,
 };

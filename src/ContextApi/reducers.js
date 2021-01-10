@@ -55,6 +55,23 @@ const reducer = (state, action) => {
         ...state,
         cart: cart,
       };
+    case actionTypes.removeProduct:
+      let cartClone = [...state.cart];
+
+      let carty = cartClone.filter((item, index) => {
+        if (item._id === action.product._id) {
+          //this is product
+          if (item.amount > 1) {
+            //reduce amount
+            return { ...item, amount: item.amount - 1 };
+          }
+        } else {
+          return item;
+        }
+      });
+
+      console.log("Cartyer", carty);
+      return { ...state };
     default:
       return { ...state };
   }
