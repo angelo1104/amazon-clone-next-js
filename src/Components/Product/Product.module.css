@@ -31,6 +31,18 @@
     font-weight: 500;
 }
 
+.product_price{
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.super_cents{
+    vertical-align: super;
+    font-size: 80%;
+    margin-left: -2px;
+}
+
 .product_separator{
     background-color: #DDDDDD;
     width: 100%;
@@ -49,6 +61,10 @@
 .product_list{
     padding: 0 20px;
     margin-top: 20px;
+}
+
+.pricey_span{
+    margin-left: 30px;
 }
 
 .product_list_item{

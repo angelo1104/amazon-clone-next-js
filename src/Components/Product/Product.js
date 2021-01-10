@@ -1,16 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Product.module.css";
 import Header from "../Header/Header";
 import ReactImageMagnify from "react-image-magnify";
 import ImageLens from "./ImageLens/ImageLens";
 import { useRouter } from "next/router";
+import { useStateValue } from "../../ContextApi/StateProvider";
+import { addProduct, updateTotalProduct } from "../../ContextApi/actions";
 
-function Product({ _id, name, images, description, features }) {
+function Product({
+  _id,
+  name,
+  images,
+  description,
+  features,
+  price,
+  brand,
+  avatar,
+}) {
   const [selectedImage, setSelectedImage] = useState(0);
   const router = useRouter();
 
+  const [{ cart }, dispatch] = useStateValue();
+
+  useEffect(() => {
+    console.log("Cartey", cart);
+  }, [cart]);
+
   const pushToCart = () => {
     console.log("added to cart");
+
+    const product = {
+      _id,
+      name,
+      price,
+      brand,
+      avatar,
+      amount: 1,
+    };
+
+    if (!cart.length) {
+      dispatch(addProduct(product));
+    } else {
+      let found = false;
+
+      cart.forEach((item, index) => {
+        if (item._id === _id) {
+          const updatedProduct = { ...product, amount: item.amount + 1 };
+
+          dispatch(updateTotalProduct(updatedProduct));
+
+          found = true;
+        }
+      });
+
+      if (!found) {
+        dispatch(addProduct(product));
+      }
+    }
   };
 
   const goToCart = () => {
@@ -73,6 +119,16 @@ function Product({ _id, name, images, description, features }) {
 
           <div className={styles.product_description}>
             <h2 className={styles.product_title}>{name}</h2>
+
+            <p className={styles.product_price}>
+              {brand}
+              <span className={styles.pricey_span}>
+                ${parseInt(price)}{" "}
+                <span className={styles.super_cents}>
+                  {(price + "").split(".")[1]}
+                </span>
+              </span>
+            </p>
 
             <hr className={styles.product_separator} />
 
