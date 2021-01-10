@@ -108,7 +108,7 @@
     object-fit: contain;
     border: 1px solid #a2a6ac;
     cursor: pointer;
-    box-shadow: 0 0 3px 2px rgba(228,121,17, .7)
+    margin: 0 0 20px;
 }
 
 .small_images{
@@ -118,4 +118,15 @@
 
 .main_image{
     width: 80% !important;
+}
+
+.main_image_src{
+    object-fit: contain;
+}
+
+.main_image_large{
+    border: none !important;
+    box-shadow: 0px -11px 35px -22px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px -11px 35px -22px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px -11px 35px -22px rgba(0,0,0,0.75);
 }

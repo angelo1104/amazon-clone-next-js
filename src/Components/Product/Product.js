@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Product.module.css";
 import Header from "../Header/Header";
 import ReactImageMagnify from "react-image-magnify";
+import ImageLens from "./ImageLens/ImageLens";
 
 function Product({ _id, name, images, description, features }) {
+  const [selectedImage, setSelectedImage] = useState(0);
+
   return (
     <div>
       <Header />
@@ -12,29 +15,47 @@ function Product({ _id, name, images, description, features }) {
         <div className={styles.product_info}>
           <div className={styles.product_images}>
             <div className={styles.small_images}>
-              <img className={styles.small_image} src={images[0]} alt="" />
+              {images.map((image, index) => {
+                const style = {
+                  boxShadow:
+                    index === selectedImage
+                      ? "0 0 3px 2px rgba(228,121,17, .7)"
+                      : "none",
+                };
+
+                return (
+                  <img
+                    className={styles.small_image}
+                    src={image}
+                    style={style}
+                    alt=""
+                    key={index}
+                    onMouseOver={(event) => {
+                      setSelectedImage(index);
+                    }}
+                  />
+                );
+              })}
             </div>
 
             <div className={styles.main_image}>
               <ReactImageMagnify
                 smallImage={{
                   isFluidWidth: true,
-                  src: images[0],
+                  src: images[selectedImage],
                 }}
+                imageClassName={styles.main_image_src}
                 largeImage={{
-                  src: images[0],
+                  src: images[selectedImage],
                   width: 667,
                   height: 800,
                 }}
-                lensStyle={{
-                  background: "hsla(0, 0%, 100%, .3)",
-                  width: 75,
-                  height: 85,
-                }}
+                enlargedImageContainerClassName={styles.main_image_large}
                 enlargedImageContainerDimensions={{
                   width: "125%",
-                  height: "150%",
+                  height: "140%",
                 }}
+                lensComponent={ImageLens}
               />
             </div>
           </div>
