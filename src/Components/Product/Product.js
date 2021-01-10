@@ -3,9 +3,20 @@ import styles from "./Product.module.css";
 import Header from "../Header/Header";
 import ReactImageMagnify from "react-image-magnify";
 import ImageLens from "./ImageLens/ImageLens";
+import { useRouter } from "next/router";
 
 function Product({ _id, name, images, description, features }) {
   const [selectedImage, setSelectedImage] = useState(0);
+  const router = useRouter();
+
+  const pushToCart = () => {
+    console.log("added to cart");
+  };
+
+  const goToCart = () => {
+    pushToCart();
+    router.push("/cart");
+  };
 
   return (
     <div>
@@ -81,15 +92,30 @@ function Product({ _id, name, images, description, features }) {
 
         <div className={styles.product_buy}>
           <div className={styles.buy_now}>
-            <button className={styles.buy_now_button}>Buy Now</button>
+            <button
+              className={styles.buy_now_button}
+              onClick={(event) => goToCart()}
+            >
+              Buy Now
+            </button>
 
-            <button className={styles.buy_now_button}>Add to cart</button>
+            <button
+              className={styles.buy_now_button}
+              onClick={(event) => pushToCart()}
+            >
+              Add to cart
+            </button>
 
             <hr className={styles.product_separator_buttons} />
 
             <p className={styles.one_to_sell}>Have one to sell?</p>
 
-            <button className={styles.sell_now_button}>Sell on Amazon</button>
+            <button
+              className={styles.sell_now_button}
+              onClick={(event) => router.push("/seller/products")}
+            >
+              Sell on Amazon
+            </button>
           </div>
         </div>
       </div>

@@ -1,16 +1,8 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 import Product from "../../Components/Product/Product";
 import productInstance from "../../axios/productInstance";
 
 function ProductPage({ product }) {
-  const router = useRouter();
-  const { q } = router.query;
-
-  useEffect(() => {
-    console.log(product);
-  }, []);
-
   return <Product {...product} />;
 }
 
