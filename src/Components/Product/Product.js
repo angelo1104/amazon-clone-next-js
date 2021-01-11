@@ -42,8 +42,6 @@ function Product({
   }, [cart]);
 
   const pushToCart = () => {
-    console.log("added to cart");
-
     const product = {
       _id,
       name,
@@ -174,12 +172,14 @@ function Product({
               Buy Now
             </button>
 
-            <button
-              className={styles.buy_now_button}
-              onClick={(event) => pushToCart()}
-            >
-              Add to cart
-            </button>
+            {!productInCart.amount && (
+              <button
+                className={styles.buy_now_button}
+                onClick={(event) => pushToCart()}
+              >
+                Add to cart
+              </button>
+            )}
 
             {productInCart?.amount && (
               <div className={styles.add_remove}>

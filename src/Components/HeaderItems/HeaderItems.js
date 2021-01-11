@@ -49,7 +49,11 @@ function HeaderItems() {
         <p className={styles.header_item_line2}>
           <img className={styles.header_item_cart} src={cartImg} />
 
-          <span className={styles.header_cart_number}>{cart?.length}</span>
+          <span className={styles.header_cart_number}>
+            {cart.reduce((accumulator, item) => {
+              return accumulator + item.amount;
+            }, 0)}
+          </span>
         </p>
       </div>
     </div>
