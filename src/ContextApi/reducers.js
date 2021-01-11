@@ -56,22 +56,24 @@ const reducer = (state, action) => {
         cart: cart,
       };
     case actionTypes.removeProduct:
-      let cartClone = [...state.cart];
+      const cartClone = [...state.cart];
+      const carty = [];
 
-      let carty = cartClone.filter((item, index) => {
+      cartClone.forEach((item, index) => {
         if (item._id === action.product._id) {
-          //this is product
-          if (item.amount > 1) {
-            //reduce amount
-            return { ...item, amount: item.amount - 1 };
+          // this is product
+          if (item.amount >= 2) {
+            //reduce 1 amount
+            const product = { ...item, amount: parseInt(item.amount) - 1 };
+
+            carty.push(product);
           }
         } else {
-          return item;
+          carty.push(item);
         }
       });
 
-      console.log("Cartyer", carty);
-      return { ...state };
+      return { ...state, cart: carty };
     default:
       return { ...state };
   }
