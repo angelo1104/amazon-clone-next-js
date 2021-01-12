@@ -8,6 +8,7 @@ const actionTypes = {
   addProduct: "ADD_PRODUCT",
   removeProduct: "REMOVE_PRODUCT",
   updateTotalProduct: "UPDATE_TOTAL_OF_PRODUCT",
+  setCart: "SET_CART",
 };
 
 const setUser = (payload) => {
@@ -73,6 +74,13 @@ const removeProduct = (payload) => {
   };
 };
 
+const setCart = (payload) => {
+  return {
+    type: actionTypes.setCart,
+    cart: payload,
+  };
+};
+
 export {
   setUser,
   actionTypes,
@@ -84,4 +92,5 @@ export {
   addProduct,
   updateTotalProduct,
   removeProduct,
+  setCart,
 };

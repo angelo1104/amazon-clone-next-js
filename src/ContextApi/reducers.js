@@ -74,6 +74,11 @@ const reducer = (state, action) => {
       });
 
       return { ...state, cart: carty };
+    case actionTypes.setCart:
+      return {
+        ...state,
+        cart: action.cart,
+      };
     default:
       return { ...state };
   }
