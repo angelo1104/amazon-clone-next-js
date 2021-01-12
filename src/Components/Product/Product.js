@@ -77,8 +77,23 @@ function Product({
   };
 
   const goToCart = () => {
-    pushToCart();
     router.push("/cart");
+  };
+
+  const isEmptyObject = (obj) => {
+    for (let key in obj) return true;
+    return false;
+  };
+
+  const buyNow = (event) => {
+    event.preventDefault();
+    if (isEmptyObject(productInCart)) {
+      console.log("go to motu", productInCart);
+      goToCart();
+    } else {
+      pushToCart();
+      goToCart();
+    }
   };
 
   return (
@@ -165,10 +180,7 @@ function Product({
 
         <div className={styles.product_buy}>
           <div className={styles.buy_now}>
-            <button
-              className={styles.buy_now_button}
-              onClick={(event) => goToCart()}
-            >
+            <button className={styles.buy_now_button} onClick={buyNow}>
               Buy Now
             </button>
 
