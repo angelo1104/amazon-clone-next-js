@@ -76,3 +76,10 @@ p{
   cursor: pointer;
   color: #111111;
 }
+
+.StripeElement{
+  border: 1px solid lightgray !important;
+  padding: 5px 10px !important;
+  border-radius: 50px !important;
+  margin-bottom: 20px;
+}

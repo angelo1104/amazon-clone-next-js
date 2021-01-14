@@ -4,7 +4,7 @@ import { useStateValue } from "../../../ContextApi/StateProvider";
 import { removeProduct, updateTotalProduct } from "../../../ContextApi/actions";
 import Link from "next/link";
 
-function CartProduct({ name, avatar, price, brand, _id, amount }) {
+function CartProduct({ name, avatar, price, brand, _id, amount, display }) {
   const [{ cart }, dispatch] = useStateValue();
 
   const priceDisplay = price * amount;
@@ -66,15 +66,19 @@ function CartProduct({ name, avatar, price, brand, _id, amount }) {
         </div>
 
         <div className={styles.increment}>
-          <button className={styles.increase_amount} onClick={addToCart}>
-            <i className={styles.arrow_up}></i>
-          </button>
+          {!display && (
+            <button className={styles.increase_amount} onClick={addToCart}>
+              <i className={styles.arrow_up}></i>
+            </button>
+          )}
 
           <p className={styles.amount}>{amount}</p>
 
-          <button className={styles.increase_amount} onClick={removeFromCart}>
-            <i className={styles.arrow_down}></i>
-          </button>
+          {!display && (
+            <button className={styles.increase_amount} onClick={removeFromCart}>
+              <i className={styles.arrow_down}></i>
+            </button>
+          )}
         </div>
       </div>
     </div>

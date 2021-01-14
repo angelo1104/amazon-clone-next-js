@@ -4,13 +4,27 @@ import Header from "../Header/Header";
 import CartList from "./CartList/CartList";
 import { useStateValue } from "../../ContextApi/StateProvider";
 import { setCart } from "../../ContextApi/actions";
+import { useRouter } from "next/router";
 
 function Cart() {
-  const [{ cart }, dispatch] = useStateValue();
+  const [{ cart, user, dataUser }, dispatch] = useStateValue();
+  const router = useRouter();
 
   const total = cart.reduce((accumulator, item) => {
     return accumulator + item.amount * item.price;
   }, 0);
+
+  const placeOrder = (event) => {
+    event.preventDefault();
+
+    if (!user || !dataUser) {
+      //user is signed out.
+      router.push("/auth/sign-up");
+    } else {
+      //place order.
+      router.push("/cart/placeOrder");
+    }
+  };
 
   return (
     <div className={styles.cart}>
@@ -29,27 +43,43 @@ function Cart() {
           <CartList />
         </div>
 
-        <div className={styles.cart_right}>
-          <p
-            className={styles.clear_cart}
-            onClick={(event) => {
-              event.preventDefault();
-
-              dispatch(setCart([]));
+        {!cart.length && (
+          <div
+            className={styles.cart_right}
+            style={{
+              zIndex: "100",
+              background: "white",
+              position: "absolute",
+              width: "100%",
             }}
-          >
-            Clear Cart
-          </p>
+          ></div>
+        )}
 
-          <p className={styles.total}>
-            Total: {parseInt(total.toString())}
-            <span className={styles.super_cents}>
-              {(total + "").split(".")[1]}
-            </span>
-          </p>
+        {cart.length && (
+          <div className={styles.cart_right}>
+            <p
+              className={styles.clear_cart}
+              onClick={(event) => {
+                event.preventDefault();
 
-          <button className={styles.place_order}>Place order</button>
-        </div>
+                dispatch(setCart([]));
+              }}
+            >
+              Clear Cart
+            </p>
+
+            <p className={styles.total}>
+              Total: {parseInt(total.toString())}
+              <span className={styles.super_cents}>
+                {(total + "").split(".")[1]}
+              </span>
+            </p>
+
+            <button className={styles.place_order} onClick={placeOrder}>
+              Place order
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

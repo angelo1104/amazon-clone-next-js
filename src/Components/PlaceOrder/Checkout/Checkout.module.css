@@ -1,0 +1,93 @@
+.checkout{
+    padding: 30px 40px;
+}
+
+.continue_shopping{
+    padding-left: 25px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.continue_shopping:hover{
+    text-decoration: underline;
+}
+
+.title{
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    padding-left: 30px;
+    margin-bottom: 40px;
+}
+
+.form{
+    display: flex;
+    width: 100%;
+}
+
+.form_left{
+    width: 75%;
+}
+
+.form_right{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+.address{
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.input_select{
+    border: 1px solid lightgray;
+    border-radius: 50px;
+    padding: 0 5px;
+    margin-bottom: 20px;
+}
+
+.input{
+    border: 1px solid lightgray;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 5px 13px;
+    outline-width: 0;
+    margin-bottom: 20px;
+}
+
+.input::placeholder{
+    color: lightgray;
+}
+
+.place_order_button{
+    margin-top: 30px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    background-color: #FF9900;
+    border: none;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-size: 16px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
+}
+
+.place_order_button:hover{
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.35);
+}
+
+
+.total_amount{
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.super_cents{
+    vertical-align: super;
+    font-size: 80%;
+}
