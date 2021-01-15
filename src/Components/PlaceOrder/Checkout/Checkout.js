@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Checkout.module.css";
 import { useStateValue } from "../../../ContextApi/StateProvider";
 import CartProduct from "../../Cart/CartProduct/CartProduct";
@@ -26,7 +26,7 @@ function Checkout() {
   const elements = useElements();
 
   const totalAmount = cart.reduce((accumulator, item) => {
-    return accumulator + item.amount;
+    return accumulator + item.amount * item.price;
   }, 0);
 
   const cardNumberStyle = {
