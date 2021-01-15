@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./Checkout.module.css";
 import { useStateValue } from "../../../ContextApi/StateProvider";
 import CartProduct from "../../Cart/CartProduct/CartProduct";
@@ -12,6 +12,11 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
+import stripeInstance from "../../../axios/stripeInstance";
+import {Dialog, IconButton, Slide} from "@material-ui/core";
+import CloseIcon from '@material-ui/icons/Close';
+import iosSpinner from "../../../lottie/ios-loader.json";
+import Lottie from "lottie-react-web";
 
 function Checkout() {
   const { Option } = Select;
@@ -19,8 +24,17 @@ function Checkout() {
   const [region, setRegion] = useState("");
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
+  const [cardHolderZip, setCardHolderZip] = useState("");
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [iframeUrl, setIframeUrl] = useState('');
 
-  const [{ cart }, dispatch] = useStateValue();
+  const [error, setError] = useState("");
+  const [succeeded, setSucceeded] = useState(false);
+  const [processing, setProcessing] = useState(false);
+
+  const [clientSecret, setClientSecret] = useState("");
+
+  const [{ cart, user }, dispatch] = useStateValue();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -70,6 +84,106 @@ function Checkout() {
     console.log("Errory");
   }
 
+  const getPaymentIntent = async ()=>{
+    try {
+      const {data} = await stripeInstance.post('/create-payment-intent',{
+        price: totalAmount.toString()
+      })
+
+      setClientSecret(data.paymentIntent.client_secret);
+      return data
+    }catch (e) {
+      setError("We encountered an error.")
+    }
+  }
+
+  const placeOrder = async (event)=>{
+    event.preventDefault();
+    setProcessing(true);
+
+    try {
+      const {paymentIntent} = await getPaymentIntent();
+
+      const {client_secret} = paymentIntent;
+
+      const stripePayload = await stripe.confirmCardPayment(client_secret, {
+        payment_method: {
+          card: elements.getElement(CardNumberElement),
+          billing_details:{
+            email: user.email,
+            name: user.displayName,
+            address:{
+              postal_code: cardHolderZip
+            }
+          }
+        },
+        return_url: `${window.location.protocol}//${window.location.host}/payments/complete`
+      },{
+        handleActions: false
+      })
+
+      if (stripePayload.error){
+        setProcessing(false);
+        setError(stripePayload.error.message)
+      }else {
+        if (stripePayload.paymentIntent.status === "requires_action"){
+          //do 3d secure
+          setDialogOpen(true);
+          setIframeUrl(stripePayload.paymentIntent.next_action.redirect_to_url.url)
+        }else if (stripePayload.paymentIntent.status === "requires_payment_method"){
+          //failed due to stupidity of user
+          setError('Please check your card details')
+          setProcessing(false)
+        }else if (stripePayload.paymentIntent.status === "succeeded"){
+          //success
+          setSucceeded(true)
+          //create order.
+          setProcessing(false)
+        }
+      }
+
+      console.log('payload', stripePayload)
+    }catch (error){
+      setError(error.message)
+      setProcessing(false)
+      console.log(error)
+    }
+  }
+
+  const closeDialog = async (event)=>{
+    setDialogOpen(false);
+
+    //fetch payment intent and check its status.
+    try {
+      console.log('hi')
+      const {paymentIntent} = await stripe.retrievePaymentIntent(clientSecret);
+
+      console.log("result", paymentIntent);
+
+      if (paymentIntent.status === "succeeded"){
+        //success in 3d secure.
+        setSucceeded(true);
+        setProcessing(false);
+
+        //create order
+      }else if (paymentIntent.status === "requires_payment_method"){
+        //failed because of stupidity of user
+        setProcessing(false)
+        setError("The provided information is not valid.")
+      }else {
+        //a fail idk reason
+        setError("Payment failed. This can happen because of a cancel request.")
+      }
+    }catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(()=>{
+    console.log("processing", processing)
+  },[processing])
+
+
   return (
     <div className={styles.checkout}>
       <Link href={"/"}>
@@ -93,6 +207,8 @@ function Checkout() {
             </span>
             $
           </h3>
+
+          <p className={styles.error}>{error}</p>
 
           <h4 className={styles.address}>Delivery Address</h4>
 
@@ -157,9 +273,19 @@ function Checkout() {
 
           {cardCvcElement}
 
-          <button className={styles.place_order_button}>Place Order</button>
+          <input value={cardHolderZip} onChange={e=>setCardHolderZip(e.target.value)} placeholder={"Card holder's Zip"} type={"text"} className={styles.input}/>
+          <button disabled={processing} style={{background: processing && '#ff9900b0'}} className={styles.place_order_button} onClick={placeOrder}>
+            {processing ? <div className={styles.ios_spinner}><Lottie options={{animationData: iosSpinner}}/></div> : "Place order"}
+          </button>
         </div>
       </div>
+
+      <Dialog fullScreen={true} open={dialogOpen} >
+        <IconButton onClick={closeDialog} className={styles.payment_close_button}>
+          <CloseIcon/>
+        </IconButton>
+        <iframe className={styles.payment_iframe} src={iframeUrl} frameborder="0"></iframe>
+      </Dialog>
     </div>
   );
 }
