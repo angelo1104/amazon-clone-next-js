@@ -17,11 +17,12 @@ import {Dialog, IconButton, Slide} from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import iosSpinner from "../../../lottie/ios-loader.json";
 import Lottie from "lottie-react-web";
+import ordersInstance from "../../../axios/orderInstance";
 
 function Checkout() {
   const { Option } = Select;
   const [country, setCountry] = useState("");
-  const [region, setRegion] = useState("");
+  const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
   const [cardHolderZip, setCardHolderZip] = useState("");
@@ -65,7 +66,7 @@ function Checkout() {
 
   const regionChange = (val) => {
     console.log("val", val);
-    setRegion(val);
+    setState(val);
   };
 
   const onChange = (val) => {
@@ -97,9 +98,43 @@ function Checkout() {
     }
   }
 
+  const createOrder = async ()=>{
+    try {
+      const order = await ordersInstance.post('/create',{
+        order:{
+          products: cart.map((product)=>{
+            return {
+              productID: product._id,
+              amount: product.amount,
+              price: product.price,
+              name: product.name,
+              avatar: product.avatar,
+              brand: product.avatar
+            }
+          }),
+          country: csc.getCountryById(country).name.toString(),
+          state: state,
+          city: city,
+          zip: zip,
+          totalPrice: totalAmount,
+          status: "NOT DELIVERED",
+          customerUid: user.uid,
+          paymentIntent: clientSecret,
+          date: new Date()
+        }
+      });
+
+      console.log("order", order)
+    }catch (error){
+      console.log(error)
+      setError("Please contact our support for any unexpected charges from your card. Your order failed.")
+    }
+  }
+
   const placeOrder = async (event)=>{
     event.preventDefault();
     setProcessing(true);
+    setError("");
 
     try {
       const {paymentIntent} = await getPaymentIntent();
@@ -138,11 +173,11 @@ function Checkout() {
           //success
           setSucceeded(true)
           //create order.
+          await createOrder();
           setProcessing(false)
         }
       }
 
-      console.log('payload', stripePayload)
     }catch (error){
       setError(error.message)
       setProcessing(false)
@@ -155,7 +190,6 @@ function Checkout() {
 
     //fetch payment intent and check its status.
     try {
-      console.log('hi')
       const {paymentIntent} = await stripe.retrievePaymentIntent(clientSecret);
 
       console.log("result", paymentIntent);
@@ -163,16 +197,21 @@ function Checkout() {
       if (paymentIntent.status === "succeeded"){
         //success in 3d secure.
         setSucceeded(true);
-        setProcessing(false);
-
         //create order
+        await createOrder();
+        setProcessing(false);
       }else if (paymentIntent.status === "requires_payment_method"){
         //failed because of stupidity of user
         setProcessing(false)
         setError("The provided information is not valid.")
       }else {
         //a fail idk reason
-        setError("Payment failed. This can happen because of a cancel request.")
+        setProcessing(false)
+        if (paymentIntent.error){
+          setError(paymentIntent.error.message)
+        }else {
+          setError("Payment failed. This can happen because of a cancel request.")
+        }
       }
     }catch (error) {
       console.log(error)
@@ -215,6 +254,7 @@ function Checkout() {
           <Select
             className={styles.input_select}
             showSearch
+            disabled={processing}
             placeholder="Select a country"
             optionFilterProp="children"
             onChange={onChange}
@@ -234,6 +274,7 @@ function Checkout() {
           <Select
             className={styles.input_select}
             showSearch
+            disabled={processing}
             placeholder="Select a state"
             optionFilterProp="children"
             onChange={regionChange}
@@ -251,6 +292,7 @@ function Checkout() {
           </Select>
           <input
             value={city}
+            disabled={processing}
             onChange={(event) => setCity(event.target.value)}
             placeholder={"City"}
             className={styles.input}
@@ -259,6 +301,7 @@ function Checkout() {
 
           <input
             value={zip}
+            disabled={processing}
             onChange={(event) => setZip(event.target.value)}
             placeholder={"Zip"}
             className={styles.input}
@@ -273,7 +316,7 @@ function Checkout() {
 
           {cardCvcElement}
 
-          <input value={cardHolderZip} onChange={e=>setCardHolderZip(e.target.value)} placeholder={"Card holder's Zip"} type={"text"} className={styles.input}/>
+          <input disabled={processing} value={cardHolderZip} onChange={e=>setCardHolderZip(e.target.value)} placeholder={"Card holder's Zip"} type={"text"} className={styles.input}/>
           <button disabled={processing} style={{background: processing && '#ff9900b0'}} className={styles.place_order_button} onClick={placeOrder}>
             {processing ? <div className={styles.ios_spinner}><Lottie options={{animationData: iosSpinner}}/></div> : "Place order"}
           </button>
