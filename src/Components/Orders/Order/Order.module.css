@@ -1,0 +1,9 @@
+.order{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    margin: 20px auto;
+    position: relative;
+    border-radius: 6px;
+    width: 80%;
+}

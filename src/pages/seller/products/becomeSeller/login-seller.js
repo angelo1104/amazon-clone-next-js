@@ -32,7 +32,7 @@ export async function getServerSideProps(ctx) {
   let user = null;
 
   if (firebase) {
-    user = await authInstance.post("/idtoken", {
+    user = await authInstance.post("/idToken", {
       idToken: firebase,
     });
   }

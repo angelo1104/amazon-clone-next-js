@@ -4,39 +4,37 @@ import nookie from "nookies";
 import authInstance from "../../../axios/authInstance";
 
 function LoginPage() {
-    return(
-        <div className="login">
-            <Login />
-        </div>
-    )
+  return (
+    <div className="login">
+      <Login />
+    </div>
+  );
 }
 
 export default LoginPage;
 
+export async function getServerSideProps(ctx) {
+  const { firebase } = nookie.get(ctx);
 
-export async function getServerSideProps(ctx){
+  let user = null;
 
-    const {firebase} = nookie.get(ctx);
+  if (firebase) {
+    user = await authInstance.post("/idToken", {
+      idToken: firebase,
+    });
 
-    let user = null;
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/",
+      },
+      props: {
+        user: user?.data,
+      },
+    };
+  }
 
-    if (firebase){
-        user = await authInstance.post('/idtoken',{
-            idToken: firebase
-        });
-
-        return{
-            redirect:{
-                permanent: false,
-                destination: '/'
-            },
-            props:{
-                user: user?.data
-            }
-        }
-    }
-
-    return{
-        props:{}
-    }
+  return {
+    props: {},
+  };
 }

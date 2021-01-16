@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { auth } from "../../../firebase";
 import { useStateValue } from "../../../ContextApi/StateProvider";
 import { setCanSell, setDataUser, setUser } from "../../../ContextApi/actions";

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Checkout.module.css";
 import { useStateValue } from "../../../ContextApi/StateProvider";
 import CartProduct from "../../Cart/CartProduct/CartProduct";
@@ -13,11 +13,13 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import stripeInstance from "../../../axios/stripeInstance";
-import {Dialog, IconButton, Slide} from "@material-ui/core";
-import CloseIcon from '@material-ui/icons/Close';
+import { Dialog, IconButton, Slide } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import iosSpinner from "../../../lottie/ios-loader.json";
 import Lottie from "lottie-react-web";
 import ordersInstance from "../../../axios/orderInstance";
+import { setCart } from "../../../ContextApi/actions";
+import { useRouter } from "next/router";
 
 function Checkout() {
   const { Option } = Select;
@@ -27,13 +29,15 @@ function Checkout() {
   const [zip, setZip] = useState("");
   const [cardHolderZip, setCardHolderZip] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [iframeUrl, setIframeUrl] = useState('');
+  const [iframeUrl, setIframeUrl] = useState("");
 
   const [error, setError] = useState("");
   const [succeeded, setSucceeded] = useState(false);
   const [processing, setProcessing] = useState(false);
 
   const [clientSecret, setClientSecret] = useState("");
+
+  const router = useRouter();
 
   const [{ cart, user }, dispatch] = useStateValue();
 
@@ -85,32 +89,32 @@ function Checkout() {
     console.log("Errory");
   }
 
-  const getPaymentIntent = async ()=>{
+  const getPaymentIntent = async () => {
     try {
-      const {data} = await stripeInstance.post('/create-payment-intent',{
-        price: totalAmount.toString()
-      })
+      const { data } = await stripeInstance.post("/create-payment-intent", {
+        price: totalAmount.toString(),
+      });
 
       setClientSecret(data.paymentIntent.client_secret);
-      return data
-    }catch (e) {
-      setError("We encountered an error.")
+      return data;
+    } catch (e) {
+      setError("We encountered an error.");
     }
-  }
+  };
 
-  const createOrder = async ()=>{
+  const createOrder = async () => {
     try {
-      const order = await ordersInstance.post('/create',{
-        order:{
-          products: cart.map((product)=>{
+      const order = await ordersInstance.post("/create", {
+        order: {
+          products: cart.map((product) => {
             return {
               productID: product._id,
               amount: product.amount,
               price: product.price,
               name: product.name,
               avatar: product.avatar,
-              brand: product.avatar
-            }
+              brand: product.avatar,
+            };
           }),
           country: csc.getCountryById(country).name.toString(),
           state: state,
@@ -120,108 +124,125 @@ function Checkout() {
           status: "NOT DELIVERED",
           customerUid: user.uid,
           paymentIntent: clientSecret,
-          date: new Date()
-        }
+          date: new Date(),
+        },
       });
 
-      console.log("order", order)
-    }catch (error){
-      console.log(error)
-      setError("Please contact our support for any unexpected charges from your card. Your order failed.")
+      console.log("order", order);
+    } catch (error) {
+      console.log(error);
+      setError(
+        "Please contact our support for any unexpected charges from your card. Your order failed."
+      );
     }
-  }
+  };
 
-  const placeOrder = async (event)=>{
+  const placeOrder = async (event) => {
     event.preventDefault();
     setProcessing(true);
     setError("");
 
     try {
-      const {paymentIntent} = await getPaymentIntent();
+      const { paymentIntent } = await getPaymentIntent();
 
-      const {client_secret} = paymentIntent;
+      const { client_secret } = paymentIntent;
 
-      const stripePayload = await stripe.confirmCardPayment(client_secret, {
-        payment_method: {
-          card: elements.getElement(CardNumberElement),
-          billing_details:{
-            email: user.email,
-            name: user.displayName,
-            address:{
-              postal_code: cardHolderZip
-            }
-          }
+      const stripePayload = await stripe.confirmCardPayment(
+        client_secret,
+        {
+          payment_method: {
+            card: elements.getElement(CardNumberElement),
+            billing_details: {
+              email: user.email,
+              name: user.displayName,
+              address: {
+                postal_code: cardHolderZip,
+              },
+            },
+          },
+          return_url: `${window.location.protocol}//${window.location.host}/payments/complete`,
         },
-        return_url: `${window.location.protocol}//${window.location.host}/payments/complete`
-      },{
-        handleActions: false
-      })
+        {
+          handleActions: false,
+        }
+      );
 
-      if (stripePayload.error){
+      if (stripePayload.error) {
         setProcessing(false);
-        setError(stripePayload.error.message)
-      }else {
-        if (stripePayload.paymentIntent.status === "requires_action"){
+        setError(stripePayload.error.message);
+      } else {
+        if (stripePayload.paymentIntent.status === "requires_action") {
           //do 3d secure
           setDialogOpen(true);
-          setIframeUrl(stripePayload.paymentIntent.next_action.redirect_to_url.url)
-        }else if (stripePayload.paymentIntent.status === "requires_payment_method"){
+          setIframeUrl(
+            stripePayload.paymentIntent.next_action.redirect_to_url.url
+          );
+        } else if (
+          stripePayload.paymentIntent.status === "requires_payment_method"
+        ) {
           //failed due to stupidity of user
-          setError('Please check your card details')
-          setProcessing(false)
-        }else if (stripePayload.paymentIntent.status === "succeeded"){
+          setError("Please check your card details");
+          setProcessing(false);
+        } else if (stripePayload.paymentIntent.status === "succeeded") {
           //success
-          setSucceeded(true)
+          setSucceeded(true);
           //create order.
           await createOrder();
-          setProcessing(false)
+          dispatch(setCart([]));
+          setProcessing(false);
+          router.push("/orders");
         }
       }
-
-    }catch (error){
-      setError(error.message)
-      setProcessing(false)
-      console.log(error)
+    } catch (error) {
+      setError(error.message);
+      setProcessing(false);
+      console.log(error);
     }
-  }
+  };
 
-  const closeDialog = async (event)=>{
+  const closeDialog = async (event) => {
     setDialogOpen(false);
 
     //fetch payment intent and check its status.
     try {
-      const {paymentIntent} = await stripe.retrievePaymentIntent(clientSecret);
+      const { paymentIntent } = await stripe.retrievePaymentIntent(
+        clientSecret
+      );
 
       console.log("result", paymentIntent);
 
-      if (paymentIntent.status === "succeeded"){
+      if (paymentIntent.status === "succeeded") {
         //success in 3d secure.
         setSucceeded(true);
         //create order
         await createOrder();
+        dispatch(setCart([]));
         setProcessing(false);
-      }else if (paymentIntent.status === "requires_payment_method"){
+
+        router.push("/orders");
+      } else if (paymentIntent.status === "requires_payment_method") {
         //failed because of stupidity of user
-        setProcessing(false)
-        setError("The provided information is not valid.")
-      }else {
+        setProcessing(false);
+        setError("The provided information is not valid.");
+      } else {
         //a fail idk reason
-        setProcessing(false)
-        if (paymentIntent.error){
-          setError(paymentIntent.error.message)
-        }else {
-          setError("Payment failed. This can happen because of a cancel request.")
+        setProcessing(false);
+        if (paymentIntent.error) {
+          setError(paymentIntent.error.message);
+        } else {
+          setError(
+            "Payment failed. This can happen because of a cancel request."
+          );
         }
       }
-    }catch (error) {
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
-  useEffect(()=>{
-    console.log("processing", processing)
-  },[processing])
-
+  useEffect(() => {
+    console.log("processing", processing);
+  }, [processing]);
 
   return (
     <div className={styles.checkout}>
@@ -316,18 +337,43 @@ function Checkout() {
 
           {cardCvcElement}
 
-          <input disabled={processing} value={cardHolderZip} onChange={e=>setCardHolderZip(e.target.value)} placeholder={"Card holder's Zip"} type={"text"} className={styles.input}/>
-          <button disabled={processing} style={{background: processing && '#ff9900b0'}} className={styles.place_order_button} onClick={placeOrder}>
-            {processing ? <div className={styles.ios_spinner}><Lottie options={{animationData: iosSpinner}}/></div> : "Place order"}
+          <input
+            disabled={processing}
+            value={cardHolderZip}
+            onChange={(e) => setCardHolderZip(e.target.value)}
+            placeholder={"Card holder's Zip"}
+            type={"text"}
+            className={styles.input}
+          />
+          <button
+            disabled={processing}
+            style={{ background: processing && "#ff9900b0" }}
+            className={styles.place_order_button}
+            onClick={placeOrder}
+          >
+            {processing ? (
+              <div className={styles.ios_spinner}>
+                <Lottie options={{ animationData: iosSpinner }} />
+              </div>
+            ) : (
+              "Place order"
+            )}
           </button>
         </div>
       </div>
 
-      <Dialog fullScreen={true} open={dialogOpen} >
-        <IconButton onClick={closeDialog} className={styles.payment_close_button}>
-          <CloseIcon/>
+      <Dialog fullScreen={true} open={dialogOpen}>
+        <IconButton
+          onClick={closeDialog}
+          className={styles.payment_close_button}
+        >
+          <CloseIcon />
         </IconButton>
-        <iframe className={styles.payment_iframe} src={iframeUrl} frameborder="0"></iframe>
+        <iframe
+          className={styles.payment_iframe}
+          src={iframeUrl}
+          frameborder="0"
+        ></iframe>
       </Dialog>
     </div>
   );

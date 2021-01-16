@@ -50,11 +50,13 @@ function HeaderItems() {
         </p>
       </div>
 
-      <div className={styles.header_item}>
-        <p className={styles.header_item_line1}>Returns</p>
+      <Link href={"/orders"}>
+        <div className={styles.header_item}>
+          <p className={styles.header_item_line1}>Returns</p>
 
-        <p className={styles.header_item_line2}>& Orders</p>
-      </div>
+          <p className={styles.header_item_line2}>& Orders</p>
+        </div>
+      </Link>
 
       <Link href={"/cart"}>
         <div className={styles.header_item}>
