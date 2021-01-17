@@ -113,7 +113,7 @@ function Checkout() {
               price: product.price,
               name: product.name,
               avatar: product.avatar,
-              brand: product.avatar,
+              brand: product.brand,
             };
           }),
           country: csc.getCountryById(country).name.toString(),

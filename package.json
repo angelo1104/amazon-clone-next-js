@@ -18,6 +18,7 @@
     "axios": "^0.21.0",
     "cors": "^2.8.5",
     "country-state-city": "^1.0.5",
+    "date-fns": "^2.16.1",
     "firebase": "^8.2.1",
     "i18n-iso-countries": "^6.3.0",
     "js-cookie": "^2.2.1",
