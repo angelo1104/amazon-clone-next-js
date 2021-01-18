@@ -19,11 +19,9 @@ function SignUp() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const [{ user }, dispatch] = useStateValue();
+  const { redirect } = router.query;
 
-  useEffect(() => {
-    if (user) router.replace("/");
-  }, [user]);
+  const [{}, dispatch] = useStateValue();
 
   const signup = async (event) => {
     event.preventDefault();
@@ -57,6 +55,9 @@ function SignUp() {
         });
 
         dispatch(setDataUser(doc.data));
+
+        if (redirect) router.replace(`${redirect}`);
+        else router.replace(`/`);
         setProcessing(false);
       } catch (error) {
         setProcessing(false);
@@ -158,7 +159,13 @@ function SignUp() {
 
           <h5 className={styles.signup_already_p}>
             Already have an account?
-            <Link href={"/auth/email/login"}>
+            <Link
+              href={
+                redirect
+                  ? `/auth/email/login?redirect=${redirect}`
+                  : "/auth/email/login"
+              }
+            >
               <a className={styles.amazon_link_tm}>Sign in -></a>
             </Link>
           </h5>

@@ -10,6 +10,8 @@ import spinner from "../../../lottie/ios-loader.json";
 function Login() {
   const router = useRouter();
 
+  const { redirect } = router.query;
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [processing, setProcessing] = useState(false);
@@ -27,7 +29,8 @@ function Login() {
       try {
         const user = await auth().signInWithEmailAndPassword(email, password);
 
-        await router.push("/");
+        if (redirect) await router.push(`${redirect}`);
+        else await router.push("/");
 
         setProcessing(false);
       } catch (error) {
@@ -40,7 +43,11 @@ function Login() {
   const goToSignUp = (event) => {
     event.preventDefault();
 
-    router.push("/auth/email/sign-up");
+    router.push(
+      redirect
+        ? `/auth/email/sign-up?redirect=${redirect}`
+        : "/auth/email/sign-up"
+    );
   };
 
   const moveToNext = (event) => {
