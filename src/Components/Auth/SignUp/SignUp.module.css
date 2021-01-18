@@ -7,77 +7,67 @@
 }
 
 .amazon_logo{
-    max-width: 200px;
+    width: 250px;
     cursor: pointer;
+    object-fit: contain;
 }
 
 .signup_form{
     display: flex;
     flex-direction: column;
-    max-width: 32%;
-    border: 1px solid lightgray;
+    max-width: 27%;
     border-radius: 4px;
     padding: 30px 20px;
 }
 
 .signup_form_heading{
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
     font-size: 35px;
     letter-spacing: 0.04px;
     margin-bottom: 30px;
-}
-
-.signup_input_div{
-    display: flex;
-    flex-direction: column;
-    margin: 15px 0;
-}
-
-.signup_label{
-    font-size: 15px;
-    font-weight: 500;
-    font-family: 'Ubuntu', sans-serif;
-    margin-bottom: 5px;
+    margin-right: -5px;
 }
 
 .signup_input{
+    border: 1px solid lightgray;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    padding: 5px 13px;
     outline-width: 0;
-    border: 1px solid #a6a6a6;
-    border-top-color: #949494;
-    border-radius: 3px;
-    box-shadow: 0 1px 0 rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.07) inset;
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 17px;
-    padding: 8px;
+    margin-bottom: 30px;
+}
+
+.signup_input::placeholder{
+    color: lightgray;
 }
 
 .signup_submit_button{
-    background: #f0c14b;
-    border: 1px solid;
-    border-color: #a88734 #9c7e31 #846a29;
-    color: #111;
-    outline-width: 0;
-    padding: 7px;
-    text-align: center;
-    font-family: 'Ubuntu', sans-serif;
-    width: 99%;
+    margin: 30px 0;
+    font-family: 'Inter', sans-serif;
     cursor: pointer;
-    margin: 20px auto;
-    border-radius: 3px;
+    background-color: #FF9900;
+    border: none;
+    color: black;
+    padding: 7px 10px;
+    border-radius: 50px;
+    font-size: 16px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
 .signup_submit_button:hover{
-    background-color: #EEBA37;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.35);
 }
 
 .signup_terms{
     margin-top: 10px;
     font-size: 12px;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Inter', sans-serif;
     color: #111111;
 }
 
@@ -87,7 +77,7 @@
 
 .signup_already_p{
     font-weight: 400;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .amazon_link_tm{
@@ -127,5 +117,8 @@
 }
 
 .spinner{
-    max-width: 100px;
+    width: 50px;
+    height: 30px;
+    object-fit: contain;
+    margin: auto;
 }
