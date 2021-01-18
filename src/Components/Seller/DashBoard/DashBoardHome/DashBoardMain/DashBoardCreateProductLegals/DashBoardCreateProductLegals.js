@@ -132,6 +132,7 @@ function DashBoardCreateProductLegals({ setPage, page }) {
             type="number"
             disabled={processing}
             value={price}
+            placeholder={"price"}
             onChange={(event) => {
               const priceValue = parseFloat(event.target.value);
               if (priceValue <= 99999999.99) dispatch(setFormPrice(priceValue));
@@ -146,6 +147,7 @@ function DashBoardCreateProductLegals({ setPage, page }) {
             disabled={processing}
             type="text"
             value={searchTerm}
+            placeholder={"search-term"}
             onChange={(event) =>
               dispatch(setFormSearchTerm(event.target.value.substr(0, 128)))
             }

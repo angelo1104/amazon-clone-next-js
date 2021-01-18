@@ -35,7 +35,7 @@ export async function getServerSideProps(ctx) {
       },
       redirect: {
         permanent: false,
-        destination: "/seller/product",
+        destination: "/seller/products",
       },
     };
   }

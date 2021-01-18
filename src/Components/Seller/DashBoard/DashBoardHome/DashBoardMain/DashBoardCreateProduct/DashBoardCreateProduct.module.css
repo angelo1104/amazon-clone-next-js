@@ -23,8 +23,8 @@
 }
 
 .form_heading{
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
     font-size: 24px;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .form_input_label{
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 10px !important;
@@ -45,9 +45,27 @@
 .form_input{
     outline-width: 0;
     border: 1px solid lightgray;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Inter', sans-serif;
+    border-radius: 500px;
     padding: 5px 10px;
     color: #000000;
+}
+
+.form_input::placeholder{
+    color: lightgray;
+}
+
+.form_input_textarea{
+    outline-width: 0;
+    border: 1px solid lightgray;
+    font-family: 'Inter', sans-serif;
+    border-radius: 4px;
+    padding: 5px 10px;
+    color: #000000;
+}
+
+.form_input_textarea::placeholder{
+    color: lightgray;
 }
 
 .input_words{

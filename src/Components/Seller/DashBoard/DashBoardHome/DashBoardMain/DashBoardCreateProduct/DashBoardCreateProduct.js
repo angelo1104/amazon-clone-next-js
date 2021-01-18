@@ -64,6 +64,7 @@ function DashBoardCreateProduct({ setPage }) {
             className={styles.form_input}
             type="text"
             value={name}
+            placeholder={"name of product"}
             onChange={(event) =>
               dispatch(setFormName(event.target.value.substr(0, 128)))
             }
@@ -81,6 +82,7 @@ function DashBoardCreateProduct({ setPage }) {
             className={styles.form_input}
             type={"text"}
             value={brand}
+            placeholder={"brand"}
             onChange={(event) =>
               dispatch(setFormBrand(event.target.value.substr(0, 128)))
             }
@@ -93,6 +95,7 @@ function DashBoardCreateProduct({ setPage }) {
           <input
             className={styles.form_input}
             value={pickupAddress}
+            placeholder={"address"}
             onChange={(event) =>
               dispatch(setFormPickupAddress(event.target.value.substr(0, 350)))
             }
@@ -103,8 +106,9 @@ function DashBoardCreateProduct({ setPage }) {
           <p className={styles.form_input_label}>Short Description</p>
 
           <textarea
-            className={styles.form_input}
+            className={styles.form_input_textarea}
             value={shortDescription}
+            placeholder={"short-description"}
             onChange={(event) =>
               dispatch(
                 setFormShortDescription(event.target.value.substr(0, 200))
@@ -119,7 +123,8 @@ function DashBoardCreateProduct({ setPage }) {
           <p className={styles.form_input_label}>Description</p>
 
           <textarea
-            className={styles.form_input}
+            className={styles.form_input_textarea}
+            placeholder={"description"}
             value={description}
             onChange={(event) =>
               dispatch(setFormDescription(event.target.value.substr(0, 500)))

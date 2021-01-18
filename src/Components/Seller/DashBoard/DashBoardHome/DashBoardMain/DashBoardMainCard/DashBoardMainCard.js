@@ -6,7 +6,7 @@ function DashBoardMainCard() {
   const router = useRouter();
 
   const moveTo = (event) => {
-    router.push("/seller/product/dashboard/create-product");
+    router.push("/seller/products/dashboard/create-product");
   };
 
   return (

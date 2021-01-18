@@ -9,7 +9,7 @@ function DashBoardCreateProductCancel() {
   const cancel = (event) => {
     event.preventDefault();
 
-    router.replace("/seller/product/dashboard");
+    router.replace("/seller/products/dashboard");
   };
 
   return (

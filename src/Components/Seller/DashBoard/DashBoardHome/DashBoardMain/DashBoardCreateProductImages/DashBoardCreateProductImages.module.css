@@ -23,7 +23,7 @@
 }
 
 .create_images_title{
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 25px;
     margin-bottom: 20px;
 }
@@ -35,7 +35,7 @@
 }
 
 .images_div_desc{
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 16px;
 }
 
@@ -68,7 +68,7 @@
     outline-width: 0;
     border: 1px solid #111111;
     cursor: pointer;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 18px;
     padding: 8px;
     align-items: center;
@@ -87,7 +87,7 @@
 }
 
 .error{
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Inter', sans-serif;
     color: red;
     font-size: 16px !important;
 }

@@ -4,7 +4,7 @@
 }
 
 .title{
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Inter', sans-serif;
     color: #555555;
     font-weight: 400;
     font-size: 18px;
@@ -32,7 +32,7 @@
     border-color: #a2a6ac #979aa1 #82858a;
     cursor: pointer;
     padding: 10px 5px;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 16px;
     display: flex;
@@ -72,13 +72,13 @@
 }
 
 .info_title{
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
     color: #111111;
 }
 
 .info_desc{
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
     color: #111111;
     margin-left: 8px;
