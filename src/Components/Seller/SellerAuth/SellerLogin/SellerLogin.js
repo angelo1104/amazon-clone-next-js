@@ -5,10 +5,9 @@ import AuthFooter from "../../../Auth/AuthFooter/AuthFooter";
 import { auth } from "../../../../firebase";
 import { useRouter } from "next/router";
 import Lottie from "lottie-react-web";
-import spinner from "../../../../lottie/spinner.json";
+import spinner from "../../../../lottie/ios-loader.json";
 import authInstance from "../../../../axios/authInstance";
 import { useStateValue } from "../../../../ContextApi/StateProvider";
-import { setCanSell } from "../../../../ContextApi/actions";
 
 function SellerLogin() {
   const router = useRouter();
@@ -20,12 +19,12 @@ function SellerLogin() {
 
   const [loginSeller, setLoginSeller] = useState(false);
 
-  const [{ user, dataUser, canSell }, dispatch] = useStateValue();
+  const [{ user, dataUser }, dispatch] = useStateValue();
 
   useEffect(() => {
     if (user && dataUser) {
       if (dataUser.seller) {
-        router.replace("/seller/product/dashboard");
+        router.replace("/seller/products/dashboard");
       }
     }
   }, [user, dataUser]);
@@ -40,46 +39,31 @@ function SellerLogin() {
     } else {
       setProcessing(true);
 
-      const dataUserReq = await authInstance.post("/user", {
-        filter: {
-          email: email,
-        },
-      });
+      try {
+        const { data } = await authInstance.post("/user", {
+          filter: {
+            email,
+          },
+        });
 
-      if (dataUserReq.data.email) {
-        dispatch(setCanSell(dataUserReq.data.seller));
+        if (data.email) {
+          const authUser = await auth().signInWithEmailAndPassword(
+            email,
+            password
+          );
+          if (data.seller) {
+            //She is seller. log her in she is beautiful.
+            setProcessing(false);
+          } else {
+            await router.push("/seller/products/becomeSeller/login-seller");
 
-        setLoginSeller(dataUserReq.data.seller);
-
-        if (dataUserReq.data.seller) {
-          auth()
-            .signInWithEmailAndPassword(email, password)
-            .then((authUser) => {
-              setProcessing(false);
-            })
-            .catch((error) => {
-              setError(error.message);
-            });
-        } else {
-          //MAKE THE GUY SELLER
-
-          auth()
-            .signInWithEmailAndPassword(email, password)
-            .then((authUser) => {
-              router.push("/seller/product/becomeSeller/login-seller");
-
-              setProcessing(false);
-            })
-            .catch((error) => {
-              setError(error.message);
-            });
+            setProcessing(false);
+            //She is not a seller make her one she is pretty hot.
+          }
         }
-      } else {
-        setError(
-          "There is no account registered. Please create your amazon account."
-        );
-
+      } catch (error) {
         setProcessing(false);
+        setError(error.message);
       }
     }
   };
@@ -119,39 +103,28 @@ function SellerLogin() {
       <form onSubmit={submitLogin} className={styles.login_form}>
         <h1 className={styles.login_form_heading}>Sign-In</h1>
 
-        <div className={styles.login_input_div}>
-          <label className={styles.login_label} htmlFor={"#signup_email"}>
-            Email
-          </label>
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={moveToNext}
-            className={styles.login_input}
-            type="email"
-            name=""
-            id={"signup_email"}
-          />
-        </div>
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          onKeyDown={moveToNext}
+          className={styles.login_input}
+          type="email"
+          placeholder={"email"}
+        />
 
-        <div className={styles.login_input_div}>
-          <label className={styles.login_label} htmlFor={"#signup_password"}>
-            Password
-          </label>
-          <input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={styles.login_input}
-            type="password"
-            name=""
-            id={"signup_password"}
-          />
-        </div>
+        <input
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className={styles.login_input}
+          type="password"
+          placeholder={"password"}
+        />
 
         <p className={styles.error}>{error}</p>
 
         <button
           disabled={processing}
+          style={{ background: processing && "#ff9900b0" }}
           className={styles.login_submit_button}
           type="submit"
         >

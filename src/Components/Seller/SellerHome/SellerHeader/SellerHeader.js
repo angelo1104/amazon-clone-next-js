@@ -7,7 +7,7 @@ function SellerHeader() {
     <div className={styles.seller_header}>
       <h3 className={styles.seller_heading}>Sell on Amazon</h3>
 
-      <Link href={"/seller/product/auth/login"}>
+      <Link href={"/seller/products/auth/login"}>
         <button className={styles.seller_button} type="submit">
           Sign Up
         </button>

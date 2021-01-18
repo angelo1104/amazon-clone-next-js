@@ -133,6 +133,7 @@ function Login() {
 
       <button
         disabled={processing}
+        style={{ background: processing && "#ff9900b0" }}
         onClick={goToSignUp}
         type={"submit"}
         className={styles.signup_button}

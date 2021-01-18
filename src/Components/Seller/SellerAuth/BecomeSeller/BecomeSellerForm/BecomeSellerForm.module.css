@@ -1,5 +1,5 @@
 .amazon_logo{
-    max-height: 200px;
+    max-height: 250px;
     cursor: pointer;
     margin: 20px 0;
     justify-self: flex-start;
@@ -16,13 +16,12 @@
 .become_seller_personal_form{
     display: flex;
     flex-direction: column;
-    border: 1px solid lightgray;
     padding: 50px 30px;
 }
 
 .seller_form_heading{
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
     font-size: 35px;
     letter-spacing: 0.04px;
     margin-bottom: 30px;
