@@ -4,7 +4,7 @@ import CartProduct from "../../Cart/CartProduct/CartProduct";
 import { formatDistanceToNow } from "date-fns";
 
 function Order({ order }) {
-  const { products, date, status } = order;
+  const { products, date, status, totalPrice } = order;
 
   return (
     <div className={styles.order}>
@@ -15,7 +15,12 @@ function Order({ order }) {
             Ordered {formatDistanceToNow(new Date(date))} ago
           </span>
         </h2>
-        <p className={styles.total}>Total amount: 2000$</p>
+        <p className={styles.total}>
+          Total: {parseInt(totalPrice.toString())}$
+          <span className={styles.super_cents}>
+            {(totalPrice + "").split(".")[1]}
+          </span>
+        </p>
       </div>
 
       {products.map((product, index) => (

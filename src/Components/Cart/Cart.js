@@ -19,7 +19,9 @@ function Cart() {
 
     if (!user || !dataUser) {
       //user is signed out.
-      router.push("/auth/sign-up");
+      router.push(
+        `/auth/email/sign-up?redirect=${window.location.origin}${window.location.pathname}`
+      );
     } else {
       //place order.
       router.push("/cart/placeOrder");
@@ -69,7 +71,7 @@ function Cart() {
             </p>
 
             <p className={styles.total}>
-              Total: {parseInt(total.toString())}
+              Total: {parseInt(total.toString())}$
               <span className={styles.super_cents}>
                 {(total + "").split(".")[1]}
               </span>

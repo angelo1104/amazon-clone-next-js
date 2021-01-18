@@ -33,3 +33,8 @@
     font-weight: 500;
     margin-left: 10px;
 }
+
+.super_cents{
+    vertical-align: super;
+    font-size: 80%;
+}
