@@ -1,19 +1,14 @@
 import React from "react";
 import styles from "./ProductTile.module.css";
 import Link from "next/link";
+import ImagePLaceHolder from "../../ImagePlaceHolder/ImagePLaceHolder";
 
 function ProductTile({ title, imageUrl, price, brand, id }) {
   return (
     <Link href={`/product?q=${id}`}>
       <a className={styles.product_with_divider}>
         <div className={styles.product}>
-          <img
-            className={styles.product_img}
-            src={
-              "https://m.media-amazon.com/images/I/71BMVOs2xML._AC_UY218_.jpg"
-            }
-            alt=""
-          />
+          <ImagePLaceHolder className={styles.product_img} src={imageUrl} />
 
           <div className={styles.product_details}>
             <h3 className={styles.product_title}>{title}</h3>

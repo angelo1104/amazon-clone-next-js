@@ -83,3 +83,7 @@ p{
   border-radius: 50px !important;
   margin-bottom: 20px;
 }
+
+#nprogress .bar{
+  background-color: #F79B34 !important;
+}

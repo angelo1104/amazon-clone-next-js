@@ -7,6 +7,15 @@ import AuthProvider from "../Components/Auth/AuthProvider/AuthProvider";
 import "antd/dist/antd.css";
 import { loadStripe } from "@stripe/stripe-js/pure";
 import { Elements } from "@stripe/react-stripe-js";
+import "nprogress/nprogress.css";
+import dynamic from "next/dynamic";
+
+const TopProgressBar = dynamic(
+  () => {
+    return import("../Components/TopProgressBar/TopProgressBar");
+  },
+  { ssr: false }
+);
 
 function MyApp({ Component, pageProps }) {
   const stripePromise = loadStripe(
@@ -33,6 +42,8 @@ function MyApp({ Component, pageProps }) {
           />
         </Head>
         <AuthProvider>
+          <TopProgressBar />
+
           <Component {...pageProps} />
         </AuthProvider>
       </Elements>

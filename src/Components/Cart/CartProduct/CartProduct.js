@@ -3,6 +3,7 @@ import styles from "./CartProduct.module.css";
 import { useStateValue } from "../../../ContextApi/StateProvider";
 import { removeProduct, updateTotalProduct } from "../../../ContextApi/actions";
 import Link from "next/link";
+import ImagePLaceHolder from "../../ImagePlaceHolder/ImagePLaceHolder";
 
 function CartProduct({ name, avatar, price, brand, _id, amount, display }) {
   const [{ cart }, dispatch] = useStateValue();
@@ -46,7 +47,7 @@ function CartProduct({ name, avatar, price, brand, _id, amount, display }) {
   return (
     <div className={styles.cart_product_after}>
       <div className={styles.cart_product}>
-        <img className={styles.cart_image} src={avatar} alt="" />
+        <ImagePLaceHolder src={avatar} className={styles.cart_image} />
         <div className={styles.product_info}>
           <Link href={`/product?q=${_id}`}>
             <a>
