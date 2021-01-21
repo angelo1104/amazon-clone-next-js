@@ -9,6 +9,13 @@ import { loadStripe } from "@stripe/stripe-js/pure";
 import { Elements } from "@stripe/react-stripe-js";
 import "nprogress/nprogress.css";
 import dynamic from "next/dynamic";
+import Amplify from "aws-amplify";
+import config from "../aws-exports";
+
+Amplify.configure({
+  ...config,
+  ssr: true,
+});
 
 const TopProgressBar = dynamic(
   () => {

@@ -1,14 +1,15 @@
 {
-    "identityPoolName": "amazonclonenextjs1162ed80_identitypool_1162ed80",
+    "identityPoolName": "amazonclonenextjsdc57f036_identitypool_dc57f036",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "amazon1162ed80",
-    "userPoolName": "amazonclonenextjs1162ed80_userpool_1162ed80",
+    "resourceNameTruncated": "amazondc57f036",
+    "userPoolName": "amazonclonenextjsdc57f036_userpool_dc57f036",
     "autoVerifiedAttributes": [
         "email"
     ],
-    "mfaConfiguration": "OFF",
+    "mfaConfiguration": "OPTIONAL",
     "mfaTypes": [
-        "SMS Text Message"
+        "SMS Text Message",
+        "TOTP"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
@@ -18,7 +19,9 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email"
+        "address",
+        "email",
+        "name"
     ],
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
@@ -28,10 +31,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "amazon1162ed80_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "amazondc57f036_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "1162ed80",
-    "resourceName": "amazonclonenextjs1162ed801162ed80",
+    "sharedId": "dc57f036",
+    "resourceName": "amazonclonenextjsdc57f036dc57f036",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -50,13 +53,11 @@
     "usernameAttributes": [
         "email"
     ],
-    "userPoolGroups": true,
-    "adminQueries": false,
+    "userPoolGroups": false,
+    "adminQueries": true,
     "triggers": "{}",
     "hostedUI": false,
-    "userPoolGroupList": [
-        "amazonCloneUserPool"
-    ],
+    "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "parentStack": {

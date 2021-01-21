@@ -6,6 +6,7 @@ import { auth } from "../../../firebase";
 import { useRouter } from "next/router";
 import Lottie from "lottie-react-web";
 import spinner from "../../../lottie/ios-loader.json";
+import { Auth } from "aws-amplify";
 
 function Login() {
   const router = useRouter();
@@ -17,6 +18,23 @@ function Login() {
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
 
+  const signIn = async () => {
+    try {
+      const user = await Auth.signIn({
+        username: email,
+        password: password,
+      });
+
+      console.log(user);
+
+      return user;
+    } catch (error) {
+      console.log(error);
+
+      return error;
+    }
+  };
+
   const submitLogin = async (event) => {
     event.preventDefault();
     setError("");
@@ -27,7 +45,7 @@ function Login() {
     } else {
       setProcessing(true);
       try {
-        const user = await auth().signInWithEmailAndPassword(email, password);
+        const user = await signIn();
 
         if (redirect) await router.push(`${redirect}`);
         else await router.push("/");

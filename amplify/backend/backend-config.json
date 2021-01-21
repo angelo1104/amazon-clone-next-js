@@ -1,22 +1,6 @@
 {
   "auth": {
-    "userPoolGroups": {
-      "service": "Cognito-UserPool-Groups",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "amazonclonenextjs1162ed801162ed80",
-          "attributes": [
-            "UserPoolId",
-            "AppClientIDWeb",
-            "AppClientID",
-            "IdentityPoolId"
-          ]
-        }
-      ]
-    },
-    "amazonclonenextjs1162ed801162ed80": {
+    "amazonclonenextjsdc57f036dc57f036": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

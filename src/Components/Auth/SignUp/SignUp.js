@@ -9,6 +9,10 @@ import { setDataUser } from "../../../ContextApi/actions";
 import { useStateValue } from "../../../ContextApi/StateProvider";
 import { auth } from "../../../firebase";
 import { useRouter } from "next/router";
+import { Auth } from "aws-amplify";
+import dynamic from "next/dynamic";
+
+const ReactCodeInput = dynamic(import("react-code-input"));
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -19,9 +23,64 @@ function SignUp() {
   const [error, setError] = useState("");
   const router = useRouter();
 
+  const [code, setCode] = useState("");
+  const [codeError, setCodeError] = useState("");
+  const [activateCode, setActivateCode] = useState(false);
+
   const { redirect } = router.query;
 
   const [{}, dispatch] = useStateValue();
+
+  useEffect(() => {
+    setCodeError("");
+    if (code.length === 6) {
+      //confirm it
+      setProcessing(true);
+      Auth.confirmSignUp(email, code)
+        .then((result) => {
+          console.log(result);
+
+          if (redirect) router.replace(`${redirect}`);
+          else router.replace("/");
+
+          setProcessing(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setProcessing(false);
+          setCodeError(error.message);
+          setCode("");
+        });
+    }
+  }, [code]);
+
+  const signUp = async () => {
+    try {
+      const { user } = await Auth.signUp({
+        username: email,
+        password,
+        attributes: {
+          email,
+          name,
+          "custom:seller": "false",
+          "custom:country": "",
+          "custom:state": "",
+          "custom:city": "",
+          "custom:zip": "",
+          address: "",
+        },
+      });
+
+      console.log(user);
+      setProcessing(false);
+
+      setActivateCode(true);
+    } catch (error) {
+      console.log("error signing up:", error);
+      setProcessing(false);
+      setError(error.message);
+    }
+  };
 
   const signup = async (event) => {
     event.preventDefault();
@@ -37,32 +96,33 @@ function SignUp() {
     } else {
       setProcessing(true);
 
-      try {
-        const authUser = await auth().createUserWithEmailAndPassword(
-          email,
-          password
-        );
-
-        await authUser.user.updateProfile({
-          displayName: name,
-        });
-
-        const doc = await authInstance.post("/new/user", {
-          name: name,
-          email: email,
-          seller: false,
-          uid: authUser.user.uid,
-        });
-
-        dispatch(setDataUser(doc.data));
-
-        if (redirect) router.replace(`${redirect}`);
-        else router.replace(`/`);
-        setProcessing(false);
-      } catch (error) {
-        setProcessing(false);
-        setError(error.message);
-      }
+      await signUp();
+      // try {
+      //   const authUser = await auth().createUserWithEmailAndPassword(
+      //     email,
+      //     password
+      //   );
+      //
+      //   await authUser.user.updateProfile({
+      //     displayName: name,
+      //   });
+      //
+      //   const doc = await authInstance.post("/new/user", {
+      //     name: name,
+      //     email: email,
+      //     seller: false,
+      //     uid: authUser.user.uid,
+      //   });
+      //
+      //   dispatch(setDataUser(doc.data));
+      //
+      //   if (redirect) router.replace(`${redirect}`);
+      //   else router.replace(`/`);
+      //   setProcessing(false);
+      // } catch (error) {
+      //   setProcessing(false);
+      //   setError(error.message);
+      // }
     }
   };
 
@@ -90,87 +150,123 @@ function SignUp() {
         />
       </Link>
 
-      <form onSubmit={signup} className={styles.signup_form}>
-        <h1 className={styles.signup_form_heading}>Create account</h1>
+      {!activateCode && (
+        <form onSubmit={signup} className={styles.signup_form}>
+          <h1 className={styles.signup_form_heading}>Create account</h1>
 
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          onKeyDown={moveToNext}
-          className={styles.signup_input}
-          type="text"
-          placeholder={"name"}
-        />
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onKeyDown={moveToNext}
+            className={styles.signup_input}
+            type="text"
+            placeholder={"name"}
+          />
 
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          onKeyDown={moveToNext}
-          className={styles.signup_input}
-          type="email"
-          placeholder={"email"}
-        />
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={moveToNext}
+            className={styles.signup_input}
+            type="email"
+            placeholder={"email"}
+          />
 
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={moveToNext}
-          className={styles.signup_input}
-          type="password"
-          placeholder={"password"}
-        />
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={moveToNext}
+            className={styles.signup_input}
+            type="password"
+            placeholder={"password"}
+          />
 
-        <input
-          value={repassword}
-          onChange={(e) => setRepassword(e.target.value)}
-          className={styles.signup_input}
-          type="password"
-          placeholder={"re-enter password"}
-        />
+          <input
+            value={repassword}
+            onChange={(e) => setRepassword(e.target.value)}
+            className={styles.signup_input}
+            type="password"
+            placeholder={"re-enter password"}
+          />
 
-        <p className={styles.error}>{error}</p>
+          <p className={styles.error}>{error}</p>
 
-        <button
-          disabled={processing}
-          style={{ background: processing && "#ff9900b0" }}
-          className={styles.signup_submit_button}
-          type="submit"
-        >
-          {!processing ? (
-            "Create your Amazon Account"
-          ) : (
-            <div className={styles.spinner}>
-              <Lottie
-                options={{
-                  animationData: spinner,
-                }}
-              />
-            </div>
-          )}
-        </button>
+          <button
+            disabled={processing}
+            style={{ background: processing && "#ff9900b0" }}
+            className={styles.signup_submit_button}
+            type="submit"
+          >
+            {!processing ? (
+              "Create your Amazon Account"
+            ) : (
+              <div className={styles.spinner}>
+                <Lottie
+                  options={{
+                    animationData: spinner,
+                  }}
+                />
+              </div>
+            )}
+          </button>
 
-        <p className={styles.signup_terms}>
-          By creating an account you agree to the terms & conditions of our
-          amazon clone.
-        </p>
+          <p className={styles.signup_terms}>
+            By creating an account you agree to the terms & conditions of our
+            amazon clone.
+          </p>
 
-        <div className={styles.signup_form_already}>
-          <div className={styles.signup_gradient}></div>
+          <div className={styles.signup_form_already}>
+            <div className={styles.signup_gradient}></div>
 
-          <h5 className={styles.signup_already_p}>
-            Already have an account?
-            <Link
-              href={
-                redirect
-                  ? `/auth/email/login?redirect=${redirect}`
-                  : "/auth/email/login"
-              }
-            >
-              <a className={styles.amazon_link_tm}>Sign in -></a>
-            </Link>
-          </h5>
+            <h5 className={styles.signup_already_p}>
+              Already have an account?
+              <Link
+                href={
+                  redirect
+                    ? `/auth/email/login?redirect=${redirect}`
+                    : "/auth/email/login"
+                }
+              >
+                <a className={styles.amazon_link_tm}>Sign in -></a>
+              </Link>
+            </h5>
+          </div>
+        </form>
+      )}
+
+      {activateCode && (
+        <div>
+          <form className={styles.code_form}>
+            <h3 className={styles.title}>
+              Please enter the code sent on your email.
+            </h3>
+
+            <p className={styles.code_error}>{codeError}</p>
+
+            <ReactCodeInput
+              type={"number"}
+              onChange={(code) => setCode(code.toString())}
+              fields={6}
+              disabled={processing}
+              value={code}
+              inputStyle={{
+                fontFamily: "Inter, sans-serif",
+                borderRadius: "6px",
+                border: "1px solid lightgrey",
+                boxShadow: "rgb(0 0 0 / 10%) 0px 0px 10px 0px",
+                margin: "4px",
+                paddingLeft: "8px",
+                width: "36px",
+                height: "42px",
+                fontSize: "32px",
+                boxSizing: "border-box",
+                color: "black",
+                backgroundColor: "white",
+              }}
+            />
+          </form>
         </div>
-      </form>
+      )}
 
       <AuthFooter />
     </div>

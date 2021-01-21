@@ -4,6 +4,7 @@ import { useStateValue } from "../../../ContextApi/StateProvider";
 import { setCanSell, setDataUser, setUser } from "../../../ContextApi/actions";
 import Cookies from "js-cookie";
 import authInstance from "../../../axios/authInstance";
+import { Auth } from "aws-amplify";
 
 function AuthProvider({ children }) {
   const [{ user, dataUser }, dispatch] = useStateValue();
@@ -40,6 +41,16 @@ function AuthProvider({ children }) {
   useEffect(() => {
     console.log("Firebase User", user, "Data User", dataUser);
   }, [user, dataUser]);
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then((user) => {
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     auth().onIdTokenChanged(async (authUser) => {
