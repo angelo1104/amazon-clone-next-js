@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import styles from "./HeaderItems.module.css";
 import cartImg from "../../../public/basket.svg";
 import { useStateValue } from "../../ContextApi/StateProvider";
-import { auth } from "../../firebase";
 import { useRouter } from "next/router";
 import { setSearchText } from "../../ContextApi/actions";
 import Cookies from "js-cookie";
@@ -22,26 +21,18 @@ function HeaderItems() {
   }, [cart]);
 
   const goToLogin = () => {
-    // if (user) {
-    //   auth().signOut();
-    // } else {
-    //   router.push("/auth/email/login");
-    // }
-    router.push("/auth/email/login");
+    if (user) {
+      Auth.signOut();
+    } else {
+      router.push("/auth/email/login");
+    }
   };
 
   return (
     <div className={styles.header_items}>
-      <div
-        onClick={(e) =>
-          Auth.signOut()
-            .then((e) => console.log("signed out"))
-            .catch((error) => console.log(error))
-        }
-        className={styles.header_item}
-      >
+      <div onClick={goToLogin} className={styles.header_item}>
         <p className={styles.header_item_line1}>
-          {user ? "Hi" : "Hello"} {user?.displayName},
+          {user ? "Hi" : "Hello"} {user?.attributes?.name},
         </p>
 
         <p className={styles.header_item_line2}>
@@ -51,7 +42,7 @@ function HeaderItems() {
 
       <div className={styles.header_item} onClick={goToLogin}>
         <p className={styles.header_item_line1}>
-          {/*{user ? "Hi" : "Hello"} {user?.displayName},*/}
+          {user ? "Hi" : "Hello"} {user?.attributes?.name},
         </p>
 
         <p className={styles.header_item_line2}>

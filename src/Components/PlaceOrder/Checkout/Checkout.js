@@ -122,7 +122,7 @@ function Checkout() {
           zip: zip,
           totalPrice: totalAmount,
           status: "NOT DELIVERED",
-          customerUid: user.uid,
+          customerUsername: user.username,
           paymentIntent: clientSecret,
           date: new Date(),
         },
@@ -153,8 +153,8 @@ function Checkout() {
           payment_method: {
             card: elements.getElement(CardNumberElement),
             billing_details: {
-              email: user.email,
-              name: user.displayName,
+              email: user.attributes.email,
+              name: user.attributes.name,
               address: {
                 postal_code: cardHolderZip,
               },

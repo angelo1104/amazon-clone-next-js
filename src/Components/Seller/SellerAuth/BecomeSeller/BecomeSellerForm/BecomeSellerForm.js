@@ -29,7 +29,7 @@ function BecomeSellerForm({ isUser }) {
     setCountryName(csc.getCountryById(country).name);
   }, [country]);
 
-  const [{ user, dataUser }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
     if (!user) {
@@ -37,7 +37,7 @@ function BecomeSellerForm({ isUser }) {
     } else if (dataUser.seller) {
       router.replace("/seller/products/dashboard");
     }
-  }, [user, dataUser]);
+  }, [user]);
 
   const businessLogic = async () => {
     setProcessing(true);

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styles from "./Login.module.css";
 import Link from "next/link";
 import AuthFooter from "../AuthFooter/AuthFooter";
-import { auth } from "../../../firebase";
 import { useRouter } from "next/router";
 import Lottie from "lottie-react-web";
 import spinner from "../../../lottie/ios-loader.json";

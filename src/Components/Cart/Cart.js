@@ -7,7 +7,7 @@ import { setCart } from "../../ContextApi/actions";
 import { useRouter } from "next/router";
 
 function Cart() {
-  const [{ cart, user, dataUser }, dispatch] = useStateValue();
+  const [{ cart, user }, dispatch] = useStateValue();
   const router = useRouter();
 
   const total = cart.reduce((accumulator, item) => {
@@ -17,7 +17,7 @@ function Cart() {
   const placeOrder = (event) => {
     event.preventDefault();
 
-    if (!user || !dataUser) {
+    if (!user) {
       //user is signed out.
       router.push(
         `/auth/email/sign-up?redirect=${window.location.origin}${window.location.pathname}`
