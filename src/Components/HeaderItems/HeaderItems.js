@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { setSearchText } from "../../ContextApi/actions";
 import Cookies from "js-cookie";
 import Link from "next/link";
+import { Auth } from "aws-amplify";
 
 function HeaderItems() {
   const [{ user, cart }, dispatch] = useStateValue();
@@ -21,16 +22,24 @@ function HeaderItems() {
   }, [cart]);
 
   const goToLogin = () => {
-    if (user) {
-      auth().signOut();
-    } else {
-      router.push("/auth/email/login");
-    }
+    // if (user) {
+    //   auth().signOut();
+    // } else {
+    //   router.push("/auth/email/login");
+    // }
+    router.push("/auth/email/login");
   };
 
   return (
     <div className={styles.header_items}>
-      <div onClick={goToLogin} className={styles.header_item}>
+      <div
+        onClick={(e) =>
+          Auth.signOut()
+            .then((e) => console.log("signed out"))
+            .catch((error) => console.log(error))
+        }
+        className={styles.header_item}
+      >
         <p className={styles.header_item_line1}>
           {user ? "Hi" : "Hello"} {user?.displayName},
         </p>
@@ -42,7 +51,7 @@ function HeaderItems() {
 
       <div className={styles.header_item} onClick={goToLogin}>
         <p className={styles.header_item_line1}>
-          {user ? "Hi" : "Hello"} {user?.displayName},
+          {/*{user ? "Hi" : "Hello"} {user?.displayName},*/}
         </p>
 
         <p className={styles.header_item_line2}>

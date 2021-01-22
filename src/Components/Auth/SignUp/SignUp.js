@@ -5,7 +5,7 @@ import AuthFooter from "../AuthFooter/AuthFooter";
 import Lottie from "lottie-react-web";
 import spinner from "../../../lottie/ios-loader.json";
 import authInstance from "../../../axios/authInstance";
-import { setDataUser } from "../../../ContextApi/actions";
+import { setDataUser, setUser } from "../../../ContextApi/actions";
 import { useStateValue } from "../../../ContextApi/StateProvider";
 import { auth } from "../../../firebase";
 import { useRouter } from "next/router";
@@ -31,26 +31,36 @@ function SignUp() {
 
   const [{}, dispatch] = useStateValue();
 
+  const verifyCodeAndSignIn = async (email, code) => {
+    setProcessing(true);
+
+    try {
+      const confirmation = await Auth.confirmSignUp(email, code);
+
+      const user = await Auth.signIn({
+        username: email,
+        password,
+      });
+
+      dispatch(setUser(user));
+
+      if (redirect) await router.replace(`${redirect}`);
+      else await router.replace("/");
+
+      setProcessing(false);
+    } catch (error) {
+      console.log(error);
+      setProcessing(false);
+      setCodeError(error.message);
+      setCode("");
+    }
+  };
+
   useEffect(() => {
     setCodeError("");
     if (code.length === 6) {
       //confirm it
-      setProcessing(true);
-      Auth.confirmSignUp(email, code)
-        .then((result) => {
-          console.log(result);
-
-          if (redirect) router.replace(`${redirect}`);
-          else router.replace("/");
-
-          setProcessing(false);
-        })
-        .catch((error) => {
-          console.log(error);
-          setProcessing(false);
-          setCodeError(error.message);
-          setCode("");
-        });
+      verifyCodeAndSignIn(email, code);
     }
   }, [code]);
 
@@ -71,7 +81,6 @@ function SignUp() {
         },
       });
 
-      console.log(user);
       setProcessing(false);
 
       setActivateCode(true);
@@ -97,32 +106,6 @@ function SignUp() {
       setProcessing(true);
 
       await signUp();
-      // try {
-      //   const authUser = await auth().createUserWithEmailAndPassword(
-      //     email,
-      //     password
-      //   );
-      //
-      //   await authUser.user.updateProfile({
-      //     displayName: name,
-      //   });
-      //
-      //   const doc = await authInstance.post("/new/user", {
-      //     name: name,
-      //     email: email,
-      //     seller: false,
-      //     uid: authUser.user.uid,
-      //   });
-      //
-      //   dispatch(setDataUser(doc.data));
-      //
-      //   if (redirect) router.replace(`${redirect}`);
-      //   else router.replace(`/`);
-      //   setProcessing(false);
-      // } catch (error) {
-      //   setProcessing(false);
-      //   setError(error.message);
-      // }
     }
   };
 

@@ -9,43 +9,23 @@ import { Auth } from "aws-amplify";
 function AuthProvider({ children }) {
   const [{ user, dataUser }, dispatch] = useStateValue();
 
-  useEffect(() => {
-    const unsubscribe = auth().onAuthStateChanged((authUser) => {
-      if (authUser) {
-        authInstance
-          .post("/user", {
-            filter: {
-              email: authUser.email,
-              uid: authUser.uid,
-            },
-          })
-          .then((response) => {
-            dispatch(setDataUser(response.data));
-            dispatch(setCanSell(response.data.seller));
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        dispatch(setUser(authUser));
-      } else {
-        dispatch(setUser(null));
-        dispatch(setDataUser(null));
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const getUser = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    console.log("Firebase User", user, "Data User", dataUser);
-  }, [user, dataUser]);
-
-  useEffect(() => {
-    Auth.currentAuthenticatedUser()
+    getUser()
       .then((user) => {
-        console.log(user);
+        if (user) {
+          dispatch(setUser(user));
+        } else {
+          dispatch(setUser(null));
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -53,15 +33,41 @@ function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    auth().onIdTokenChanged(async (authUser) => {
-      if (authUser) {
-        const token = await authUser.getIdToken();
-        Cookies.set("firebase", token);
-      } else {
-        Cookies.remove("firebase");
-      }
-    });
+    let checkCookie = (function () {
+      let lastCookie = document.cookie; // 'static' memory between function calls
+
+      return async function () {
+        let currentCookie = document.cookie;
+
+        if (currentCookie != lastCookie) {
+          // something useful like parse cookie, run a callback fn, etc.
+          try {
+            const user = await Auth.currentAuthenticatedUser();
+
+            if (user) {
+              dispatch(setUser(user));
+            } else {
+              dispatch(setUser(null));
+            }
+          } catch (error) {
+            console.log(error);
+          }
+
+          lastCookie = currentCookie; // store latest cookie
+        }
+      };
+    })();
+
+    const setIntervalCookieId = window.setInterval(checkCookie, 100);
+
+    return () => {
+      window.clearInterval(setIntervalCookieId);
+    };
   }, []);
+
+  useEffect(() => {
+    console.log("Cognito User", user);
+  }, [user]);
 
   return <>{children}</>;
 }
