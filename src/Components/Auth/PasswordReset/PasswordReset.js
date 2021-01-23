@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./PasswordReset.module.css";
 import Link from "next/link";
 import AuthFooter from "../AuthFooter/AuthFooter";
-import { auth } from "../../../firebase";
 import Lottie from "lottie-react-web";
 import spinner from "../../../lottie/ios-loader.json";
 import { Auth } from "aws-amplify";
 import ReactCodeInput from "react-code-input";
+import { useRouter } from "next/router";
 
 function PasswordReset() {
   const [email, setEmail] = useState("");
@@ -14,6 +14,9 @@ function PasswordReset() {
   const [processing, setProcessing] = useState(false);
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
+
+  const router = useRouter();
+  const { redirect } = router.query;
 
   const [activateCode, setActivateCode] = useState(false);
 
@@ -44,10 +47,8 @@ function PasswordReset() {
 
   const resendCode = async () => {
     try {
-      if (validatePassword()) {
-        await Auth.forgotPassword(email);
-        setCodeError("Sent code on your email.");
-      }
+      await Auth.forgotPassword(email);
+      setCodeError("Sent code on your email.");
     } catch (error) {
       setMessage(error.message);
     }
@@ -89,8 +90,25 @@ function PasswordReset() {
     }
   };
 
+  const verifyCodeAndResetPassword = async () => {
+    setProcessing(true);
+    try {
+      await Auth.forgotPasswordSubmit(email, code, password);
+      if (redirect) router.replace(`/auth/email/login?redirect=${redirect}`);
+      else router.replace(`/auth/email/login`);
+    } catch (error) {
+      console.log(error);
+      setCode("");
+      setCodeError(error.message);
+    } finally {
+      setProcessing(false);
+    }
+  };
+
   useEffect(() => {
+    setCodeError("");
     if (code.length === 6) {
+      verifyCodeAndResetPassword();
     }
   }, [code]);
 

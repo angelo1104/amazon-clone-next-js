@@ -204,7 +204,13 @@ function Login() {
             </p>
 
             <div className={styles.need_help}>
-              <Link href={"/auth/email/password-reset"}>
+              <Link
+                href={
+                  redirect
+                    ? `/auth/email/password-reset?redirect=${redirect}`
+                    : "/auth/email/password-reset"
+                }
+              >
                 <a className={styles.amazon_link}>Forgot Password?</a>
               </Link>
             </div>
