@@ -246,6 +246,8 @@ function SignUp() {
               }}
             />
           </form>
+
+          <p className={styles.resend_code}>Resend Code</p>
         </div>
       )}
 

@@ -36,33 +36,32 @@ function AuthProvider({ children }) {
     let checkCookie = (function () {
       let lastCookie = document.cookie; // 'static' memory between function calls
 
-      return async function () {
+      return function () {
         let currentCookie = document.cookie;
 
         if (currentCookie != lastCookie) {
           // something useful like parse cookie, run a callback fn, etc.
-          try {
-            const user = await Auth.currentAuthenticatedUser();
 
-            if (user) {
-              dispatch(setUser(user));
-            } else {
-              dispatch(setUser(null));
-            }
-          } catch (error) {
-            console.log(error);
-          }
+          console.log("changed crooks.");
+
+          getUser()
+            .then((user) => {
+              if (user) {
+                dispatch(setUser(user));
+              } else {
+                dispatch(setUser(null));
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
 
           lastCookie = currentCookie; // store latest cookie
         }
       };
     })();
 
-    const setIntervalCookieId = window.setInterval(checkCookie, 100);
-
-    return () => {
-      window.clearInterval(setIntervalCookieId);
-    };
+    window.setInterval(checkCookie, 100); // run every 100 ms
   }, []);
 
   useEffect(() => {

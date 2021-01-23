@@ -3,7 +3,7 @@ import styles from "./HeaderItems.module.css";
 import cartImg from "../../../public/basket.svg";
 import { useStateValue } from "../../ContextApi/StateProvider";
 import { useRouter } from "next/router";
-import { setSearchText } from "../../ContextApi/actions";
+import { setSearchText, setUser } from "../../ContextApi/actions";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { Auth } from "aws-amplify";
@@ -22,7 +22,7 @@ function HeaderItems() {
 
   const goToLogin = () => {
     if (user) {
-      Auth.signOut();
+      Auth.signOut(); //.then(() => dispatch(setUser(null)));
     } else {
       router.push("/auth/email/login");
     }

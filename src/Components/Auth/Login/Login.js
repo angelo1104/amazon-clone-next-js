@@ -37,7 +37,7 @@ function Login() {
         password,
       });
 
-      dispatch(setUser(user));
+      // dispatch(setUser(user));
 
       if (redirect) await router.replace(`${redirect}`);
       else await router.replace("/");
@@ -68,7 +68,7 @@ function Login() {
         password: password,
       });
 
-      dispatch(setUser(user));
+      // dispatch(setUser(user));
       if (redirect) await router.push(`${redirect}`);
       else await router.push("/");
 
