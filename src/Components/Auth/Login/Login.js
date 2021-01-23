@@ -26,34 +26,30 @@ function Login() {
 
   const [{}, dispatch] = useStateValue();
 
-  const verifyCodeAndSignIn = (email, code) => {
+  const verifyCodeAndSignIn = async (email, code) => {
     setProcessing(true);
 
-    Auth.confirmSignUp(email, code)
-      .then(() => {
-        Auth.signIn({
-          username: email,
-          password,
-        })
-          .then((user) => {
-            setProcessing(false);
-          })
-          .catch((error) => {
-            console.log(error);
-            setError(error.message);
-            setProcessing(false);
-          });
-      })
-      .catch((error) => {
-        console.log("code error", error.message, typeof error.message);
-        setCodeError("Sent code on your email.");
-        setCode("");
-        setProcessing(false);
+    try {
+      const confirmation = await Auth.confirmSignUp(email, code);
+
+      const user = await Auth.signIn({
+        username: email,
+        password,
       });
+      setProcessing(false);
+    } catch (error) {
+      console.log("code error", error);
+      setCode("");
+      setCodeError(error.message);
+      setProcessing(false);
+    }
   };
 
   useEffect(() => {
-    setCodeError("");
+    console.log("code-error", codeError);
+  }, [codeError]);
+
+  useEffect(() => {
     if (code.length === 6) {
       //confirm it
       verifyCodeAndSignIn(email, code);

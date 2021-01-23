@@ -53,7 +53,7 @@ function SignUp() {
 
   useEffect(() => {
     console.log("codey", codeError);
-  }, []);
+  }, [codeError]);
 
   useEffect(() => {
     setCodeError("");
