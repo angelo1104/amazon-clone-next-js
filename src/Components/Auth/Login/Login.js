@@ -181,6 +181,7 @@ function Login() {
 
             <button
               disabled={processing}
+              style={{ background: processing && "#ff9900b0" }}
               className={styles.login_submit_button}
               type="submit"
             >
@@ -215,10 +216,9 @@ function Login() {
 
           <button
             disabled={processing}
-            style={{ background: processing && "#ff9900b0" }}
             onClick={goToSignUp}
             type={"submit"}
-            className={styles.signup_button}
+            className={styles.go_to_signup_button}
           >
             Create your Amazon account
           </button>
