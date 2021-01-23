@@ -46,7 +46,6 @@ function SignUp() {
     } catch (error) {
       console.log("code error", error.message);
       setCodeError(error.message);
-      setCode("");
       setProcessing(false);
     }
   };
@@ -56,7 +55,6 @@ function SignUp() {
   }, [codeError]);
 
   useEffect(() => {
-    setCodeError("");
     if (code.length === 6) {
       //confirm it
       verifyCodeAndSignIn(email, code);

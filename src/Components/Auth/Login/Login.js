@@ -36,18 +36,26 @@ function Login() {
         username: email,
         password,
       });
+
+      if (redirect) router.replace(`${redirect}`);
+      else router.replace("/");
       setProcessing(false);
     } catch (error) {
       console.log("code error", error);
-      setCode("");
       setCodeError(error.message);
       setProcessing(false);
     }
   };
 
   useEffect(() => {
-    console.log("code-error", codeError);
+    if (codeError && code) {
+      setCode("");
+    }
   }, [codeError]);
+
+  useEffect(() => {
+    console.log("coder", code);
+  }, [code]);
 
   useEffect(() => {
     if (code.length === 6) {
@@ -228,8 +236,10 @@ function Login() {
 
             <ReactCodeInput
               type={"number"}
-              onChange={(code) => setCode(code.toString())}
               fields={6}
+              name={"active code"}
+              inputMode={"numeric"}
+              onChange={(code) => setCode(code.toString())}
               disabled={processing}
               value={code}
               inputStyle={{
