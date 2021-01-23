@@ -26,29 +26,30 @@ function Login() {
 
   const [{}, dispatch] = useStateValue();
 
-  const verifyCodeAndSignIn = async (email, code) => {
+  const verifyCodeAndSignIn = (email, code) => {
     setProcessing(true);
 
-    try {
-      const confirmation = await Auth.confirmSignUp(email, code);
-
-      const user = await Auth.signIn({
-        username: email,
-        password,
+    Auth.confirmSignUp(email, code)
+      .then(() => {
+        Auth.signIn({
+          username: email,
+          password,
+        })
+          .then((user) => {
+            setProcessing(false);
+          })
+          .catch((error) => {
+            console.log(error);
+            setError(error.message);
+            setProcessing(false);
+          });
+      })
+      .catch((error) => {
+        console.log("code error", error.message, typeof error.message);
+        setCodeError("Sent code on your email.");
+        setCode("");
+        setProcessing(false);
       });
-
-      // dispatch(setUser(user));
-
-      if (redirect) await router.replace(`${redirect}`);
-      else await router.replace("/");
-
-      setProcessing(false);
-    } catch (error) {
-      console.log(error);
-      setProcessing(false);
-      setCodeError(error.message);
-      setCode("");
-    }
   };
 
   useEffect(() => {
@@ -68,7 +69,6 @@ function Login() {
         password: password,
       });
 
-      // dispatch(setUser(user));
       if (redirect) await router.push(`${redirect}`);
       else await router.push("/");
 
@@ -127,6 +127,16 @@ function Login() {
       const input = inputs[index];
       input.focus();
       input.select();
+    }
+  };
+
+  const resendCode = async () => {
+    try {
+      await Auth.resendSignUp(email);
+      setCodeError("Sent code on your email.");
+    } catch (e) {
+      console.log(e);
+      setCodeError(error.message);
     }
   };
 
@@ -241,6 +251,10 @@ function Login() {
                 backgroundColor: "white",
               }}
             />
+
+            <p className={styles.resend_code} onClick={() => resendCode()}>
+              Resend Code
+            </p>
           </form>
         </div>
       )}

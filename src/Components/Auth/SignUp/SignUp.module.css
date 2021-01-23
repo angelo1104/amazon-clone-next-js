@@ -148,6 +148,9 @@
     font-size: 14px;
     font-weight: 400;
     color: #F79B34;
+    text-align: center;
+    margin-top: 30px;
+    cursor: pointer;
 }
 
 .resend_code:hover{

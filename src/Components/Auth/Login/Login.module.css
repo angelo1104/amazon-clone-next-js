@@ -163,3 +163,17 @@
     font-weight: 400;
     margin-bottom: 20px !important;
 }
+
+.resend_code{
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #F79B34;
+    text-align: center;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.resend_code:hover{
+    text-decoration: underline #F79B34;
+}

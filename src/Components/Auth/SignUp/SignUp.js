@@ -40,19 +40,20 @@ function SignUp() {
         password,
       });
 
-      dispatch(setUser(user));
-
+      setProcessing(false);
       if (redirect) await router.replace(`${redirect}`);
       else await router.replace("/");
-
-      setProcessing(false);
     } catch (error) {
-      console.log(error);
-      setProcessing(false);
+      console.log("code error", error.message);
       setCodeError(error.message);
       setCode("");
+      setProcessing(false);
     }
   };
+
+  useEffect(() => {
+    console.log("codey", codeError);
+  }, []);
 
   useEffect(() => {
     setCodeError("");
@@ -118,6 +119,16 @@ function SignUp() {
       const input = inputs[index];
       input.focus();
       input.select();
+    }
+  };
+
+  const resendCode = async () => {
+    try {
+      await Auth.resendSignUp(email);
+      setCodeError("Sent code on your email.");
+    } catch (e) {
+      console.log(e);
+      setCodeError(error.message);
     }
   };
 
@@ -247,7 +258,9 @@ function SignUp() {
             />
           </form>
 
-          <p className={styles.resend_code}>Resend Code</p>
+          <p className={styles.resend_code} onClick={() => resendCode()}>
+            Resend Code
+          </p>
         </div>
       )}
 
