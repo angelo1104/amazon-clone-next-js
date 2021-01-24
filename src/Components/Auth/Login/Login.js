@@ -7,6 +7,7 @@ import Lottie from "lottie-react-web";
 import spinner from "../../../lottie/ios-loader.json";
 import { Auth } from "aws-amplify";
 import ReactCodeInput from "react-code-input";
+import URL from "url";
 
 function Login() {
   const router = useRouter();
