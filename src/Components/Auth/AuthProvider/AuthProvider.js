@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
-import { auth } from "../../../firebase";
 import { useStateValue } from "../../../ContextApi/StateProvider";
-import { setCanSell, setDataUser, setUser } from "../../../ContextApi/actions";
-import Cookies from "js-cookie";
-import authInstance from "../../../axios/authInstance";
+import { setUser } from "../../../ContextApi/actions";
 import { Auth, Hub } from "aws-amplify";
 
 function AuthProvider({ children }) {
