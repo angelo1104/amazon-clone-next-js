@@ -6,8 +6,6 @@ import { useRouter } from "next/router";
 import Lottie from "lottie-react-web";
 import spinner from "../../../lottie/ios-loader.json";
 import { Auth } from "aws-amplify";
-import { useStateValue } from "../../../ContextApi/StateProvider";
-import { setUser } from "../../../ContextApi/actions";
 import ReactCodeInput from "react-code-input";
 
 function Login() {
@@ -24,15 +22,13 @@ function Login() {
   const [code, setCode] = useState("");
   const [codeError, setCodeError] = useState("");
 
-  const [{}, dispatch] = useStateValue();
-
   const verifyCodeAndSignIn = async (email, code) => {
     setProcessing(true);
 
     try {
-      const confirmation = await Auth.confirmSignUp(email, code);
+      await Auth.confirmSignUp(email, code);
 
-      const user = await Auth.signIn({
+      await Auth.signIn({
         username: email,
         password,
       });
@@ -54,10 +50,6 @@ function Login() {
   }, [codeError]);
 
   useEffect(() => {
-    console.log("coder", code);
-  }, [code]);
-
-  useEffect(() => {
     if (code.length === 6) {
       //confirm it
       verifyCodeAndSignIn(email, code);
@@ -68,7 +60,7 @@ function Login() {
     setProcessing(true);
 
     try {
-      const user = await Auth.signIn({
+      await Auth.signIn({
         username: email,
         password: password,
       });

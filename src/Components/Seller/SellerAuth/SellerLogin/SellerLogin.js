@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import styles from "./SellerLogin.module.css";
 import Link from "next/link";
 import AuthFooter from "../../../Auth/AuthFooter/AuthFooter";
-import { auth } from "../../../../firebase";
 import { useRouter } from "next/router";
 import Lottie from "lottie-react-web";
 import spinner from "../../../../lottie/ios-loader.json";
-import authInstance from "../../../../axios/authInstance";
 import { useStateValue } from "../../../../ContextApi/StateProvider";
+import { Auth } from "aws-amplify";
+import ReactCodeInput from "react-code-input";
 
 function SellerLogin() {
   const router = useRouter();
@@ -17,17 +17,19 @@ function SellerLogin() {
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
 
-  const [loginSeller, setLoginSeller] = useState(false);
+  const [activateCode, setActivateCode] = useState(false);
+  const [code, setCode] = useState("");
+  const [codeError, setCodeError] = useState("");
 
-  const [{ user, dataUser }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
 
   useEffect(() => {
-    if (user && dataUser) {
-      if (dataUser.seller) {
+    if (user) {
+      if (user.attributes["custom:seller"] === "true") {
         router.replace("/seller/products/dashboard");
       }
     }
-  }, [user, dataUser]);
+  }, [user]);
 
   const submitLogin = async (event) => {
     event.preventDefault();
@@ -40,30 +42,25 @@ function SellerLogin() {
       setProcessing(true);
 
       try {
-        const { data } = await authInstance.post("/user", {
-          filter: {
-            email,
-          },
+        await Auth.signIn({
+          username: email,
+          password,
         });
 
-        if (data.email) {
-          const authUser = await auth().signInWithEmailAndPassword(
-            email,
-            password
-          );
-          if (data.seller) {
-            //She is seller. log her in she is beautiful.
-            setProcessing(false);
-          } else {
-            await router.push("/seller/products/becomeSeller/login-seller");
+        router.push("/seller/products/becomeSeller/login-seller");
 
-            setProcessing(false);
-            //She is not a seller make her one she is pretty hot.
-          }
-        }
-      } catch (error) {
         setProcessing(false);
-        setError(error.message);
+      } catch (error) {
+        if (error.code === "UserNotConfirmedException") {
+          //send code
+          setActivateCode(true);
+          setProcessing(false);
+          await Auth.resendSignUp(email);
+        } else {
+          //handle other errors
+          setProcessing(false);
+          setError(error.message);
+        }
       }
     }
   };
@@ -71,7 +68,7 @@ function SellerLogin() {
   const goToSignUp = (event) => {
     event.preventDefault();
 
-    router.push("/seller/product/auth/sign-up");
+    router.push("/seller/products/auth/sign-up");
   };
 
   const moveToNext = (event) => {
@@ -88,9 +85,47 @@ function SellerLogin() {
     }
   };
 
+  const resendCode = async (event) => {
+    event.preventDefault();
+
+    try {
+      await Auth.resendSignUp(email);
+      setCodeError("Sent code on your email.");
+    } catch (e) {
+      console.log(e);
+      setCodeError(error.message);
+    }
+  };
+
+  const verifyCodeAndSignIn = async (email, code) => {
+    setProcessing(true);
+    try {
+      await Auth.confirmSignUp(email, code);
+      await Auth.signIn({
+        username: email,
+        password,
+      });
+
+      router.push("/seller/products/becomeSeller/login-seller");
+    } catch (error) {
+      console.log("code error", error);
+      await setCode("");
+      setCodeError(error.message);
+    } finally {
+      setProcessing(false);
+    }
+  };
+
+  useEffect(() => {
+    if (code.length === 6) {
+      //confirm it
+      verifyCodeAndSignIn(email, code);
+    }
+  }, [code]);
+
   return (
     <div className={styles.login}>
-      <Link href={"/seller/product"}>
+      <Link href={"/seller/products"}>
         <img
           className={styles.amazon_logo}
           src={
@@ -100,74 +135,118 @@ function SellerLogin() {
         />
       </Link>
 
-      <form onSubmit={submitLogin} className={styles.login_form}>
-        <h1 className={styles.login_form_heading}>Sign-In</h1>
+      {!activateCode && (
+        <>
+          <form onSubmit={submitLogin} className={styles.login_form}>
+            <h1 className={styles.login_form_heading}>Sign-In</h1>
 
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          onKeyDown={moveToNext}
-          className={styles.login_input}
-          type="email"
-          placeholder={"email"}
-        />
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={moveToNext}
+              className={styles.login_input}
+              type="email"
+              placeholder={"email"}
+            />
 
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className={styles.login_input}
-          type="password"
-          placeholder={"password"}
-        />
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={styles.login_input}
+              type="password"
+              placeholder={"password"}
+            />
 
-        <p className={styles.error}>{error}</p>
+            <p className={styles.error}>{error}</p>
 
-        <button
-          disabled={processing}
-          style={{ background: processing && "#ff9900b0" }}
-          className={styles.login_submit_button}
-          type="submit"
-        >
-          {!processing ? (
-            "Continue"
-          ) : (
-            <div className={styles.spinner}>
-              <Lottie
-                options={{
-                  animationData: spinner,
-                }}
-              />
+            <button
+              disabled={processing}
+              style={{ background: processing && "#ff9900b0" }}
+              className={styles.login_submit_button}
+              type="submit"
+            >
+              {!processing ? (
+                "Continue"
+              ) : (
+                <div className={styles.spinner}>
+                  <Lottie
+                    options={{
+                      animationData: spinner,
+                    }}
+                  />
+                </div>
+              )}
+            </button>
+
+            <p className={styles.login_terms}>
+              By continuing over amazon clone you agree to the terms &
+              conditions of our amazon clone.
+            </p>
+
+            <div className={styles.need_help}>
+              <Link href={"/auth/email/password-reset"}>
+                <a className={styles.amazon_link}>Forgot Password?</a>
+              </Link>
+            </div>
+          </form>
+
+          {!user && (
+            <div className={styles.divider}>
+              <h5 className={styles.divider_title}>New to Amazon?</h5>
             </div>
           )}
-        </button>
 
-        <p className={styles.login_terms}>
-          By continuing over amazon clone you agree to the terms & conditions of
-          our amazon clone.
-        </p>
-
-        <div className={styles.need_help}>
-          <Link href={"/auth/email/password-reset"}>
-            <a className={styles.amazon_link}>Forgot Password?</a>
-          </Link>
-        </div>
-      </form>
-
-      {!user && (
-        <div className={styles.divider}>
-          <h5 className={styles.divider_title}>New to Amazon?</h5>
-        </div>
+          {!user && (
+            <button
+              disabled={processing}
+              onClick={goToSignUp}
+              type={"submit"}
+              className={styles.signup_button}
+            >
+              Create your Amazon account
+            </button>
+          )}
+        </>
       )}
 
-      {!user && (
-        <button
-          disabled={processing}
-          onClick={goToSignUp}
-          type={"submit"}
-          className={styles.signup_button}
-        >
-          Create your Amazon account
-        </button>
+      {activateCode && (
+        <div>
+          <form className={styles.code_form}>
+            <h3 className={styles.title}>
+              Please enter the code sent on your email.
+            </h3>
+
+            <p className={styles.code_error}>{codeError}</p>
+
+            <ReactCodeInput
+              type={"number"}
+              fields={6}
+              name={"active code"}
+              inputMode={"numeric"}
+              onChange={(code) => setCode(code.toString())}
+              disabled={processing}
+              value={code}
+              inputStyle={{
+                fontFamily: "Inter, sans-serif",
+                borderRadius: "6px",
+                border: "1px solid lightgrey",
+                boxShadow: "rgb(0 0 0 / 10%) 0px 0px 10px 0px",
+                margin: "4px",
+                paddingLeft: "8px",
+                width: "36px",
+                height: "42px",
+                fontSize: "32px",
+                boxSizing: "border-box",
+                color: "black",
+                backgroundColor: "white",
+              }}
+            />
+
+            <p className={styles.resend_code} onClick={resendCode}>
+              Resend Code
+            </p>
+          </form>
+        </div>
       )}
 
       <AuthFooter />

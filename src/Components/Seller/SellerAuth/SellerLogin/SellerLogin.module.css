@@ -143,3 +143,37 @@
     object-fit: contain;
     margin: auto;
 }
+
+.code_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title{
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.code_error{
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 20px !important;
+}
+
+.resend_code{
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #F79B34;
+    text-align: center;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.resend_code:hover{
+    text-decoration: underline #F79B34;
+}
