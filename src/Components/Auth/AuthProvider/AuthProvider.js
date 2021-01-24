@@ -4,25 +4,16 @@ import { useStateValue } from "../../../ContextApi/StateProvider";
 import { setCanSell, setDataUser, setUser } from "../../../ContextApi/actions";
 import Cookies from "js-cookie";
 import authInstance from "../../../axios/authInstance";
-import { Auth } from "aws-amplify";
+import { Auth, Hub } from "aws-amplify";
 
 function AuthProvider({ children }) {
   const [{ user, dataUser }, dispatch] = useStateValue();
 
-  const getUser = async () => {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      return user;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    getUser()
-      .then((user) => {
-        if (user) {
-          dispatch(setUser(user));
+    Auth.currentAuthenticatedUser()
+      .then((authUser) => {
+        if (authUser) {
+          dispatch(setUser(authUser));
         } else {
           dispatch(setUser(null));
         }
@@ -33,40 +24,26 @@ function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    let checkCookie = (function () {
-      let lastCookie = document.cookie; // 'static' memory between function calls
-
-      return function () {
-        let currentCookie = document.cookie;
-
-        if (currentCookie != lastCookie) {
-          // something useful like parse cookie, run a callback fn, etc.
-
-          console.log("changed crooks.");
-
-          getUser()
-            .then((user) => {
-              if (user) {
-                dispatch(setUser(user));
-              } else {
-                dispatch(setUser(null));
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-
-          lastCookie = currentCookie; // store latest cookie
-        }
-      };
-    })();
-
-    window.setInterval(checkCookie, 100); // run every 100 ms
-  }, []);
-
-  useEffect(() => {
     console.log("Cognito User", user);
   }, [user]);
+
+  useEffect(() => {
+    const listener = (data) => {
+      switch (data.payload.event) {
+        case "signIn":
+          const user = data.payload.data;
+          console.log("user signed in");
+          dispatch(setUser(user));
+          break;
+        case "signOut":
+          console.log("user signed out");
+          dispatch(setUser(null));
+          break;
+      }
+    };
+
+    Hub.listen("auth", listener);
+  }, []);
 
   return <>{children}</>;
 }
