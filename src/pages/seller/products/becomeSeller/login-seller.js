@@ -3,6 +3,7 @@ import { useStateValue } from "../../../../ContextApi/StateProvider";
 import BecomeSellerLogin from "../../../../Components/Seller/SellerAuth/BecomeSeller/BecomeSellerLogin/BecomeSellerLogin";
 import nookie from "nookies";
 import authInstance from "../../../../axios/authInstance";
+import { withSSRContext } from "aws-amplify";
 
 function BecomeLoginSellerPage({ user }) {
   const [{ dataUser, canSell }, dispatch] = useStateValue();
@@ -27,45 +28,23 @@ function BecomeLoginSellerPage({ user }) {
 export default BecomeLoginSellerPage;
 
 export async function getServerSideProps(ctx) {
-  const { firebase } = nookie.get(ctx);
+  const { Auth } = withSSRContext(ctx);
 
-  let user = null;
+  try {
+    const user = await Auth.currentAuthenticatedUser();
 
-  if (firebase) {
-    user = await authInstance.post("/idToken", {
-      idToken: firebase,
-    });
-  }
-
-  const redirect = {
-    permanent: false,
-    destination: "/seller/products/dashboard",
-  };
-
-  if (user.data.user.seller) {
-    return {
-      redirect: redirect,
-      props: {
-        user: user?.data,
-      },
-    };
-  }
-
-  if (!user.data.user) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/seller/products",
-      },
-      props: {
-        user: user?.data,
-      },
-    };
-  }
+    console.log("at", user.attributes["custom:seller"]);
+    if (user.attributes["custom:seller"] === "false") {
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/seller/products/dashboard",
+        },
+      };
+    }
+  } catch (error) {}
 
   return {
-    props: {
-      user: user?.data,
-    },
+    props: {},
   };
 }
