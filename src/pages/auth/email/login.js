@@ -24,9 +24,11 @@ export async function getServerSideProps(ctx) {
 
   try {
     const user = await Auth.currentAuthenticatedUser();
-    if (user) {
+    console.log("user", user);
+    if (user !== null || user !== undefined) {
       //she is signed in don't let her go though she is hot
       if (req.headers.host === redirectUrl.host) {
+        console.log("headers", user);
         return {
           redirect: {
             permanent: true,
@@ -44,7 +46,10 @@ export async function getServerSideProps(ctx) {
         props: {},
       };
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log("error", error);
+    //user is not authenticated.
+  }
   return {
     props: {},
   };

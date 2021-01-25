@@ -13,6 +13,9 @@ function Login() {
   const router = useRouter();
 
   const { redirect } = router.query;
+  let redirectUrl = "";
+
+  if (redirect) redirectUrl = URL.parse(redirect.toString());
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +37,8 @@ function Login() {
         password,
       });
 
-      if (redirect) router.replace(`${redirect}`);
+      if (redirectUrl?.hostname === location.hostname)
+        router.replace(`${redirect}`);
       else router.replace("/");
       setProcessing(false);
     } catch (error) {
@@ -66,7 +70,8 @@ function Login() {
         password: password,
       });
 
-      if (redirect) await router.push(`${redirect}`);
+      if (redirectUrl?.hostname === location.hostname)
+        await router.push(`${redirect}`);
       else await router.push("/");
 
       setProcessing(false);
@@ -107,7 +112,7 @@ function Login() {
     event.preventDefault();
 
     router.push(
-      redirect
+      redirectUrl?.hostname === location.hostname
         ? `/auth/email/sign-up?redirect=${redirect}`
         : "/auth/email/sign-up"
     );
