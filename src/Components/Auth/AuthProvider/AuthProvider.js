@@ -40,6 +40,10 @@ function AuthProvider({ children }) {
     };
 
     Hub.listen("auth", listener);
+
+    return () => {
+      Hub.remove("auth", listener);
+    };
   }, []);
 
   return <>{children}</>;

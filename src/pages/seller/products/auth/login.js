@@ -20,7 +20,7 @@ export async function getServerSideProps(ctx) {
   try {
     const user = await Auth.currentAuthenticatedUser();
 
-    if (user && user.attributes["custom:seller"] !== "false") {
+    if (user && user.attributes["custom:seller"] === "true") {
       //she is beautiful let her she is really hot and sexy. Please kiss me. Be my girlfriend.
 
       return {

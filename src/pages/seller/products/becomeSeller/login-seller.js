@@ -1,25 +1,11 @@
 import React from "react";
-import { useStateValue } from "../../../../ContextApi/StateProvider";
 import BecomeSellerLogin from "../../../../Components/Seller/SellerAuth/BecomeSeller/BecomeSellerLogin/BecomeSellerLogin";
-import nookie from "nookies";
-import authInstance from "../../../../axios/authInstance";
+import { withSSRContext } from "aws-amplify";
 
-function BecomeLoginSellerPage({ user }) {
-  const [{ dataUser, canSell }, dispatch] = useStateValue();
-
-  let widget = <div>Nothing here</div>;
-
-  if (dataUser && !canSell) {
-    widget = <div>I will make u a guy</div>;
-  } else if (!dataUser) {
-    widget = <div>Go to login</div>;
-  } else if (canSell) {
-    widget = <div>Sorry you are a guy</div>;
-  }
-
+function BecomeLoginSellerPage() {
   return (
     <div>
-      <BecomeSellerLogin isUser={user} />
+      <BecomeSellerLogin />
     </div>
   );
 }
@@ -27,45 +13,34 @@ function BecomeLoginSellerPage({ user }) {
 export default BecomeLoginSellerPage;
 
 export async function getServerSideProps(ctx) {
-  const { firebase } = nookie.get(ctx);
+  const { Auth } = withSSRContext(ctx);
 
-  let user = null;
+  try {
+    const user = await Auth.currentAuthenticatedUser();
 
-  if (firebase) {
-    user = await authInstance.post("/idToken", {
-      idToken: firebase,
-    });
-  }
-
-  const redirect = {
-    permanent: false,
-    destination: "/seller/products/dashboard",
-  };
-
-  if (user.data.user.seller) {
-    return {
-      redirect: redirect,
-      props: {
-        user: user?.data,
-      },
-    };
-  }
-
-  if (!user.data.user) {
+    if (user && user?.attributes["custom:seller"] === "true") {
+      //she is beautiful and she is a seller. Let's send her to dashboard and maybe she will offer us a date and night and even a kiss. You are pretty.
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/seller/products/dashboard",
+        },
+        props: {},
+      };
+    }
+  } catch (e) {
+    //she is not yet with us let's add her to our list.
+    console.log("eeee", e);
     return {
       redirect: {
         permanent: false,
-        destination: "/seller/products",
+        destination: "/seller/products/auth/login",
       },
-      props: {
-        user: user?.data,
-      },
+      props: {},
     };
   }
 
   return {
-    props: {
-      user: user?.data,
-    },
+    props: {},
   };
 }

@@ -5,13 +5,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import csc from "country-state-city";
 import { useStateValue } from "../../../../../ContextApi/StateProvider";
-import authInstance from "../../../../../axios/authInstance";
-import { auth } from "../../../../../firebase";
-import { setDataUser } from "../../../../../ContextApi/actions";
 import AuthFooter from "../../../../Auth/AuthFooter/AuthFooter";
-import axios from "axios";
+import { Auth } from "aws-amplify";
 
-function BecomeSellerForm({ isUser }) {
+function BecomeSellerForm() {
   const router = useRouter();
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
@@ -32,11 +29,25 @@ function BecomeSellerForm({ isUser }) {
   const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
-    if (!user) {
-      router.replace("/seller/products/sign-up");
-    } else if (dataUser.seller) {
-      router.replace("/seller/products/dashboard");
-    }
+    // if () {
+    //
+    //   router.replace("/seller/products/auth/sign-up");
+    // } else if (user?.attributes["custom:seller"] === "true") {
+    //   router.replace("/seller/products/dashboard");
+    //}
+    Auth.currentAuthenticatedUser()
+      .then((user) => {
+        if (!user) {
+          //she is signed in
+          router.replace("/seller/products/auth/sign-up");
+        } else if (user.attributes["custom:seller"] === "true") {
+          //she is a seller
+          router.replace("/seller/products/dashboard");
+        }
+      })
+      .catch((error) => {
+        router.replace("/seller/products/auth/sign-up");
+      });
   }, [user]);
 
   const businessLogic = async () => {
@@ -44,31 +55,22 @@ function BecomeSellerForm({ isUser }) {
     setError("");
 
     try {
-      const sellerUser = await authInstance.put("/make/seller", {
-        sellerFilter: {
-          email: user.email,
-          uid: user.uid,
-        },
-        sellerData: {
-          name: `${firstName} ${lastName}`,
-          country: countryName,
-          state: region,
-          city: city,
-          address: address,
-          zip: zip,
-        },
-      });
+      const user = await Auth.currentAuthenticatedUser();
 
-      await auth().currentUser.updateProfile({
-        displayName: `${firstName} ${lastName}`,
+      await Auth.updateUserAttributes(user, {
+        name: `${firstName} ${lastName}`,
+        "custom:country": countryName,
+        "custom:state": region,
+        "custom:city": city,
+        "custom:zip": zip,
+        address: address,
+        "custom:seller": "true",
       });
-
-      await dispatch(setDataUser(sellerUser.data));
-      setProcessing(false);
     } catch (error) {
-      setProcessing(false);
       setError("We encountered an error.");
       console.log(error);
+    } finally {
+      setProcessing(false);
     }
   };
 

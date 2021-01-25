@@ -197,7 +197,7 @@ function SellerSignUp() {
 
             <h5 className={styles.signup_already_p}>
               Already have an account?
-              <Link href={"/seller/product/auth/login"}>
+              <Link href={"/seller/products/auth/login"}>
                 <a className={styles.amazon_link_tm}>Sign in -></a>
               </Link>
             </h5>
