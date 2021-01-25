@@ -3,6 +3,7 @@ import SignUp from "../../../Components/Auth/SignUp/SignUp";
 import nookie from "nookies";
 import authInstance from "../../../axios/authInstance";
 import URL from "url";
+import { withSSRContext } from "aws-amplify";
 
 function SignUpPage({ user }) {
   useEffect(() => {
@@ -23,7 +24,7 @@ function SignUpPage({ user }) {
 export default SignUpPage;
 
 export async function getServerSideProps(ctx) {
-  const { firebase } = nookie.get(ctx);
+  const { Auth } = withSSRContext(ctx);
 
   const { query, req } = ctx;
 
@@ -31,36 +32,32 @@ export async function getServerSideProps(ctx) {
 
   const redirectUrl = URL.parse(`${redirect}`);
 
-  let user = null;
+  try {
+    const user = await Auth.currentAuthenticatedUser();
+    if (user !== null || user !== undefined) {
+      //she is signed in don't let her go though she is hot
+      if (req.headers.host === redirectUrl.host) {
+        console.log("she is beautiful");
+        return {
+          redirect: {
+            permanent: true,
+            destination: `${redirect}`,
+          },
+          props: {},
+        };
+      }
 
-  if (firebase) {
-    user = await authInstance.post("/idToken", {
-      idToken: firebase,
-    });
-
-    if (req.headers.host === redirectUrl.host) {
       return {
         redirect: {
-          permanent: false,
-          destination: `${redirect}`,
+          permanent: true,
+          destination: "/",
         },
-        props: {
-          user: user?.data,
-        },
+        props: {},
       };
     }
-
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/",
-      },
-      props: {
-        user: user?.data,
-      },
-    };
+  } catch (error) {
+    //user is not authenticated.
   }
-
   return {
     props: {},
   };

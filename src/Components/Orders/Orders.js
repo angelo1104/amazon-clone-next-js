@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import styles from "./Orders.module.css";
+import React, { useEffect } from "react";
 import Header from "../Header/Header";
 import Order from "./Order/Order";
 import Footer from "../Footer/Footer";
