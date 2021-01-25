@@ -20,7 +20,7 @@ export async function getServerSideProps(ctx) {
   try {
     const user = await Auth.currentAuthenticatedUser();
 
-    if (user?.attributes["custom:seller"] !== "false") {
+    if (user && user?.attributes["custom:seller"] !== "false") {
       console.log(user?.attributes["custom:seller"]);
 
       return {

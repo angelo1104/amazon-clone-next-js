@@ -1,37 +1,38 @@
-import React from 'react';
+import React from "react";
 import SellerLogin from "../../../../Components/Seller/SellerAuth/SellerLogin/SellerLogin";
 import nookie from "nookies";
 import authInstance from "../../../../axios/authInstance";
+import { withSSRContext } from "aws-amplify";
 
 function SellerLoginPage() {
-    return(
-        <>
-         <SellerLogin/>
-        </>
-    )
+  return (
+    <>
+      <SellerLogin />
+    </>
+  );
 }
 
 export default SellerLoginPage;
 
-export async function getServerSideProps(ctx){
+export async function getServerSideProps(ctx) {
+  const { Auth } = withSSRContext(ctx);
 
-    const {firebase} = nookie.get(ctx);
+  try {
+    const user = await Auth.currentAuthenticatedUser();
 
-    let user = null;
+    if (user && user.attributes["custom:seller"] !== "false") {
+      //she is beautiful let her she is really hot and sexy. Please kiss me. Be my girlfriend.
 
-    if (firebase){
-        user = await authInstance.post('/idToken',{
-            idToken: firebase
-        });
-
-        return{
-            props:{
-                user: user?.data
-            }
-        }
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/seller/products/dashboard",
+        },
+      };
     }
+  } catch (error) {}
 
-    return{
-        props:{}
-    }
+  return {
+    props: {},
+  };
 }
