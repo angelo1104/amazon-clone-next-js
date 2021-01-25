@@ -7,6 +7,7 @@ import spinner from "../../../lottie/ios-loader.json";
 import { Auth } from "aws-amplify";
 import ReactCodeInput from "react-code-input";
 import { useRouter } from "next/router";
+import URL from "url";
 
 function PasswordReset() {
   const [email, setEmail] = useState("");
@@ -17,6 +18,10 @@ function PasswordReset() {
 
   const router = useRouter();
   const { redirect } = router.query;
+
+  let redirectUrl = "";
+
+  if (redirect) redirectUrl = URL.parse(redirect.toString());
 
   const [activateCode, setActivateCode] = useState(false);
 
@@ -94,7 +99,8 @@ function PasswordReset() {
     setProcessing(true);
     try {
       await Auth.forgotPasswordSubmit(email, code, password);
-      if (redirect) router.replace(`/auth/email/login?redirect=${redirect}`);
+      if (redirectUrl?.hostname === location.hostname)
+        router.replace(`/auth/email/login?redirect=${redirect}`);
       else router.replace(`/auth/email/login`);
     } catch (error) {
       console.log(error);

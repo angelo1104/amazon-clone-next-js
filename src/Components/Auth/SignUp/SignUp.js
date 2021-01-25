@@ -4,11 +4,10 @@ import Link from "next/link";
 import AuthFooter from "../AuthFooter/AuthFooter";
 import Lottie from "lottie-react-web";
 import spinner from "../../../lottie/ios-loader.json";
-import { setUser } from "../../../ContextApi/actions";
-import { useStateValue } from "../../../ContextApi/StateProvider";
 import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
 import dynamic from "next/dynamic";
+import URL from "url";
 
 const ReactCodeInput = dynamic(import("react-code-input"));
 
@@ -27,21 +26,24 @@ function SignUp() {
 
   const { redirect } = router.query;
 
-  const [{}, dispatch] = useStateValue();
+  let redirectUrl = "";
+
+  if (redirect) redirectUrl = URL.parse(redirect.toString());
 
   const verifyCodeAndSignIn = async (email, code) => {
     setProcessing(true);
 
     try {
-      const confirmation = await Auth.confirmSignUp(email, code);
+      await Auth.confirmSignUp(email, code);
 
-      const user = await Auth.signIn({
+      await Auth.signIn({
         username: email,
         password,
       });
 
       setProcessing(false);
-      if (redirect) await router.replace(`${redirect}`);
+      if (redirectUrl?.hostname === location.hostname)
+        await router.replace(`${redirect}`);
       else await router.replace("/");
     } catch (error) {
       console.log("code error", error.message);
@@ -63,7 +65,7 @@ function SignUp() {
 
   const signUp = async () => {
     try {
-      const { user } = await Auth.signUp({
+      const {} = await Auth.signUp({
         username: email,
         password,
         attributes: {
@@ -212,7 +214,7 @@ function SignUp() {
               Already have an account?
               <Link
                 href={
-                  redirect
+                  redirectUrl?.hostname === location.hostname
                     ? `/auth/email/login?redirect=${redirect}`
                     : "/auth/email/login"
                 }

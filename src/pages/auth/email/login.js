@@ -47,7 +47,6 @@ export async function getServerSideProps(ctx) {
       };
     }
   } catch (error) {
-    console.log("error", error);
     //user is not authenticated.
   }
   return {
