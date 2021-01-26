@@ -12,6 +12,7 @@ import { storage } from "../../../../../../firebase";
 import animation from "../../../../../../lottie/loader-product.json";
 import Lottie from "lottie-react-web";
 import { useRouter } from "next/router";
+import { nanoid } from "nanoid";
 
 //I love Ishika. Please love me.
 
@@ -37,22 +38,24 @@ function DashBoardCreateProductLegals({ setPage, page }) {
     dispatch(setFormProcessing(state));
   };
 
-  const [{ dataUser }] = useStateValue();
+  const [{ user }] = useStateValue();
 
   const router = useRouter();
 
   const submit = async (event) => {
     event.preventDefault();
 
+    const productId = nanoid(28);
+
     try {
       console.log("clicked.");
       setProcessing(true);
-      await storage()
-        .ref(`products/${dataUser.name}/${name}/avatar`)
+      await storage
+        .ref(`products/${dataUser.name}/${productId}/${name}/avatar`)
         .put(avatar[0]);
 
-      const avatarUrl = await storage()
-        .ref(`products/${dataUser.name}/${name}/avatar`)
+      const avatarUrl = await storage
+        .ref(`products/${dataUser.name}/${productId}/${name}/avatar`)
         .getDownloadURL();
 
       const imageUrls = [];
@@ -60,12 +63,16 @@ function DashBoardCreateProductLegals({ setPage, page }) {
       for (const image of images) {
         const index = images.indexOf(image);
 
-        await storage()
-          .ref(`products/${dataUser.name}/${name}/${image.name}${index}`)
+        await storage
+          .ref(
+            `products/${user.attributes.email}/${productId}/${name}/${image.name}${index}`
+          )
           .put(image);
 
-        const url = await storage()
-          .ref(`products/${dataUser.name}/${name}/${image.name}${index}`)
+        const url = await storage
+          .ref(
+            `products/${user.attributes.email}/${productId}/${name}/${image.name}${index}`
+          )
           .getDownloadURL();
 
         imageUrls.push(url);
@@ -90,9 +97,10 @@ function DashBoardCreateProductLegals({ setPage, page }) {
               return feature;
             }
           }),
-          ownerEmail: dataUser.email,
-          ownerUid: dataUser.uid,
+          ownerEmail: user.attributes.email,
+          ownerUsername: user.username,
           status: "LIVE",
+          productId: productId,
         },
       });
 
