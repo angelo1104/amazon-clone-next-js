@@ -7,6 +7,7 @@ import csc from "country-state-city";
 import { useStateValue } from "../../../../../ContextApi/StateProvider";
 import AuthFooter from "../../../../Auth/AuthFooter/AuthFooter";
 import { Auth } from "aws-amplify";
+import { setUser } from "../../../../../ContextApi/actions";
 
 function BecomeSellerForm() {
   const router = useRouter();
@@ -29,12 +30,6 @@ function BecomeSellerForm() {
   const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
-    // if () {
-    //
-    //   router.replace("/seller/products/auth/sign-up");
-    // } else if (user?.attributes["custom:seller"] === "true") {
-    //   router.replace("/seller/products/dashboard");
-    //}
     Auth.currentAuthenticatedUser()
       .then((user) => {
         if (!user) {
@@ -55,7 +50,7 @@ function BecomeSellerForm() {
     setError("");
 
     try {
-      const user = await Auth.currentAuthenticatedUser();
+      //const user = await Auth.currentAuthenticatedUser();
 
       await Auth.updateUserAttributes(user, {
         name: `${firstName} ${lastName}`,
@@ -66,6 +61,10 @@ function BecomeSellerForm() {
         address: address,
         "custom:seller": "true",
       });
+
+      const newUser = await Auth.currentAuthenticatedUser();
+
+      dispatch(setUser(newUser));
     } catch (error) {
       setError("We encountered an error.");
       console.log(error);

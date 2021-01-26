@@ -167,13 +167,11 @@ function BecomeSellerPersonal({
           businessLogic();
         }}
         type="submit"
+        style={{ background: processing && "#ff9900b0" }}
         className={styles.continue_button}
       >
         {processing ? (
-          <div
-            className={styles.spinner}
-            style={{ background: processing && "rgba(255,153,0, 0.3)" }}
-          >
+          <div className={styles.spinner}>
             <Lottie options={{ animationData: spinner }} />
           </div>
         ) : (

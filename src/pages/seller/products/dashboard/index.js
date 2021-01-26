@@ -1,7 +1,6 @@
 import React from "react";
 import DashBoardHome from "../../../../Components/Seller/DashBoard/DashBoardHome/DashBoardHome";
-import nookie from "nookies";
-import authInstance from "../../../../axios/authInstance";
+import { withSSRContext } from "aws-amplify";
 
 function DashBoardHomePage() {
   return (
@@ -14,33 +13,26 @@ function DashBoardHomePage() {
 export default DashBoardHomePage;
 
 export async function getServerSideProps(ctx) {
-  const { firebase } = nookie.get(ctx);
+  const { Auth } = withSSRContext(ctx);
 
-  let user = null;
+  try {
+    const user = await Auth.currentAuthenticatedUser();
 
-  if (firebase) {
-    user = await authInstance.post("/idToken", {
-      idToken: firebase,
-    });
-
-    return {
-      props: {
-        user: user?.data,
-      },
-    };
-  } else {
-    return {
-      props: {
-        user: user?.data,
-      },
-      redirect: {
-        permanent: false,
-        destination: "/seller/products",
-      },
-    };
-  }
+    if (user) {
+      //she is logged in and she is really hot.
+      if (user.attributes["custom:seller"] === "true") {
+        return {
+          props: {},
+        };
+      }
+    }
+  } catch (error) {}
 
   return {
+    redirect: {
+      permanent: false,
+      destination: "/seller/products",
+    },
     props: {},
   };
 }
