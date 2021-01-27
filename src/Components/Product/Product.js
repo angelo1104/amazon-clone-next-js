@@ -88,7 +88,6 @@ function Product({
   const buyNow = (event) => {
     event.preventDefault();
     if (isEmptyObject(productInCart)) {
-      console.log("go to motu", productInCart);
       goToCart();
     } else {
       pushToCart();

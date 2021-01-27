@@ -51,11 +51,11 @@ function DashBoardCreateProductLegals({ setPage, page }) {
       console.log("clicked.");
       setProcessing(true);
       await storage
-        .ref(`products/${dataUser.name}/${productId}/${name}/avatar`)
+        .ref(`products/${user.attributes.email}/${productId}/${name}/avatar`)
         .put(avatar[0]);
 
       const avatarUrl = await storage
-        .ref(`products/${dataUser.name}/${productId}/${name}/avatar`)
+        .ref(`products/${user.attributes.email}/${productId}/${name}/avatar`)
         .getDownloadURL();
 
       const imageUrls = [];
@@ -106,7 +106,7 @@ function DashBoardCreateProductLegals({ setPage, page }) {
 
       console.log("Submitted", product);
 
-      router.push("/seller/product/dashboard");
+      router.push("/seller/products/dashboard");
       setProcessing(false);
     } catch (error) {
       setProcessing(false);
