@@ -4,7 +4,7 @@ import { Skeleton } from "@material-ui/lab";
 import Image from "next/image";
 import { nanoid } from "nanoid";
 
-function ImagePLaceHolder({ style, className, width, height, src }) {
+function ImagePLaceHolder({ className, src }) {
   const [loaded, setLoaded] = useState(false);
   const imageId = nanoid(30);
 
@@ -13,12 +13,13 @@ function ImagePLaceHolder({ style, className, width, height, src }) {
   }, [loaded]);
 
   useEffect(() => {
-    const image = document.querySelector(`#${imageId}`);
-    image.onload = () => {
-      // console.log("loader fodder.");
-      setLoaded(true);
-    };
-  }, []);
+    try {
+      const image = document.querySelector(`#${imageId}`);
+      image.addEventListener("load", (evt) => {
+        setLoaded(true);
+      });
+    } catch (error) {}
+  });
 
   return (
     <div className={`${className} ${styles.container}`}>

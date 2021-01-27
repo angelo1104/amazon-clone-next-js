@@ -12,6 +12,7 @@ import {
 } from "../../ContextApi/actions";
 import { Button, Grid } from "@material-ui/core";
 import Footer from "../Footer/Footer";
+import ImagePLaceHolder from "../ImagePlaceHolder/ImagePLaceHolder";
 
 function Product({
   _id,
@@ -109,19 +110,24 @@ function Product({
                     index === selectedImage
                       ? "0 0 3px 2px rgba(228,121,17, .7)"
                       : "none",
+                  width: "fit-content",
+                  height: "fit-content",
                 };
 
                 return (
-                  <img
-                    className={styles.small_image}
-                    src={image}
+                  <div
                     style={style}
-                    alt=""
-                    key={index}
                     onMouseOver={(event) => {
                       setSelectedImage(index);
                     }}
-                  />
+                  >
+                    <ImagePLaceHolder
+                      className={styles.small_image}
+                      src={image}
+                      style={style}
+                      key={index}
+                    />
+                  </div>
                 );
               })}
             </div>
