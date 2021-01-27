@@ -163,7 +163,7 @@ function Product({
 
             <hr className={styles.product_separator} />
 
-            <p className={styles.product_desc}>{description}</p>
+            <pre className={styles.product_desc}>{description}</pre>
 
             <ul className={styles.product_list}>
               {features.map((feature, index) => {

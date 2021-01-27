@@ -9,12 +9,8 @@ import Link from "next/link";
 import { Auth } from "aws-amplify";
 
 function HeaderItems() {
-  const [{ user, cart }, dispatch] = useStateValue();
+  const [{ user, cart }] = useStateValue();
   const router = useRouter();
-
-  useEffect(() => {
-    dispatch(setSearchText(""));
-  }, []);
 
   useEffect(() => {
     Cookies.set("cart", cart);
