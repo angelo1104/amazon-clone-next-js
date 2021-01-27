@@ -3,12 +3,9 @@
 }
 
 .product_info{
-    width: 100%;
     padding: 20px 10px;
     min-height: 700px;
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
 }
 
 .product_images{
@@ -63,6 +60,8 @@
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 400;
+    white-space: pre-wrap;
+    word-break: keep-all;
 }
 
 .product_list{
@@ -178,4 +177,20 @@
     height: 30px !important;
     width: 19px !important;
     margin: auto 5px !important;
+}
+
+.product_text{
+    padding-left: 30px !important;
+}
+
+.avatars{
+    position: sticky !important;
+    top: 20px !important;
+    height: fit-content !important;
+}
+
+.display_image{
+    position: sticky !important;
+    top: 20px !important;
+    height: fit-content !important;
 }

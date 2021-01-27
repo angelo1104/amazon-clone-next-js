@@ -10,7 +10,7 @@ import {
   removeProduct,
   updateTotalProduct,
 } from "../../ContextApi/actions";
-import { Button } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import Footer from "../Footer/Footer";
 
 function Product({
@@ -100,8 +100,8 @@ function Product({
       <Header />
 
       <div className={styles.product_main}>
-        <div className={styles.product_info}>
-          <div className={styles.product_images}>
+        <Grid container={true} spacing={1} className={styles.product_info}>
+          <Grid item xs={1} className={styles.avatars}>
             <div className={styles.small_images}>
               {images.map((image, index) => {
                 const style = {
@@ -125,30 +125,30 @@ function Product({
                 );
               })}
             </div>
+          </Grid>
 
-            <div className={styles.main_image}>
-              <ReactImageMagnify
-                smallImage={{
-                  isFluidWidth: true,
-                  src: images[selectedImage],
-                }}
-                imageClassName={styles.main_image_src}
-                largeImage={{
-                  src: images[selectedImage],
-                  width: 667,
-                  height: 800,
-                }}
-                enlargedImageContainerClassName={styles.main_image_large}
-                enlargedImageContainerDimensions={{
-                  width: "125%",
-                  height: "140%",
-                }}
-                lensComponent={ImageLens}
-              />
-            </div>
-          </div>
+          <Grid item={true} xs={4} className={styles.display_image}>
+            <ReactImageMagnify
+              smallImage={{
+                isFluidWidth: true,
+                src: images[selectedImage],
+              }}
+              imageClassName={styles.main_image_src}
+              largeImage={{
+                src: images[selectedImage],
+                width: 667,
+                height: 800,
+              }}
+              enlargedImageContainerClassName={styles.main_image_large}
+              enlargedImageContainerDimensions={{
+                width: "125%",
+                height: "140%",
+              }}
+              lensComponent={ImageLens}
+            />
+          </Grid>
 
-          <div className={styles.product_description}>
+          <Grid item={true} xs={7} className={styles.product_text}>
             <h2 className={styles.product_title}>{name}</h2>
 
             <p className={styles.product_price}>
@@ -174,8 +174,8 @@ function Product({
                 );
               })}
             </ul>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
 
         <div className={styles.product_buy}>
           <div className={styles.buy_now}>
