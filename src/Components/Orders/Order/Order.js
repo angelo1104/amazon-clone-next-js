@@ -30,7 +30,7 @@ function Order({ order }) {
           avatar={product.avatar}
           name={product.name}
           price={product.price}
-          _id={product._id}
+          _id={product.productID}
           amount={product.amount}
           brand={product.brand}
         />
