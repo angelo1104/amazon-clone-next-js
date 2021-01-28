@@ -30,7 +30,6 @@ export async function getServerSideProps(ctx) {
     }
   } catch (e) {
     //she is not yet with us let's add her to our list.
-    console.log("eeee", e);
     return {
       redirect: {
         permanent: false,

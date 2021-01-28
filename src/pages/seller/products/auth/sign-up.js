@@ -21,8 +21,6 @@ export async function getServerSideProps(ctx) {
     const user = await Auth.currentAuthenticatedUser();
 
     if (user && user?.attributes["custom:seller"] !== "false") {
-      console.log(user?.attributes["custom:seller"]);
-
       return {
         redirect: {
           permanent: false,

@@ -5,15 +5,7 @@ import authInstance from "../../../axios/authInstance";
 import URL from "url";
 import { withSSRContext } from "aws-amplify";
 
-function SignUpPage({ user }) {
-  useEffect(() => {
-    if (user) {
-      console.log("This is cookie user --->>>", user);
-    } else {
-      console.log("Out of cookies...");
-    }
-  }, []);
-
+function SignUpPage() {
   return (
     <div className="sign-up">
       <SignUp />
