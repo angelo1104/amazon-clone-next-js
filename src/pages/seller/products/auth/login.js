@@ -1,7 +1,5 @@
 import React from "react";
 import SellerLogin from "../../../../Components/Seller/SellerAuth/SellerLogin/SellerLogin";
-import nookie from "nookies";
-import authInstance from "../../../../axios/authInstance";
 import { withSSRContext } from "aws-amplify";
 
 function SellerLoginPage() {

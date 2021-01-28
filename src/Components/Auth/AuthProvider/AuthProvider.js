@@ -4,7 +4,7 @@ import { setUser } from "../../../ContextApi/actions";
 import { Auth, Hub } from "aws-amplify";
 
 function AuthProvider({ children }) {
-  const [{ user, dataUser }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()

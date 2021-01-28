@@ -2,7 +2,6 @@ import { actionTypes } from "./actions";
 
 export const initialState = {
   user: null,
-  dataUser: null,
   hits: [],
   showAutoComplete: false,
   searchText: "",
@@ -15,11 +14,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: action.user,
-      };
-    case actionTypes.setDataUser:
-      return {
-        ...state,
-        dataUser: action.user,
       };
     case actionTypes.setHits:
       return {

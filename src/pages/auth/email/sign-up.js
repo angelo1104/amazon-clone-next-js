@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import SignUp from "../../../Components/Auth/SignUp/SignUp";
-import nookie from "nookies";
-import authInstance from "../../../axios/authInstance";
 import URL from "url";
 import { withSSRContext } from "aws-amplify";
 

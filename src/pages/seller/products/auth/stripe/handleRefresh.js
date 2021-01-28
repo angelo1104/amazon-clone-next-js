@@ -1,34 +1,31 @@
 import React, { useEffect } from "react";
 import styles from "./styles.module.css";
 import { useRouter } from "next/router";
-import nookie from "nookies";
-import authInstance from "../../../../../axios/authInstance";
 import { useStateValue } from "../../../../../ContextApi/StateProvider";
-import { setDataUser } from "../../../../../ContextApi/actions";
 
 function HandleRefresh({ user }) {
   const router = useRouter();
   const [{}, dispatch] = useStateValue();
 
   useEffect(() => {
-    authInstance
-      .patch("/update/user", {
-        filter: {
-          email: user.user.email,
-          uid: user.user.uid,
-        },
-        update: {
-          accountID: "",
-        },
-      })
-      .then((res) => {
-        router.replace("/seller/product/dashboard");
-
-        dispatch(setDataUser(res.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // authInstance
+    //   .patch("/update/user", {
+    //     filter: {
+    //       email: user.user.email,
+    //       uid: user.user.uid,
+    //     },
+    //     update: {
+    //       accountID: "",
+    //     },
+    //   })
+    //   .then((res) => {
+    //     router.replace("/seller/product/dashboard");
+    //
+    //     dispatch(setDataUser(res.data));
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, []);
 
   return (
@@ -53,21 +50,21 @@ function HandleRefresh({ user }) {
 export default HandleRefresh;
 
 export async function getServerSideProps(ctx) {
-  const { firebase } = nookie.get(ctx);
-
-  let user = null;
-
-  if (firebase) {
-    user = await authInstance.post("/idtoken", {
-      idToken: firebase,
-    });
-
-    return {
-      props: {
-        user: user.data,
-      },
-    };
-  }
+  // const { firebase } = nookie.get(ctx);
+  //
+  // let user = null;
+  //
+  // if (firebase) {
+  //   user = await authInstance.post("/idtoken", {
+  //     idToken: firebase,
+  //   });
+  //
+  //   return {
+  //     props: {
+  //       user: user.data,
+  //     },
+  //   };
+  // }
 
   return {
     props: {},
