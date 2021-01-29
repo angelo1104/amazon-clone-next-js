@@ -6,12 +6,11 @@ import AmazonProductsRow from "./AmazonProductsRow/AmazonProductsRow";
 import Carousel from "react-material-ui-carousel";
 import { useStateValue } from "../../ContextApi/StateProvider";
 import { setShowAutoComplete } from "../../ContextApi/actions";
-import CodeInput from "../CodeInput/CodeInput";
 
 function AmazonHomePage({ cardData, productDataStore }) {
   const [{ showAutoComplete }, dispatch] = useStateValue();
 
-  const hideAutoComplete = (event) => {
+  const hideAutoComplete = () => {
     dispatch(setShowAutoComplete(false));
   };
 

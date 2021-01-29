@@ -7,7 +7,7 @@ import Lottie from "lottie-react-web";
 import spinner from "../../../../lottie/ios-loader.json";
 import { useStateValue } from "../../../../ContextApi/StateProvider";
 import { Auth } from "aws-amplify";
-import ReactCodeInput from "react-code-input";
+import CodeInput from "../../../CodeInput/CodeInput";
 
 function SellerLogin() {
   const router = useRouter();
@@ -117,7 +117,7 @@ function SellerLogin() {
   };
 
   useEffect(() => {
-    if (code.length === 6) {
+    if (code.length === 6 || code.trim()) {
       //confirm it
       verifyCodeAndSignIn(email, code);
     }
@@ -218,28 +218,10 @@ function SellerLogin() {
 
             <p className={styles.code_error}>{codeError}</p>
 
-            <ReactCodeInput
-              type={"number"}
+            <CodeInput
               fields={6}
-              name={"active code"}
-              inputMode={"numeric"}
-              onChange={(code) => setCode(code.toString())}
+              onChange={(code) => setCode(code.join(""))}
               disabled={processing}
-              value={code}
-              inputStyle={{
-                fontFamily: "Inter, sans-serif",
-                borderRadius: "6px",
-                border: "1px solid lightgrey",
-                boxShadow: "rgb(0 0 0 / 10%) 0px 0px 10px 0px",
-                margin: "4px",
-                paddingLeft: "8px",
-                width: "36px",
-                height: "42px",
-                fontSize: "32px",
-                boxSizing: "border-box",
-                color: "black",
-                backgroundColor: "white",
-              }}
             />
 
             <p className={styles.resend_code} onClick={resendCode}>

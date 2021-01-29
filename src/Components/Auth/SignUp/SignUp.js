@@ -6,10 +6,8 @@ import Lottie from "lottie-react-web";
 import spinner from "../../../lottie/ios-loader.json";
 import { useRouter } from "next/router";
 import { Auth } from "aws-amplify";
-import dynamic from "next/dynamic";
 import URL from "url";
-
-const ReactCodeInput = dynamic(import("react-code-input"));
+import CodeInput from "../../CodeInput/CodeInput";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -57,7 +55,7 @@ function SignUp() {
   }, [codeError]);
 
   useEffect(() => {
-    if (code.length === 6) {
+    if (code.length === 6 || code.trim()) {
       //confirm it
       verifyCodeAndSignIn(email, code);
     }
@@ -235,26 +233,10 @@ function SignUp() {
 
             <p className={styles.code_error}>{codeError}</p>
 
-            <ReactCodeInput
-              type={"number"}
-              onChange={(code) => setCode(code.toString())}
+            <CodeInput
               fields={6}
+              onChange={(code) => setCode(code.join(""))}
               disabled={processing}
-              value={code}
-              inputStyle={{
-                fontFamily: "Inter, sans-serif",
-                borderRadius: "6px",
-                border: "1px solid lightgrey",
-                boxShadow: "rgb(0 0 0 / 10%) 0px 0px 10px 0px",
-                margin: "4px",
-                paddingLeft: "8px",
-                width: "36px",
-                height: "42px",
-                fontSize: "32px",
-                boxSizing: "border-box",
-                color: "black",
-                backgroundColor: "white",
-              }}
             />
           </form>
 

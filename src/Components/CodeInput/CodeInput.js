@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
 import styles from "./CodeInput.module.css";
 
-function CodeInput({ fields, onChange }) {
+function CodeInput({ fields, onChange, disabled }) {
   const BACKSPACE_KEY = 8;
   const LEFT_ARROW_KEY = 37;
   const RIGHT_ARROW_KEY = 39;
 
   const [code, setCode] = useState(
-    Array.from({ length: parseInt(fields) }).map(() => "0")
+    Array.from({ length: parseInt(fields) }).map(() => "")
   );
 
   useEffect(() => {
-    console.log("codey", code);
-
     try {
-      onChange();
+      onChange(code);
     } catch (e) {}
   }, [code]);
 
@@ -79,6 +77,7 @@ function CodeInput({ fields, onChange }) {
             type={"text"}
             inputMode={"numeric"}
             key={index}
+            disabled={disabled}
             value={code[index]}
             onFocus={(e) =>
               e.currentTarget.setSelectionRange(
