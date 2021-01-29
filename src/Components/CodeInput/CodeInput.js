@@ -1,29 +1,29 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CodeInput.module.css";
 
-function CodeInput({ fields }) {
+function CodeInput({ fields, onChange }) {
   const BACKSPACE_KEY = 8;
   const LEFT_ARROW_KEY = 37;
-  const UP_ARROW_KEY = 38;
   const RIGHT_ARROW_KEY = 39;
-  const DOWN_ARROW_KEY = 40;
 
   const [code, setCode] = useState(
     Array.from({ length: parseInt(fields) }).map(() => "0")
   );
 
-  const [codeRef, setCodeRef] = useState(
-    Array.from({ length: parseInt(fields) }).map(() => useRef(null))
-  );
-
   useEffect(() => {
     console.log("codey", code);
+
+    try {
+      onChange();
+    } catch (e) {}
   }, [code]);
 
   const modifyCode = (codeNumber, index) => {
     setCode((code) =>
       code.map((initial, codeIndex) =>
-        index == codeIndex ? codeNumber.toString() : initial
+        index.toString() === codeIndex.toString()
+          ? codeNumber.toString()
+          : initial
       )
     );
   };
@@ -50,13 +50,6 @@ function CodeInput({ fields }) {
     input.select();
   };
 
-  // useEffect(() => {
-  //   codeRef.forEach((ref, index) => {
-  //     const input = ref.current;
-  //     console.log("referee", ref.current);
-  //   });
-  // }, [codeRef]);
-
   //code input .md
   /*
    * It should have a bunch of inputs
@@ -72,7 +65,7 @@ function CodeInput({ fields }) {
       el.selectionStart = el.selectionEnd = el.value.length;
     } else if (typeof el.createTextRange != "undefined") {
       el.focus();
-      var range = el.createTextRange();
+      let range = el.createTextRange();
       range.collapse(false);
       range.select();
     }
@@ -80,14 +73,12 @@ function CodeInput({ fields }) {
 
   return (
     <div>
-      <p>I am code inputy</p>
       {code.map((field, index) => {
         return (
           <input
             type={"text"}
             inputMode={"numeric"}
             key={index}
-            ref={codeRef[index]}
             value={code[index]}
             onFocus={(e) =>
               e.currentTarget.setSelectionRange(
@@ -121,12 +112,7 @@ function CodeInput({ fields }) {
               const value = event.target.value;
 
               function isNumeric(number) {
-                if (+number === +number) {
-                  // if is a number
-                  return true;
-                }
-
-                return false;
+                return +number === +number;
               }
 
               if (isNumeric(value)) {

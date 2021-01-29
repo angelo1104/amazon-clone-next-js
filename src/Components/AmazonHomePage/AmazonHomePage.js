@@ -6,7 +6,6 @@ import AmazonProductsRow from "./AmazonProductsRow/AmazonProductsRow";
 import Carousel from "react-material-ui-carousel";
 import { useStateValue } from "../../ContextApi/StateProvider";
 import { setShowAutoComplete } from "../../ContextApi/actions";
-import ReactCodeInput from "react-code-input";
 import CodeInput from "../CodeInput/CodeInput";
 
 function AmazonHomePage({ cardData, productDataStore }) {
@@ -114,8 +113,6 @@ function AmazonHomePage({ cardData, productDataStore }) {
       </div>
 
       <div className={styles.amazon_home_page_products}>
-        <CodeInput fields={6} />
-
         <AmazonCardRow cardData={cardData.slice(0, 8)} />
 
         <AmazonProductsRow {...productDataStore.firstProductsData} id={1} />
