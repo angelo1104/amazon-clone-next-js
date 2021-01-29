@@ -113,7 +113,7 @@ function PasswordReset() {
 
   useEffect(() => {
     setCodeError("");
-    if (code.length === 6 || code.trim()) {
+    if (code.length === 6 && code.trim()) {
       verifyCodeAndResetPassword();
     }
   }, [code]);

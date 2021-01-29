@@ -108,7 +108,7 @@ function SellerSignUp() {
   };
 
   useEffect(() => {
-    if (code.length === 6 || code.trim()) {
+    if (code.length === 6 && code.trim()) {
       verifyCodeAndSignIn(email, code);
     }
   }, [code]);

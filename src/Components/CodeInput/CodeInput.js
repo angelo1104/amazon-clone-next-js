@@ -27,25 +27,31 @@ function CodeInput({ fields, onChange, disabled }) {
   };
 
   const moveToNext = () => {
-    const inputs = Array.prototype.slice.call(
-      document.querySelectorAll("input")
-    );
-    const index = (inputs.indexOf(document.activeElement) + 1) % inputs.length;
-    const input = inputs[index];
-    input.focus();
-    input.select();
-    moveCursorToEnd(input);
+    try {
+      const inputs = Array.prototype.slice.call(
+        document.querySelectorAll("input")
+      );
+      const index =
+        (inputs.indexOf(document.activeElement) + 1) % inputs.length;
+      const input = inputs[index];
+      input.focus();
+      input.select();
+      moveCursorToEnd(input);
+    } catch (e) {}
   };
 
   const moveBack = () => {
-    const inputs = Array.prototype.slice.call(
-      document.querySelectorAll("input")
-    );
-    const index = (inputs.indexOf(document.activeElement) - 1) % inputs.length;
-    const input = inputs[index];
-    input.focus();
-    moveCursorToEnd(input);
-    input.select();
+    try {
+      const inputs = Array.prototype.slice.call(
+        document.querySelectorAll("input")
+      );
+      const index =
+        (inputs.indexOf(document.activeElement) - 1) % inputs.length;
+      const input = inputs[index];
+      input.focus();
+      moveCursorToEnd(input);
+      input.select();
+    } catch (e) {}
   };
 
   //code input .md
