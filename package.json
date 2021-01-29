@@ -33,7 +33,6 @@
     "next-images": "^1.7.0",
     "nprogress": "^0.2.0",
     "react": "17.0.1",
-    "react-code-input": "^3.10.0",
     "react-dom": "17.0.1",
     "react-image-magnify": "^2.7.4",
     "react-material-ui-carousel": "^2.1.2",
