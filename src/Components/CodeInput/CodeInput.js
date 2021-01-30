@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./CodeInput.module.css";
 
 function CodeInput({ fields, onChange, disabled }) {
@@ -8,6 +8,10 @@ function CodeInput({ fields, onChange, disabled }) {
 
   const [code, setCode] = useState(
     Array.from({ length: parseInt(fields) }).map(() => "")
+  );
+
+  const [codeRef, setCodeRef] = useState(
+    Array.from({ length: parseInt(fields) }).map(() => useRef(null))
   );
 
   useEffect(() => {
@@ -83,14 +87,9 @@ function CodeInput({ fields, onChange, disabled }) {
             type={"text"}
             inputMode={"numeric"}
             key={index}
+            ref={codeRef[index]}
             disabled={disabled}
             value={code[index]}
-            onFocus={(e) =>
-              e.currentTarget.setSelectionRange(
-                e.currentTarget.value.length,
-                e.currentTarget.value.length
-              )
-            }
             className={styles.input}
             onKeyDown={function (event) {
               const value = event.target.value;

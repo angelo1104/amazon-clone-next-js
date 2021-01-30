@@ -51,10 +51,6 @@ function SignUp() {
   };
 
   useEffect(() => {
-    console.log("codey", codeError);
-  }, [codeError]);
-
-  useEffect(() => {
     if (code.length === 6 && code.trim()) {
       //confirm it
       verifyCodeAndSignIn(email, code);
