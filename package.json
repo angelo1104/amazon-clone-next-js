@@ -34,7 +34,7 @@
     "nprogress": "^0.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-image-magnify": "^2.7.4",
+    "react-image-magnifiers": "^1.4.0",
     "react-material-ui-carousel": "^2.1.2",
     "react-reveal": "^1.2.2",
     "react-visibility-sensor": "^5.1.1"

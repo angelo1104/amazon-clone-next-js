@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Product.module.css";
 import Header from "../Header/Header";
-import ReactImageMagnify from "react-image-magnify";
-import ImageLens from "./ImageLens/ImageLens";
+import { GlassMagnifier } from "react-image-magnifiers";
 import { useRouter } from "next/router";
 import { useStateValue } from "../../ContextApi/StateProvider";
 import {
@@ -13,6 +12,7 @@ import {
 import { Button, Grid } from "@material-ui/core";
 import Footer from "../Footer/Footer";
 import ImagePLaceHolder from "../ImagePlaceHolder/ImagePLaceHolder";
+import ImageZoom from "./ImageZoom/ImageZoom";
 
 function Product({
   _id,
@@ -120,6 +120,7 @@ function Product({
                     onMouseOver={(event) => {
                       setSelectedImage(index);
                     }}
+                    key={index}
                   >
                     <ImagePLaceHolder
                       className={styles.small_image}
@@ -134,23 +135,10 @@ function Product({
           </Grid>
 
           <Grid item={true} xs={4} className={styles.display_image}>
-            <ReactImageMagnify
-              smallImage={{
-                isFluidWidth: true,
-                src: images[selectedImage],
-              }}
-              imageClassName={styles.main_image_src}
-              largeImage={{
-                src: images[selectedImage],
-                width: 667,
-                height: 800,
-              }}
-              enlargedImageContainerClassName={styles.main_image_large}
-              enlargedImageContainerDimensions={{
-                width: "125%",
-                height: "140%",
-              }}
-              lensComponent={ImageLens}
+            <GlassMagnifier
+              imageSrc={images[selectedImage]}
+              imageAlt={"product image"}
+              magnifierBorderSize={0}
             />
           </Grid>
 

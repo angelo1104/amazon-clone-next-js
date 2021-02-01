@@ -1,0 +1,11 @@
+.zoom{
+    width: 100%;
+    height: fit-content;
+}
+
+.small_image{
+    width: 100%;
+    min-height: 300px;
+    object-fit: contain;
+    height: fit-content;
+}

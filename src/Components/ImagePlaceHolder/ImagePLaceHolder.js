@@ -4,13 +4,15 @@ import { Skeleton } from "@material-ui/lab";
 import Image from "next/image";
 import { nanoid } from "nanoid";
 
-function ImagePLaceHolder({ className, src }) {
+function ImagePLaceHolder({ className, src, setBounding }) {
   const [loaded, setLoaded] = useState(false);
   const imageId = nanoid(30);
 
-  useEffect(() => {
-    console.log("loaded", loaded);
-  }, [loaded]);
+  const setBound = (bound) => {
+    try {
+      setBounding(bound);
+    } catch (e) {}
+  };
 
   useEffect(() => {
     try {
@@ -18,8 +20,10 @@ function ImagePLaceHolder({ className, src }) {
       image.addEventListener("load", (evt) => {
         setLoaded(true);
       });
+
+      setBound(image.getBoundingClientRect());
     } catch (error) {}
-  });
+  }, [imageId]);
 
   return (
     <div className={`${className} ${styles.container}`}>

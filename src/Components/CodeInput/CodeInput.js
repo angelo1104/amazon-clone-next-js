@@ -91,6 +91,9 @@ function CodeInput({ fields, onChange, disabled }) {
             disabled={disabled}
             value={code[index]}
             className={styles.input}
+            onFocus={(event) => {
+              console.log(codeRef[index].current.selectionEnd);
+            }}
             onKeyDown={function (event) {
               const value = event.target.value;
               const key = event.keyCode;
