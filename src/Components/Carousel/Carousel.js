@@ -14,20 +14,20 @@ function Carousel({ data }) {
 
   const MINUTE_MS = 15000;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      console.log("Logs every minute");
-      nextSlide();
-    }, MINUTE_MS);
-
-    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     console.log("Logs every minute");
+  //     nextSlide();
+  //   }, MINUTE_MS);
+  //
+  //   return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+  // }, []);
 
   return (
     <div className={styles.carousel}>
-      <div className={styles.left_arrow} onClick={prevSlide}>
-        {"<"}
-      </div>
+      {/*<div className={styles.left_arrow} onClick={prevSlide}>*/}
+      {/*  {"<"}*/}
+      {/*</div>*/}
 
       {data.map((image, index) => (
         <div
@@ -46,9 +46,9 @@ function Carousel({ data }) {
 
       <img src={data[0]} className={styles.hidden_image} />
 
-      <div className={styles.right_arrow} onClick={nextSlide}>
-        {">"}
-      </div>
+      {/*<div className={styles.right_arrow} onClick={nextSlide}>*/}
+      {/*  {">"}*/}
+      {/*</div>*/}
     </div>
   );
 }
