@@ -24,7 +24,7 @@ function BecomeSellerForm() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    setCountryName(csc.getCountryById(country).name);
+    setCountryName(csc.getCountryByCode(country).name);
   }, [country]);
 
   const [{ user }, dispatch] = useStateValue();

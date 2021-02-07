@@ -90,7 +90,7 @@ function BecomeSellerPersonal({
         >
           {csc.getAllCountries().map((country) => {
             return (
-              <Option key={country.id} value={country.id}>
+              <Option key={country.isoCode} value={country.isoCode}>
                 {country.name}
               </Option>
             );
@@ -113,7 +113,7 @@ function BecomeSellerPersonal({
             >
               {csc.getStatesOfCountry(country).map((state) => {
                 return (
-                  <Option key={state.id} value={state.name}>
+                  <Option key={state.isoCode} value={state.name}>
                     {state.name}
                   </Option>
                 );
