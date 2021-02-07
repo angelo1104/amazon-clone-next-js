@@ -12,7 +12,6 @@ import {
 import { Button, Grid } from "@material-ui/core";
 import Footer from "../Footer/Footer";
 import ImagePLaceHolder from "../ImagePlaceHolder/ImagePLaceHolder";
-import ImageZoom from "./ImageZoom/ImageZoom";
 
 function Product({
   _id,

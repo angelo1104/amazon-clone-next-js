@@ -69,7 +69,6 @@ function Checkout() {
   };
 
   const regionChange = (val) => {
-    console.log("val", val);
     setState(val);
   };
 
@@ -116,7 +115,7 @@ function Checkout() {
               brand: product.brand,
             };
           }),
-          country: csc.getCountryById(country).name.toString(),
+          country: csc.getCountryByCode(country).name.toString(),
           state: state,
           city: city,
           zip: zip,
@@ -127,8 +126,6 @@ function Checkout() {
           date: new Date(),
         },
       });
-
-      console.log("order", order);
     } catch (error) {
       console.log(error);
       setError(
@@ -209,8 +206,6 @@ function Checkout() {
         clientSecret
       );
 
-      console.log("result", paymentIntent);
-
       if (paymentIntent.status === "succeeded") {
         //success in 3d secure.
         setSucceeded(true);
@@ -285,7 +280,7 @@ function Checkout() {
           >
             {csc.getAllCountries().map((country) => {
               return (
-                <Option key={country.id} value={country.id}>
+                <Option key={country.isoCode} value={country.isoCode}>
                   {country.name}
                 </Option>
               );
@@ -305,7 +300,7 @@ function Checkout() {
           >
             {csc.getStatesOfCountry(country).map((state) => {
               return (
-                <Option key={state.id} value={state.name}>
+                <Option key={state.isoCode} value={state.name}>
                   {state.name}
                 </Option>
               );
