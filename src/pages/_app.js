@@ -1,12 +1,10 @@
 import "../../styles/globals.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { StateProvider } from "../ContextApi/StateProvider";
 import reducer, { initialState } from "../ContextApi/reducers";
 import Head from "next/head";
 import AuthProvider from "../Components/Auth/AuthProvider/AuthProvider";
 import "antd/dist/antd.css";
-import { loadStripe } from "@stripe/stripe-js/pure";
-import { Elements } from "@stripe/react-stripe-js";
 import "nprogress/nprogress.css";
 import dynamic from "next/dynamic";
 import Amplify from "aws-amplify";
@@ -25,10 +23,6 @@ const TopProgressBar = dynamic(
 );
 
 function MyApp({ Component, pageProps }) {
-  const stripePromise = loadStripe(
-    "pk_test_51HRUplG7mYQXcjRQLgPD5Y9RtRiNYSqgfEEy8KezalgBXUNRMfpqnja5Ht0GHgOHpiZo5dobSXRuDMuGiZsU4fYf00iPpQBrTM"
-  );
-
   return (
     <StateProvider initialState={initialState} reducer={reducer}>
       <Head>
