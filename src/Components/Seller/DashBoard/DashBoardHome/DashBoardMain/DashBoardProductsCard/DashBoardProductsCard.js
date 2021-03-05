@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./DashBoardProductsCard.module.css";
 import ImagePLaceHolder from "../../../../../ImagePlaceHolder/ImagePLaceHolder";
 
-function DashBoardProductsCard() {
+function DashBoardProductsCard({ image, name, price, description }) {
   const truncateString = (string, maxLength = 50) => {
     if (!string) return null;
     if (string.length <= maxLength) return string;
@@ -12,31 +12,20 @@ function DashBoardProductsCard() {
   return (
     <div className={styles.container}>
       <div className={styles.image_container}>
-        <ImagePLaceHolder
-          className={styles.image}
-          src={
-            "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_announce-iphone12pro_10132020.jpg.landing-big_2x.jpg"
-          }
-        />
+        <ImagePLaceHolder className={styles.image} src={image} />
 
-        <h4 className={styles.name}>
-          {truncateString("Hola Me sammo duerrrrrrrrrrrrrrrrr", 30)}
-        </h4>
+        <h4 className={styles.name}>{truncateString(name, 30)}</h4>
       </div>
 
       <div className={styles.info}>
         <div>
           <p className={styles.text}>
             Price on our stores {"  "}
-            <span className={styles.price}>$8.29 USD</span>
+            <span className={styles.price}>${price} USD</span>
           </p>
 
           <p className={styles.small_desc}>
-            {truncateString(
-              "Hola\n" +
-                "            ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo",
-              150
-            )}
+            {truncateString(description, 150)}
           </p>
         </div>
 
