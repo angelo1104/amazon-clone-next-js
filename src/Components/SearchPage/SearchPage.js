@@ -58,15 +58,15 @@ function SearchPage({ serverHits }) {
 
   return (
     <div className={styles.products}>
-      {!serverHits.hits.length && (
+      {!serverHits?.hits?.length && (
         <div className={styles.nothing}>
           <p className={styles.nothing_text}>No results found</p>
         </div>
       )}
 
-      {serverHits.hits.length && <div className={styles.ad}></div>}
+      {serverHits?.hits?.length && <div className={styles.ad}></div>}
 
-      {serverHits.hits.length && (
+      {serverHits?.hits?.length && (
         <div className={styles.product_list}>
           {hits?.map((hit, index) => {
             return (

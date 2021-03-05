@@ -25,11 +25,16 @@ function SellerLogin() {
 
   useEffect(() => {
     if (user) {
-      if (user.attributes["custom:seller"] === "true") {
+      if (user.attributes["custom:seller"] == "true") {
+        console.log(user, "true");
         router.replace("/seller/products/dashboard");
       }
     }
   }, [user]);
+
+  useEffect(() => {
+    console.log("dream");
+  }, []);
 
   const submitLogin = async (event) => {
     event.preventDefault();

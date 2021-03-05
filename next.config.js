@@ -2,7 +2,7 @@ const withPlugins = require("next-compose-plugins");
 const withImages = require("next-images");
 const config = {
   images: {
-    domains: ["firebasestorage.googleapis.com"],
+    domains: ["firebasestorage.googleapis.com", "www.apple.com"],
   },
 };
 
