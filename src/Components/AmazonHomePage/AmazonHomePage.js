@@ -6,6 +6,7 @@ import AmazonProductsRow from "./AmazonProductsRow/AmazonProductsRow";
 import { useStateValue } from "../../ContextApi/StateProvider";
 import { setShowAutoComplete } from "../../ContextApi/actions";
 import Carousel from "../Carousel/Carousel";
+import BuyProduct from "./BuyProduct/BuyProduct";
 
 function AmazonHomePage({ cardData, productDataStore }) {
   const [{ showAutoComplete }, dispatch] = useStateValue();
@@ -59,6 +60,28 @@ function AmazonHomePage({ cardData, productDataStore }) {
       </div>
 
       <div className={styles.amazon_home_page_products}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <BuyProduct
+            title={"Yoga mat"}
+            image={
+              "https://images-na.ssl-images-amazon.com/images/G/01/events/GFAH/GWDesktop_SingleImageCard_fitathome_1x._SY304_CB434924743_.jpg"
+            }
+          />
+
+          <BuyProduct
+            title={"iPad air"}
+            image={
+              "https://www.apple.com/v/ipad/home/bk/images/overview/compare_ipad_air__dlzfpz8gev42_large.png"
+            }
+          />
+          <BuyProduct
+            title={"Flaunt it"}
+            image={
+              "https://www.apple.com/v/iphone-12/f/images/overview/camera/deep_fusion__djiny4608bo2_large.jpg"
+            }
+          />
+        </div>
+
         <AmazonCardRow cardData={cardData.slice(0, 8)} />
 
         <AmazonProductsRow {...productDataStore.firstProductsData} id={1} />

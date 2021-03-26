@@ -1,0 +1,33 @@
+.container {
+  padding: 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 30px !important;
+}
+
+.image {
+  max-width: 250px;
+  object-fit: cover;
+  height: 300px;
+}
+
+.button {
+  color: #232f3e;
+  background: #ff9900;
+  border-radius: 50px;
+  padding: 6px 10px;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 16px;
+  outline-width: 0;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
+  margin: 20px 0;
+}
