@@ -3,6 +3,9 @@
   background-color: white;
   display: flex;
   flex-direction: column;
+  flex: 1;
+  max-width: 250px;
+  margin: 10px;
 }
 
 .head {
@@ -12,7 +15,8 @@
 }
 
 .image {
-  max-width: 250px;
+  width: 100%;
+  max-width: 225px;
   object-fit: cover;
   height: 300px;
 }
