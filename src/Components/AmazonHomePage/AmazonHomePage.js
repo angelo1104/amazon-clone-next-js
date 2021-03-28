@@ -87,7 +87,13 @@ function AmazonHomePage({ cardData, productDataStore }) {
           />
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: 40,
+          }}
+        >
           <BuyProduct
             title={"Watch"}
             image={
@@ -125,19 +131,19 @@ function AmazonHomePage({ cardData, productDataStore }) {
           />
         </div>
 
-        <AmazonCardRow cardData={cardData.slice(0, 8)} />
+        {/*<AmazonCardRow cardData={cardData.slice(0, 8)} />*/}
 
-        <AmazonProductsRow {...productDataStore.firstProductsData} id={1} />
-        <AmazonProductsRow {...productDataStore.secondProductsData} id={2} />
-        <AmazonProductsRow {...productDataStore.thirdProductsData} id={3} />
+        {/*<AmazonProductsRow {...productDataStore.firstProductsData} id={1} />*/}
+        {/*<AmazonProductsRow {...productDataStore.secondProductsData} id={2} />*/}
+        {/*<AmazonProductsRow {...productDataStore.thirdProductsData} id={3} />*/}
 
-        <AmazonCardRow cardData={cardData.slice(8, 12)} />
+        {/*<AmazonCardRow cardData={cardData.slice(8, 12)} />*/}
 
-        <AmazonProductsRow {...productDataStore.fourthProductsData} id={4} />
-        <AmazonProductsRow {...productDataStore.fifthProductsData} id={5} />
-        <AmazonProductsRow {...productDataStore.sixthProductsData} id={6} />
-        <AmazonProductsRow {...productDataStore.seventhProductsData} id={7} />
-        <AmazonProductsRow {...productDataStore.eightProductsData} id={8} />
+        {/*<AmazonProductsRow {...productDataStore.fourthProductsData} id={4} />*/}
+        {/*<AmazonProductsRow {...productDataStore.fifthProductsData} id={5} />*/}
+        {/*<AmazonProductsRow {...productDataStore.sixthProductsData} id={6} />*/}
+        {/*<AmazonProductsRow {...productDataStore.seventhProductsData} id={7} />*/}
+        {/*<AmazonProductsRow {...productDataStore.eightProductsData} id={8} />*/}
       </div>
     </div>
   );

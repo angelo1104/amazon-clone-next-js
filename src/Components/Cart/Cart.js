@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Cart.module.css";
 import Header from "../Header/Header";
 import CartList from "./CartList/CartList";
@@ -9,6 +9,10 @@ import { useRouter } from "next/router";
 function Cart() {
   const [{ cart, user }, dispatch] = useStateValue();
   const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch("/cart/placeOrder");
+  }, []);
 
   const total = cart.reduce((accumulator, item) => {
     return accumulator + item.amount * item.price;
