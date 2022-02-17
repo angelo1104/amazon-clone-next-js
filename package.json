@@ -27,7 +27,7 @@
     "lottie-react-web": "^2.2.2",
     "mongoose": "^5.12.2",
     "nanoid": "^3.1.22",
-    "next": "^10.0.9",
+    "next": "^12.1.0",
     "next-compose-plugins": "^2.2.1",
     "next-connect": "^0.10.1",
     "next-images": "^1.7.0",
